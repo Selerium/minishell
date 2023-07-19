@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/19 19:59:21 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:34:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@
 
 //built-ins:
 int	pwd(void);
+int	new_export(char *name, char *value);
 
 #endif
