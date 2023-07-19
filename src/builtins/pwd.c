@@ -6,7 +6,14 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/19 18:44:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:16:39 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"../../include/minishell.h"
+
+int	pwd(void)
+{
+	printf("%s\n", getenv("PWD"));
+	return (0);
+}
