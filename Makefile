@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/22 17:06:44 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/07/24 19:09:38 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ B_OBJDIR := bonusobjs
 NAME := minishell
 
 SRCS := $(SRCDIR)/minishell.c\
+		$(SRCDIR)/env_vars.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
-		$(SRCDIR)/$(BUILTINS)/cd.c
+		# $(SRCDIR)/$(BUILTINS)/cd.c\
 		
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -36,6 +37,8 @@ CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include
 
 LINKERS := -lreadline -L/usr/local/opt/readline/lib
 
+LIB := libft/libft.a
+
 all: $(NAME)
 
 bonus: $(BONUS)
@@ -44,8 +47,8 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 	mkdir -p $(OBJDIR)/$(BUILTINS)
 
-$(NAME): $(OBJDIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) -o $@
+$(NAME): $(OBJDIR) $(OBJS) $(LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
 
 $(BONUS): $(B_OBJS)
 	$(CC) $(CFLAGS) $(B_OBJS) -o $@
@@ -56,10 +59,15 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(B_OBJS): $(B_SRCS)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
+$(LIB):
+	make bonus -C libft
+
 clean:
+	make clean -C libft
 	rm -rf $(OBJDIR) $(B_OBJDIR)
 
 fclean: clean
+	rm $(LIB)
 	rm -f $(NAME) $(BONUS)
 
 re: fclean all
