@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:05:29 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/07/24 19:06:03 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:23:37 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
             t_cmd *cmd;
 **/
 
-typedef struct	s_flag
+typedef struct s_flag
 {
 	bool	quote;
 	bool	pipe;
@@ -41,38 +41,10 @@ typedef struct	s_flag
 	bool	env_var;
 }	t_flag;
 
-typedef enum	e_def
-{
-	WORD,
-	INPUT,
-	OUTPUT,
-	PIPE,
-	ENV_VAR, 
-	QUOTE,	
-}	t_def;
-
-enum e_redir
-{
-    REDIR_IN,
-    REDIR_OUT,
-    APPEND,
-    HEREDOC
-};
-
-typedef struct s_chunk
-{
-    char                    **args; // cmd && args excluding the redirections
-    char                    **redir_in; // redir in filename 
-    enum e_redir            *redir_in_type;
-    char                    **redir_out; // redir out filename 
-    enum e_redir            *redir_out_type; 
-    struct s_chunk            *next;
-} t_chunk;
-
 typedef struct s_minishell
 {
-    int     exit_code;
-    t_cmd   *cmd;
-} t_minishell;
+	int				exit_code;
+	struct s_chunk	*cmd;
+}			t_minishell;
 
 #endif

@@ -6,12 +6,35 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:10:15 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:27:58 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef enum e_def
+{
+	WORD,
+	INPUT,
+	OUTPUT,
+	PIPE,
+	ENV_VAR,
+	QUOTE,
+}	t_def;
+
+/**
+*	enum for redirections
+*	
+*	>	values for the type of the redirection
+*/
+enum e_redir
+{
+	REDIR_IN,
+	REDIR_OUT,
+	APPEND,
+	HEREDOC
+};
 
 /**
 *	linked list to hold env vars.
@@ -26,13 +49,24 @@ typedef struct s_env {
 	struct s_env	*next;
 }				t_env;
 
-typedef struct s_cmd {
-	char			*cmd;
+/**
+*	linked list to hold each cmd and its params
+*	
+*	>	args: holds command and its args - pass in execve()
+*	>	redir_in: list of infiles
+*	>	redir_in_type: type of redirect
+*	>	redir_out: list of outfiles
+*	>	redir_out_type: type of redirect
+*	>	next: the next command in list
+*/
+typedef struct s_chunk
+{
 	char			**args;
-	char			*infile;
-	char			*outfile;
-	struct s_cmd	*next;
-}				t_cmd;
-
+	char			**redir_in;
+	enum e_redir	*redir_in_type;
+	char			**redir_out;
+	enum e_redir	*redir_out_type;
+	struct s_chunk	*next;
+}			t_chunk;
 
 #endif

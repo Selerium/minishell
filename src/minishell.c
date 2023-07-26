@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:12:15 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:16:31 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,15 @@ int	main(int argc, char **argv, char **env)
 {
 	int		flag;
 	char	*str;
-	// t_env	*envs;
 
 	(void) argc;
 	(void) argv;
 	flag = 1;
-	// envs = fill_vars(env);
-	(void) envs;
 	while (flag)
 	{
 		str = readline("hi bestie $> ");
 		add_history(str);
 		parse(str);
 	}
-	free_envs(envs);
 }
  
