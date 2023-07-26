@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:13:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:29:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void	free_envs(t_env *envs)
 		free(envs);
 		envs = next;
 	}
+}
+
+void	free_cmd(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		free(cmd[i]);
+		i++;
+	}
+	free(cmd);
 }
 
 t_env	*add_env(char *str)
@@ -66,6 +79,15 @@ t_env	*create_envs(char **env)
 	return (start);
 }
 
+void	print_envs(t_env *envs)
+{
+	while (envs)
+	{
+		printf("%s = %s\n", envs->name, envs->value);
+		envs = envs->next;
+	}
+}
+
 /**
 	currently it's just running forever with a prompt and i've added builtins
 	to test.
@@ -79,15 +101,17 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	flag = 1;
 	envs = create_envs(env);
+	flag = 1;
 	while (flag)
 	{
 		out = readline("hi bestie $> ");
 		array_out = ft_split(out, ' ');
 		ms_cd(array_out);
-		// pwd();
-		
+		pwd();
 	}
+	print_envs(envs);
+	free_envs(envs);
+	free_cmd(array_out);
 }
  
