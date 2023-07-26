@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/26 19:14:00 by jadithya         ###   ########.fr        #
+#    Updated: 2023/07/26 20:05:33 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -fsanitize=address
+CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
+# -fsanitize=address
 
 LINKERS := -lreadline -L/usr/local/opt/readline/lib
 
