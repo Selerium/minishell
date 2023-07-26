@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:42:41 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:35:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	free_cmd(char **cmd)
 		free(cmd[i]);
 		i++;
 	}
-	free(cmd);
+	if (cmd)
+		free(cmd);
 }
 
 t_env	*add_env(char *str)
@@ -101,16 +102,18 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
+	signal(SIGINT, sigint_handler);
 	flag = 1;
 	while (flag)
 	{
 		shell.str = readline("hi bestie $> ");
+		add_history(shell.str);
 		array_out = ft_split(shell.str, ' ');
 		ms_cd(array_out);
 		pwd();
+		free_cmd(array_out);
 	}
 	print_envs(shell.envs);
 	free_envs(shell.envs);
-	free_cmd(array_out);
 }
  
