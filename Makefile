@@ -38,7 +38,8 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -fsanitize=address
+CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
+# -fsanitize=address
 
 LINKERS := -lreadline -L/usr/local/opt/readline/lib
 

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 22:34:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 19:59:46 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_env	*fill_vars(char **env);
 
 //signal handlers:
 void	sigint_handler(int n);
+void	set_handlers(void);
+void	set_child_handlers(void);
 
 //pre-parsing 
 void    set_flags(char *input);
