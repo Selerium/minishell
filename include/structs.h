@@ -6,12 +6,47 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:27:58 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:37:56 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+/**
+               |-> t_minishell  minishell->cmd
+               |
+|- -------------------------------------------------|
+ echo    hi     >     test.txt   |   cat       -e
+ |____________________________|     |_____________|
+  |_______|     |      |_____|       |__|  |   |_|
+   |     |      |         |           |    |    |
+   |     v      |         |        ___|    |    |_-> args[1]
+   |    args[1] |         |       |        |
+   |            |         |       v        |
+   v            |         |    args[0]     |
+ args[0]        |         |                v
+                |         v            cmd->next;
+                |    redir_out[0]
+                |   redir_out_type[0] = REDIR_OUT
+                v
+            t_cmd *cmd;
+**/
+
+typedef struct s_flag
+{
+	bool	quote;
+	bool	pipe;
+	bool	redir;
+	bool	env_var;
+}	t_flag;
+
+typedef struct s_minishell
+{
+	int				exit_code;
+	struct s_chunk	*cmd;
+}			t_minishell;
+
 
 typedef enum e_def
 {

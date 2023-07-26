@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:16:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:38:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,21 @@ void	free_envs(t_env *envs)
 	}
 }
 
-t_cmd	*set_cmd(char	*cmd)
+t_env	*add_env(char *str)
 {
-	t_cmd	*newcmd;
-	char	**parts;
-	int		i;
+	t_env	*new_env;
 
-	newcmd = (t_cmd *) malloc (sizeof(t_cmd));
-	parts = ft_split(cmd, ' ');
-	i = 0;
-	while (parts[i])
-	{
-		if (parts[i][0] == '<')
-			newcmd->infile = parts[i];
-		else if (parts[i][0] == '>')
-			newcmd->outfile = parts[++i];
-		else
-			newcmd->cmd = parts[i];
-		i++;
-	}
-	return (newcmd);
+	new_env = malloc (sizeof(t_env));
+	if (!new_env)
+		return (NULL);
 }
 
-t_cmd	*parse(char *str)
+t_env	*create_envs(char **env)
 {
-	t_cmd	*cmd;
-	t_cmd	*next;
-	char	**cmds;
-	int		i;
+	t_env	*start;
+	t_env	*next;
 
-	cmd = (t_cmd *) malloc (sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmds = ft_split(str, '|');
-	cmd = set_cmd(*cmds);
-	i = 0;
-	next = cmd;
-	while (cmds[i])
-	{
-		next->next = set_cmd(cmds[i++]);
-		next = next->next;
-	}
-	while (--i >= 0)
-		free(cmds[i]);
-	free (cmds);
-	return (cmd);
+	
 }
 
 /**
@@ -85,15 +55,16 @@ int	main(int argc, char **argv, char **env)
 {
 	int		flag;
 	char	*str;
+	t_env	**envs;
 
 	(void) argc;
 	(void) argv;
 	flag = 1;
+	envs = create_envs(env);
 	while (flag)
 	{
 		str = readline("hi bestie $> ");
 		add_history(str);
-		parse(str);
 	}
 }
  
