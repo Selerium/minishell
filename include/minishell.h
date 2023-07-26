@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:28:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 19:47:07 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		new_export(char *name, char *value, char **env);
 int     ms_cd(char **input);
 
 //environment variables:
+t_env	*make_lst(char *name, char *value);
 t_env	*fill_vars(char **env);
 
 #endif
