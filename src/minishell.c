@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:29:14 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:42:41 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,23 @@ void	print_envs(t_env *envs)
 */
 int	main(int argc, char **argv, char **env)
 {
-	int		flag;
-	char	*out;
-	char	**array_out;
-	t_env	*envs;
+	int			flag;
+	t_minishell	shell;
+	char		**array_out;
 
 	(void) argc;
 	(void) argv;
-	envs = create_envs(env);
+	shell.envs = create_envs(env);
 	flag = 1;
 	while (flag)
 	{
-		out = readline("hi bestie $> ");
-		array_out = ft_split(out, ' ');
+		shell.str = readline("hi bestie $> ");
+		array_out = ft_split(shell.str, ' ');
 		ms_cd(array_out);
 		pwd();
 	}
-	print_envs(envs);
-	free_envs(envs);
+	print_envs(shell.envs);
+	free_envs(shell.envs);
 	free_cmd(array_out);
 }
  

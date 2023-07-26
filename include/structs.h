@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:59:36 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:40:56 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@
                 v
             t_cmd *cmd;
 **/
-
-typedef struct s_flag
-{
-	bool	quote;
-	bool	pipe;
-	bool	redir;
-	bool	env_var;
-}	t_flag;
-
-typedef struct s_minishell
-{
-	int				exit_code;
-	struct s_chunk	*cmd;
-}			t_minishell;
 
 
 typedef enum e_def
@@ -107,5 +93,29 @@ typedef struct s_chunk
 	enum e_redir_out	*redir_out_type;
 	struct s_chunk		*next;
 }			t_chunk;
+
+typedef struct s_flag
+{
+	bool	quote;
+	bool	pipe;
+	bool	redir;
+	bool	env_var;
+}	t_flag;
+
+/**
+*	the BIG struct.
+*	
+*	>	exit_code: exit code from a run command
+*	>	str: string returned by readline()
+*	>	cmds: linked list of cmds
+*	>	envs: linked list of env vars
+*/
+typedef struct s_minishell
+{
+	int				exit_code;
+	char			*str;
+	struct s_chunk	*cmds;
+	struct s_env	*envs;
+}			t_minishell;
 
 #endif
