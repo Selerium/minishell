@@ -6,12 +6,13 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 19:35:14 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:18:36 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
 #include <readline/history.h>
+#include <readline/readline.h>
 
 /**
 *	free the envs list safely (i think).
@@ -102,15 +103,14 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
-	signal(SIGINT, sigint_handler);
 	flag = 1;
+	set_handlers();
 	while (flag)
 	{
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);
 		array_out = ft_split(shell.str, ' ');
 		ms_cd(array_out);
-		pwd();
 		free_cmd(array_out);
 	}
 	print_envs(shell.envs);
