@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 19:47:07 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:45:15 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 # include"cmd_struct.h"
 
 //built-ins:
-int		pwd(char **env);
-int		new_export(char *name, char *value, char **env);
-int     ms_cd(char **input);
+int		pwd();
+t_env	*new_export(char *name, char *value, char **env);
+int		ms_cd(char **input);
 
 //environment variables:
 t_env	*make_lst(char *name, char *value);
