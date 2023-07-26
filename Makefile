@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/24 19:09:38 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/07/25 18:59:57 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME := minishell
 SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/env_vars.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
-		# $(SRCDIR)/$(BUILTINS)/cd.c\
+		$(SRCDIR)/$(BUILTINS)/cd.c\
 		
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 

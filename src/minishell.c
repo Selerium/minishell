@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/24 19:09:05 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 16:59:46 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@
 int	main(int argc, char **argv, char **env)
 {
 	// t_env	*envs;
+	char *out;
+	char **array_out;
 
 	(void) argc;
 	(void) argv;
 	// envs = fill_vars(env);
 	while (true)
 	{
-		readline("hi bestie $> ");
+		out = readline("hi bestie $> ");
+		// readline("hi bestie $> ");
+		array_out = ft_split(out, ' ');
 		pwd(env);
+		ms_cd(array_out);
 		// pwd();
 		
 	}

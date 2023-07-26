@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/24 19:08:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 18:28:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include<dirent.h>
 # include<string.h>
 # include<stdbool.h>
+# include<errno.h>
 
 # include"../libft/libft.h"
 # include"structs.h"
@@ -35,7 +36,7 @@
 //built-ins:
 int		pwd(char **env);
 int		new_export(char *name, char *value, char **env);
-// int cd(char *input);
+int     ms_cd(char **input);
 
 //environment variables:
 t_env	*fill_vars(char **env);
