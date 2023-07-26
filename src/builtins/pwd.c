@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:45:10 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:09:33 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 *
 *	uses getcwd() to return current working directory
 */
-int	pwd()
+int	pwd(void)
 {
 	char	*str;
 

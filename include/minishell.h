@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 17:45:15 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:09:56 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # include"cmd_struct.h"
 
 //built-ins:
-int		pwd();
-t_env	*new_export(char *name, char *value, char **env);
+int		pwd(void);
+t_env	*new_export(t_env *var, t_env *env);
 int		ms_cd(char **input);
 
 //environment variables:
