@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/22 17:26:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:12:59 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@
 
 # include"../libft/libft.h"
 # include"structs.h"
+# include"cmd_struct.h"
 
 //built-ins:
 int		pwd(t_env *envs);
 t_env	*new_export(t_env *var, t_env *env);
+// int cd(char *input);
 
 //environment variables:
 t_env	*make_lst(char *name, char *value);
