@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:09:56 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:29:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # include"../libft/libft.h"
 # include"structs.h"
-# include"cmd_struct.h"
+# include"exit_codes.h"
 
 //built-ins:
 int		pwd(void);
@@ -42,4 +42,6 @@ int		ms_cd(char **input);
 t_env	*make_lst(char *name, char *value);
 t_env	*fill_vars(char **env);
 
+//signal handlers:
+void	sigint_handler(int n);
 #endif
