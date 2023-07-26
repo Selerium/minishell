@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 19:46:42 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/07/26 17:44:36 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ t_env	*create_envs(char **env)
 */
 int	main(int argc, char **argv, char **env)
 {
-	// t_env	*envs;
-	char *out;
-	char **array_out;
+	int		flag;
+	char	*out;
+	char	**array_out;
+	t_env	*envs;
 
 	(void) argc;
 	(void) argv;
@@ -64,9 +65,7 @@ int	main(int argc, char **argv, char **env)
 	while (flag)
 	{
 		out = readline("hi bestie $> ");
-		// readline("hi bestie $> ");
 		array_out = ft_split(out, ' ');
-		pwd(env);
 		ms_cd(array_out);
 		// pwd();
 		
