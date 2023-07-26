@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 19:29:44 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:34:51 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,11 @@ t_env	*fill_vars(char **env);
 
 //signal handlers:
 void	sigint_handler(int n);
+
+//pre-parsing 
+void    set_flags(char *input);
+void    handle_redirection(char *input, t_flag *flag, size_t *i, char n);
+void    handle_quotes(char *input, t_flag *flag, size_t *i, char n);
+void    handle_pipes(char *input, t_flag *flag, size_t *i);
+
 #endif

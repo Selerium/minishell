@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/26 19:14:00 by jadithya         ###   ########.fr        #
+#    Updated: 2023/07/26 22:53:23 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ OS := ${shell uname}
 CC := cc
 
 BUILTINS := builtins
+PARSING	:=	parsing
 SRCDIR := src
 OBJDIR := obj
 B_SRCDIR := bonussrcs
@@ -28,6 +29,8 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
+		$(SRCDIR)/$(PARSING)/syntax_check.c\
+		$(SRCDIR)/$(PARSING)/handle_flags.c\
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -48,6 +51,7 @@ bonus: $(BONUS)
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 	mkdir -p $(OBJDIR)/$(BUILTINS)
+	mkdir -p $(OBJDIR)/$(PARSING)
 
 $(NAME): $(OBJDIR) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
