@@ -1,2 +1,9 @@
 obj/
 minishell
+*.o
+*.a
+hello
+hello_there.txt
+hi
+oh
+pipex_info

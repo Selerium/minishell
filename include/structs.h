@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/22 14:44:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:04:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ typedef struct s_env {
 }				t_env;
 
 typedef struct s_cmd {
-	char	*cmd;
-	char	**args;
+	char			*cmd;
+	char			**args;
+	char			*infile;
+	char			*outfile;
+	struct s_cmd	*next;
 }				t_cmd;
 
 #endif
