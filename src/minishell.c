@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/27 19:34:04 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:48:46 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);
+		set_flags(shell.str);
 		array_out = ft_split(shell.str, ' ');
 		ms_cd(array_out);
 		free_cmd(array_out);
