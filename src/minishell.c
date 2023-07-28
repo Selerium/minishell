@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 20:18:36 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:34:04 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,32 @@ void	print_envs(t_env *envs)
 	}
 }
 
+int	our_readline(char *str, t_minishell *shell)
+{
+	char	*text;
+
+	text = readline("hi bestie $> ");
+	(void) shell;
+	(void) str;
+	(void) text;
+	return (0);
+}
+
 /**
 	currently it's just running forever with a prompt and i've added builtins
 	to test.
 */
 int	main(int argc, char **argv, char **env)
 {
-	int			flag;
 	t_minishell	shell;
 	char		**array_out;
 
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
-	flag = 1;
+	shell.flag = 1;
 	set_handlers();
-	while (flag)
+	while (shell.flag)
 	{
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);

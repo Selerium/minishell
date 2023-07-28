@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:40:56 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:24:42 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_flag
 typedef struct s_minishell
 {
 	int				exit_code;
+	int				flag;
 	char			*str;
 	struct s_chunk	*cmds;
 	struct s_env	*envs;
