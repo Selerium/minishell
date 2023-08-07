@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/26 22:53:23 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/07/28 19:51:28 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,14 @@ bonus: $(BONUS)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/$(BUILTINS):
 	mkdir -p $(OBJDIR)/$(BUILTINS)
+
+$(OBJDIR)/$(PARSING):
 	mkdir -p $(OBJDIR)/$(PARSING)
 
-$(NAME): $(OBJDIR) $(OBJS) $(LIB)
+$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
 
 $(BONUS): $(B_OBJS)

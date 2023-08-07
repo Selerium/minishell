@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/28 18:48:46 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:47:59 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,17 @@ void	print_envs(t_env *envs)
 	}
 }
 
-int	our_readline(char *str, t_minishell *shell)
+int	our_readline(t_minishell *shell)
 {
 	char	*text;
 
-	text = readline("hi bestie $> ");
 	(void) shell;
-	(void) str;
-	(void) text;
+	text = readline("hi bestie $> ");
+	if (text)
+	{
+		shell->str = text;
+		return (1);
+	}
 	return (0);
 }
 
@@ -114,17 +117,14 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	shell.envs = create_envs(env);
 	shell.flag = 1;
-	set_handlers();
 	while (shell.flag)
 	{
-		shell.str = readline("hi bestie $> ");
+		our_readline(&shell);
 		add_history(shell.str);
 		set_flags(shell.str);
 		array_out = ft_split(shell.str, ' ');
-		ms_cd(array_out);
 		free_cmd(array_out);
 	}
-	print_envs(shell.envs);
 	free_envs(shell.envs);
 }
  

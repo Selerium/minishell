@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 19:59:46 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:41:28 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	set_handlers(void);
 void	set_child_handlers(void);
 
 //pre-parsing 
-void    set_flags(char *input);
-void    handle_redirection(char *input, t_flag *flag, size_t *i, char n);
-void    handle_quotes(char *input, t_flag *flag, size_t *i, char n);
-void    handle_pipes(char *input, t_flag *flag, size_t *i);
+void	set_flags(char *input);
+void	handle_redirection(char *input, t_flag *flag, size_t *i, char n);
+void	handle_quotes(char *input, t_flag *flag, size_t *i, char n);
+void	handle_pipes(char *input, t_flag *flag, size_t *i);
 
 #endif
