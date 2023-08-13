@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/12 18:57:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/13 19:48:27 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	set_handlers(void);
 void	set_child_handlers(void);
 
 //pre-parsing 
-bool    check_space(int c);
 bool    set_flags(char *input);
 void    handle_redirection(char *input, t_flag *flag, size_t *i, char n);
 void    handle_quotes(char *input, t_flag *flag, size_t *i, char n);
@@ -59,5 +58,10 @@ void    set_args(t_minishell *shell);
 
 // debug
 void    deboog(t_chunk *chunk);
+
+// utils
+size_t  strlen_2d(char **arr);
+char    **realloc_2d(char **og, size_t new_size);
+bool    check_space(int c);
 
 #endif

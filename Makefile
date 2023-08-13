@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/08/12 18:58:08 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/08/13 19:48:39 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/handle_flags.c\
 		$(SRCDIR)/$(PARSING)/split_input.c\
 		$(SRCDIR)/$(PARSING)/deboog.c\
+		$(SRCDIR)/$(PARSING)/utils.c\
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
