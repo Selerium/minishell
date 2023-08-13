@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/07/26 22:53:23 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/08/12 18:58:08 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
 		$(SRCDIR)/$(PARSING)/syntax_check.c\
 		$(SRCDIR)/$(PARSING)/handle_flags.c\
+		$(SRCDIR)/$(PARSING)/split_input.c\
+		$(SRCDIR)/$(PARSING)/deboog.c\
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -38,8 +40,7 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
-# -fsanitize=address
+CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -fsanitize=address
 
 LINKERS := -lreadline -L/usr/local/opt/readline/lib
 

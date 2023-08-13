@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 18:40:56 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:23:43 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,12 @@ typedef enum e_def
 *	
 *	>	values for the type of the redirection
 */
-enum	e_redir_in
+enum	e_redir
 {
 	REDIR_IN,
-	HEREDOC
-};
-
-enum	e_redir_out
-{
+	APPEND,
 	REDIR_OUT,
-	APPEND
+	HEREDOC
 };
 
 /**
@@ -86,11 +82,11 @@ typedef struct s_env {
 */
 typedef struct s_chunk
 {
-	char				**args;
+	char				**cmd;
 	char				**redir_in;
-	enum e_redir_in		*redir_in_type;
+	enum e_redir		*redir_in_type;
 	char				**redir_out;
-	enum e_redir_out	*redir_out_type;
+	enum e_redir		*redir_out_type;
 	struct s_chunk		*next;
 }			t_chunk;
 

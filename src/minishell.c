@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/26 23:03:33 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:14:51 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	main(int argc, char **argv, char **env)
 {
 	int			flag;
 	t_minishell	shell;
+	// t_chunk		chunk;
 	char		**array_out;
 
 	(void) argc;
@@ -109,10 +110,13 @@ int	main(int argc, char **argv, char **env)
 	{
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);
-		set_flags(shell.str);
-		array_out = ft_split(shell.str, ' ');
-		ms_cd(array_out);
-		free_cmd(array_out);
+		if (set_flags(shell.str) == true)
+		{
+			array_out = ft_split(shell.str, ' ');
+			ms_cd(array_out);
+			set_args(&shell);
+			free_cmd(array_out);
+		}
 	}
 	print_envs(shell.envs);
 	free_envs(shell.envs);

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:20:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/07/26 22:35:15 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/06 17:38:54 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ bool   print_error(t_flag flag)
         printf("syntax error: no file included for redirection\n");
     else if (flag.pipe == false)
         printf("syntax error: pipes\n");
-    return (true);
-} 
+    return (false);
+}
 
-void    set_flags(char *input)
+bool    set_flags(char *input)
 {
     size_t  i;
     
@@ -44,5 +44,7 @@ void    set_flags(char *input)
             handle_pipes(input, &flag, &i);
         i++;
     }
-    print_error(flag);
+    if (print_error(flag) == true)
+        return (false);
+    return (true);
 }
