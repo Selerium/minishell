@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:46:54 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/13 19:51:31 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 14:51:51 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,33 @@ void    deboog(t_chunk *chunk)
 {
     size_t  i;
     size_t  j;
+    size_t  r_i;
+    size_t  r_o;
     
+    r_i = 0;
+    r_o = 0;
     while (chunk)
     {
         i = 0;
         j = 0;
-        while (chunk->redir_out && chunk->redir_out[i] != NULL)
+        while ((chunk->redir_out && chunk->redir_out[i] != NULL)
+            || (chunk->redir_out_type && chunk->redir_out_type[r_o]))
         {
             printf("redir_out[%ld] = %s\n", i, chunk->redir_out[i]);
+            printf("redir_out_type[%ld] = %d\n", r_o, chunk->redir_out_type[r_o]);
             i++;
+            r_o++;
         }
-        while (chunk->redir_in && chunk->redir_in[j] != NULL)
+        printf("\n");
+        while ((chunk->redir_in && chunk->redir_in[j] != NULL)
+            || (chunk->redir_in_type && chunk->redir_in_type[r_i]))
         {
-            printf("redir_in[%ld] = %s\n", i, chunk->redir_in[j]);
+            printf("redir_in[%ld] = %s\n", j, chunk->redir_in[j]);
+            printf("redir_in_type[%ld] = %d\n", r_i, chunk->redir_in_type[r_i]);
+            r_i++;
             j++;
         }
+        printf("\n");
         chunk = chunk->next;
     }
 }

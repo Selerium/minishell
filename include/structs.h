@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/10 16:23:43 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:15:27 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef enum e_def
 */
 enum	e_redir
 {
+	NON,
 	REDIR_IN,
+	HEREDOC,
+	REDIR_OUT, 
 	APPEND,
-	REDIR_OUT,
-	HEREDOC
 };
 
 /**
@@ -84,9 +85,11 @@ typedef struct s_chunk
 {
 	char				**cmd;
 	char				**redir_in;
+	size_t				redir_in_count;
 	enum e_redir		*redir_in_type;
 	char				**redir_out;
 	enum e_redir		*redir_out_type;
+	size_t				redir_out_count;
 	struct s_chunk		*next;
 }			t_chunk;
 

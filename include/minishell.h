@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/13 19:48:27 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:30:21 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ void    handle_quotes(char *input, t_flag *flag, size_t *i, char n);
 void    handle_pipes(char *input, t_flag *flag, size_t *i);
 
 //tokenizing the string
-void    set_args(t_minishell *shell);
+void    fill_struct(t_minishell *shell);
 
 // debug
 void    deboog(t_chunk *chunk);
 
 // utils
 size_t  strlen_2d(char **arr);
-char    **realloc_2d(char **og, size_t new_size);
+void    **realloc_2d(void **og, size_t new_size);
+enum e_redir    *realloc_xd(enum e_redir *og, size_t new_size);
 bool    check_space(int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/10 16:14:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:34:18 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			array_out = ft_split(shell.str, ' ');
 			ms_cd(array_out);
-			set_args(&shell);
+			fill_struct(&shell);
 			free_cmd(array_out);
 		}
 	}
