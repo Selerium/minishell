@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/14 18:15:27 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:22:49 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_env {
 typedef struct s_chunk
 {
 	char				**cmd;
+	size_t				cmd_count;
 	char				**redir_in;
 	size_t				redir_in_count;
 	enum e_redir		*redir_in_type;

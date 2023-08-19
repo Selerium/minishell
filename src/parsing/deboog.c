@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:46:54 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/14 14:51:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:27:19 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void    deboog(t_chunk *chunk)
     size_t  j;
     size_t  r_i;
     size_t  r_o;
+    size_t  cmd;
     
     r_i = 0;
     r_o = 0;
+    cmd = 0;
     while (chunk)
     {
         i = 0;
@@ -41,6 +43,11 @@ void    deboog(t_chunk *chunk)
             printf("redir_in_type[%ld] = %d\n", r_i, chunk->redir_in_type[r_i]);
             r_i++;
             j++;
+        }
+        while (chunk->cmd && chunk->cmd[cmd])
+        {
+            printf("cmd[%ld] = %s\n", cmd, chunk->cmd[cmd]);
+            cmd++;
         }
         printf("\n");
         chunk = chunk->next;

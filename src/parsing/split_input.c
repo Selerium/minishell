@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/14 18:12:05 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/19 19:14:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 // and store in the linked list
 
 // tokenize each "word" in the string
-
-
 
 enum e_redir    *get_redir_type(enum e_redir *redir, char *input, size_t *j, size_t size)
 {
@@ -40,8 +38,6 @@ enum e_redir    *get_redir_type(enum e_redir *redir, char *input, size_t *j, siz
     return (new);
 }
 
-
-
 char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
 {
     size_t  len;
@@ -54,6 +50,29 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
     while ((input[*j] && check_space(input[*j]))
         || (input[*j] == '>' || input[*j] == '<'))
         (*j)++;
+    while (input[(*j)] && !check_space(input[(*j)])
+        && (input[*j] != '>' && input[*j] != '<'))
+    {
+        len++;
+        (*j)++;
+    }
+    (*size)++;
+    new[(*size) - 1] = ft_substr(input, (*j) - len, len);
+    (*j)--;
+    return (new);
+}
+
+char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
+{
+    char    **new;
+    size_t  len;
+    // size_t  i;
+
+    len = 0;
+    new = (char **)realloc_2d((void **)chunk->cmd, *size + 1);
+    while (input[*j] && check_space(input[*j])
+        && (input[*j] == '>' || input[*j] == '<'))
+        (*j)++;
     while (input[(*j)] && !check_space(input[(*j)]))
     {
         len++;
@@ -63,12 +82,6 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
     new[(*size) - 1] = ft_substr(input, (*j) - len, len);
     return (new);
 }
-
-// char    **get_args(t_chunk *chunk, char *input, size_t *j)
-// {
-//     chunk->cmd = (char **)malloc(sizeof(char *) strlen_2d(input[]))
-//     while(input[*j] && !check_space(input[*j]))
-// }
 
 void    fill_struct(t_minishell *shell)
 {
@@ -92,6 +105,7 @@ void    fill_struct(t_minishell *shell)
     chunk->redir_out_type = NULL;
     chunk->redir_in_count = 0;
     chunk->redir_out_count = 0;
+    chunk->cmd_count = 0;
     split = ft_split(shell->str, '|');
     while (split[i])
     {
@@ -110,12 +124,13 @@ void    fill_struct(t_minishell *shell)
                 chunk->redir_in = get_file_name(chunk->redir_in, split[i], &j, &chunk->redir_in_count);
                 in++;
             }
-            // else
-            //     get_args(chunk, split[i], &j);
+            else if (split[i][j] != '>' && split[i][j] != '>')
+                chunk->cmd = get_args(chunk, split[i], &j, &chunk->cmd_count);
             if (split[i][j]) 
                 j++;
         }
         i++;
+        // chunk = chunk->next;        
     }
     deboog(chunk);
     // shell->cmds = chunk;
