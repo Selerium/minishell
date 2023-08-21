@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/19 19:14:23 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/21 13:25:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
     return (new);
 }
 
+
 char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
 {
     char    **new;
@@ -86,6 +87,7 @@ char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
 void    fill_struct(t_minishell *shell)
 {
     t_chunk *chunk;
+    t_chunk *head;
     char    **split;
     size_t  i;
     size_t  j;
@@ -97,19 +99,21 @@ void    fill_struct(t_minishell *shell)
     j = 0;
     in = 0;
     out = 0;
-    chunk->redir_in = NULL;
-    chunk->redir_out = NULL;
-    chunk->cmd = NULL;
-    chunk->next = NULL;
-    chunk->redir_in_type = NULL;
-    chunk->redir_out_type = NULL;
-    chunk->redir_in_count = 0;
-    chunk->redir_out_count = 0;
-    chunk->cmd_count = 0;
-    split = ft_split(shell->str, '|');
+    split = my_split(shell->str, '|');
+    // print_split(split);
+    head = chunk;
     while (split[i])
     {
         j = 0;
+        chunk->redir_in = NULL;
+        chunk->redir_out = NULL;
+        chunk->cmd = NULL;
+        chunk->next = NULL;
+        chunk->redir_in_type = NULL;
+        chunk->redir_out_type = NULL;
+        chunk->redir_in_count = 0;
+        chunk->redir_out_count = 0;
+        chunk->cmd_count = 0;
         while (split[i][j])
         {
             if (split[i][j] == '>')
@@ -124,14 +128,19 @@ void    fill_struct(t_minishell *shell)
                 chunk->redir_in = get_file_name(chunk->redir_in, split[i], &j, &chunk->redir_in_count);
                 in++;
             }
-            else if (split[i][j] != '>' && split[i][j] != '>')
+            else if (split[i][j] != '>' && split[i][j] != '>' && !check_space(split[i][j]))
                 chunk->cmd = get_args(chunk, split[i], &j, &chunk->cmd_count);
-            if (split[i][j]) 
-                j++;
+            j++;
         }
         i++;
-        // chunk = chunk->next;        
+        if (split[i] != NULL)
+        {
+            chunk->next = (t_chunk *)malloc(sizeof(t_chunk));
+            chunk = chunk->next;
+            chunk->next = NULL;
+        }
     }
+    chunk = head;
     deboog(chunk);
     // shell->cmds = chunk;
 }
