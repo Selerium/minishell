@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/21 13:25:22 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/24 19:32:50 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,63 +84,80 @@ char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
     return (new);
 }
 
-void    fill_struct(t_minishell *shell)
+t_chunk    *init_chunk(void)
 {
     t_chunk *chunk;
+    
+    chunk = (t_chunk *)malloc(sizeof(t_chunk));
+    chunk->redir_in = NULL;
+    chunk->redir_out = NULL;
+    chunk->cmd = NULL;
+    chunk->next = NULL;
+    chunk->redir_in_type = NULL;
+    chunk->redir_out_type = NULL;
+    chunk->redir_in_count = 0;
+    chunk->redir_out_count = 0;
+    chunk->cmd_count = 0;
+    return(chunk);
+}
+
+t_chunk    *fill_struct_mini(char *split)
+{
+    size_t  j;
+    t_chunk *chunk;
+
+    j = 0;
+    chunk = init_chunk();
+    while (split[j])
+    {
+        if (split[j] == '>')
+        {
+            chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split, &j, chunk->redir_out_count); 
+            chunk->redir_out = get_file_name(chunk->redir_out, split, &j, &chunk->redir_out_count);
+        }
+        else if (split[j] == '<')
+        {
+            chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split, &j, chunk->redir_in_count); 
+            chunk->redir_in = get_file_name(chunk->redir_in, split, &j, &chunk->redir_in_count);
+        }
+        else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
+            chunk->cmd = get_args(chunk, split, &j, &chunk->cmd_count);
+        if (split[j])
+            j++;
+    }
+    return (chunk);
+}
+
+// void    set_next_node()
+
+
+void    fill_struct(t_minishell *shell)
+{
+    t_chunk *new;
     t_chunk *head;
     char    **split;
     size_t  i;
-    size_t  j;
-    size_t  in;
-    size_t  out;
     
-    chunk = (t_chunk *)malloc(sizeof(t_chunk));
     i = 0;
-    j = 0;
-    in = 0;
-    out = 0;
     split = my_split(shell->str, '|');
-    // print_split(split);
-    head = chunk;
+    shell->cmds = NULL;
+    head = shell->cmds;
     while (split[i])
     {
-        j = 0;
-        chunk->redir_in = NULL;
-        chunk->redir_out = NULL;
-        chunk->cmd = NULL;
-        chunk->next = NULL;
-        chunk->redir_in_type = NULL;
-        chunk->redir_out_type = NULL;
-        chunk->redir_in_count = 0;
-        chunk->redir_out_count = 0;
-        chunk->cmd_count = 0;
-        while (split[i][j])
+        new = fill_struct_mini(split[i]);
+        if (shell->cmds == NULL)
         {
-            if (split[i][j] == '>')
-            {
-                chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split[i], &j, chunk->redir_out_count); 
-                chunk->redir_out = get_file_name(chunk->redir_out, split[i], &j, &chunk->redir_out_count);
-                out++;
-            }
-            else if (split[i][j] == '<')
-            {
-                chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split[i], &j, chunk->redir_in_count); 
-                chunk->redir_in = get_file_name(chunk->redir_in, split[i], &j, &chunk->redir_in_count);
-                in++;
-            }
-            else if (split[i][j] != '>' && split[i][j] != '>' && !check_space(split[i][j]))
-                chunk->cmd = get_args(chunk, split[i], &j, &chunk->cmd_count);
-            j++;
+            head = new;
+            shell->cmds = new;
+        }
+        else
+        {
+            shell->cmds->next = new;
+            shell->cmds = shell->cmds->next;
         }
         i++;
-        if (split[i] != NULL)
-        {
-            chunk->next = (t_chunk *)malloc(sizeof(t_chunk));
-            chunk = chunk->next;
-            chunk->next = NULL;
-        }
     }
-    chunk = head;
-    deboog(chunk);
+    shell->cmds = head;
+    deboog(shell->cmds);
     // shell->cmds = chunk;
 }
