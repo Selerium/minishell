@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/19 19:14:23 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/24 19:56:17 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
     return (new);
 }
 
+
 char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
 {
     char    **new;
@@ -83,20 +84,11 @@ char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
     return (new);
 }
 
-void    fill_struct(t_minishell *shell)
+t_chunk    *init_chunk(void)
 {
     t_chunk *chunk;
-    char    **split;
-    size_t  i;
-    size_t  j;
-    size_t  in;
-    size_t  out;
     
     chunk = (t_chunk *)malloc(sizeof(t_chunk));
-    i = 0;
-    j = 0;
-    in = 0;
-    out = 0;
     chunk->redir_in = NULL;
     chunk->redir_out = NULL;
     chunk->cmd = NULL;
@@ -106,32 +98,68 @@ void    fill_struct(t_minishell *shell)
     chunk->redir_in_count = 0;
     chunk->redir_out_count = 0;
     chunk->cmd_count = 0;
-    split = ft_split(shell->str, '|');
+    return(chunk);
+}
+
+t_chunk    *fill_struct_mini(char *split)
+{
+    size_t  j;
+    t_chunk *chunk;
+
+    j = 0;
+    chunk = init_chunk();
+    while (split[j])
+    {
+        if (split[j] == '>')
+        {
+            chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split, &j, chunk->redir_out_count); 
+            chunk->redir_out = get_file_name(chunk->redir_out, split, &j, &chunk->redir_out_count);
+        }
+        else if (split[j] == '<')
+        {
+            chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split, &j, chunk->redir_in_count); 
+            chunk->redir_in = get_file_name(chunk->redir_in, split, &j, &chunk->redir_in_count);
+        }
+        else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
+            chunk->cmd = get_args(chunk, split, &j, &chunk->cmd_count);
+        if (split[j])
+            j++;
+    }
+    return (chunk);
+}
+
+void    set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
+{
+    if (shell->cmds == NULL)
+    {
+        *head = new;
+        shell->cmds = new;
+    }
+    else
+    {
+        shell->cmds->next = new;
+        shell->cmds = shell->cmds->next;
+    }
+}
+
+
+void    fill_struct(t_minishell *shell)
+{
+    t_chunk *new;
+    t_chunk *head;
+    char    **split;
+    size_t  i;
+    
+    i = 0;
+    split = my_split(shell->str, '|');
+    shell->cmds = NULL;
+    head = shell->cmds;
     while (split[i])
     {
-        j = 0;
-        while (split[i][j])
-        {
-            if (split[i][j] == '>')
-            {
-                chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split[i], &j, chunk->redir_out_count); 
-                chunk->redir_out = get_file_name(chunk->redir_out, split[i], &j, &chunk->redir_out_count);
-                out++;
-            }
-            else if (split[i][j] == '<')
-            {
-                chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split[i], &j, chunk->redir_in_count); 
-                chunk->redir_in = get_file_name(chunk->redir_in, split[i], &j, &chunk->redir_in_count);
-                in++;
-            }
-            else if (split[i][j] != '>' && split[i][j] != '>')
-                chunk->cmd = get_args(chunk, split[i], &j, &chunk->cmd_count);
-            if (split[i][j]) 
-                j++;
-        }
+        new = fill_struct_mini(split[i]);
+        set_next_node(shell, new, &head);
         i++;
-        // chunk = chunk->next;        
     }
-    deboog(chunk);
-    // shell->cmds = chunk;
+    shell->cmds = head;
+    deboog(shell->cmds);
 }
