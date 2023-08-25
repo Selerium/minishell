@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/24 19:34:09 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/25 13:08:58 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ int	main(int argc, char **argv, char **env)
 {
 	int			flag;
 	t_minishell	shell;
-	// t_chunk		chunk;
-	// char		**array_out;
 
 	(void) argc;
 	(void) argv;
@@ -111,12 +109,7 @@ int	main(int argc, char **argv, char **env)
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);
 		if (is_syntax_valid(shell.str) == true)
-		{
-			// array_out = ft_split(shell.str, ' ');
-			// ms_cd(array_out);
 			fill_struct(&shell);
-			// free_cmd(array_out);
-		}
 	}
 	print_envs(shell.envs);
 	free_envs(shell.envs);

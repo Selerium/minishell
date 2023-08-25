@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/24 19:32:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/24 19:56:17 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,19 @@ t_chunk    *fill_struct_mini(char *split)
     return (chunk);
 }
 
-// void    set_next_node()
+void    set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
+{
+    if (shell->cmds == NULL)
+    {
+        *head = new;
+        shell->cmds = new;
+    }
+    else
+    {
+        shell->cmds->next = new;
+        shell->cmds = shell->cmds->next;
+    }
+}
 
 
 void    fill_struct(t_minishell *shell)
@@ -145,19 +157,9 @@ void    fill_struct(t_minishell *shell)
     while (split[i])
     {
         new = fill_struct_mini(split[i]);
-        if (shell->cmds == NULL)
-        {
-            head = new;
-            shell->cmds = new;
-        }
-        else
-        {
-            shell->cmds->next = new;
-            shell->cmds = shell->cmds->next;
-        }
+        set_next_node(shell, new, &head);
         i++;
     }
     shell->cmds = head;
     deboog(shell->cmds);
-    // shell->cmds = chunk;
 }
