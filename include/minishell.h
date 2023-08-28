@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/21 15:54:30 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/28 10:07:49 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # include"../libft/libft.h"
 # include"structs.h"
 # include"exit_codes.h"
+
+#define DOUBLE '\"'
+#define SINGLE '\''
 
 //built-ins:
 int		pwd(void);
@@ -65,6 +68,6 @@ size_t  strlen_2d(char **arr);
 void    **realloc_2d(void **og, size_t new_size);
 enum e_redir    *realloc_xd(enum e_redir *og, size_t new_size);
 bool    check_space(int c);
-char    **my_split(char const *s, char c); // using ft_split from jensen's libft 
+char    **my_split(char *s, char c); // using ft_split from jensen's libft 
 
 #endif

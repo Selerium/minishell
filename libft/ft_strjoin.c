@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:39:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/06/15 15:00:08 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/27 20:01:13 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

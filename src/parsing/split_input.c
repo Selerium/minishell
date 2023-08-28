@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/24 19:56:17 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/08/25 16:02:18 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ enum e_redir    *get_redir_type(enum e_redir *redir, char *input, size_t *j, siz
     return (new);
 }
 
-char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
+char    **get_args(char **var, char *input, size_t *j, size_t *size)
 {
     size_t  len;
     // size_t  len_2d;
@@ -46,7 +46,7 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
 
     len = 0;
     // len_2d = strlen_2d(out);
-    new = (char **)realloc_2d((void **)out, *size + 1);
+    new = (char **)realloc_2d((void **)var, *size + 1);
     while ((input[*j] && check_space(input[*j]))
         || (input[*j] == '>' || input[*j] == '<'))
         (*j)++;
@@ -59,28 +59,6 @@ char    **get_file_name(char **out, char *input, size_t *j, size_t *size)
     (*size)++;
     new[(*size) - 1] = ft_substr(input, (*j) - len, len);
     (*j)--;
-    return (new);
-}
-
-
-char    **get_args(t_chunk *chunk, char *input, size_t *j, size_t *size)
-{
-    char    **new;
-    size_t  len;
-    // size_t  i;
-
-    len = 0;
-    new = (char **)realloc_2d((void **)chunk->cmd, *size + 1);
-    while (input[*j] && check_space(input[*j])
-        && (input[*j] == '>' || input[*j] == '<'))
-        (*j)++;
-    while (input[(*j)] && !check_space(input[(*j)]))
-    {
-        len++;
-        (*j)++;
-    }
-    (*size)++;
-    new[(*size) - 1] = ft_substr(input, (*j) - len, len);
     return (new);
 }
 
@@ -113,15 +91,15 @@ t_chunk    *fill_struct_mini(char *split)
         if (split[j] == '>')
         {
             chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split, &j, chunk->redir_out_count); 
-            chunk->redir_out = get_file_name(chunk->redir_out, split, &j, &chunk->redir_out_count);
+            chunk->redir_out = get_args(chunk->redir_out, split, &j, &chunk->redir_out_count);
         }
         else if (split[j] == '<')
         {
             chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split, &j, chunk->redir_in_count); 
-            chunk->redir_in = get_file_name(chunk->redir_in, split, &j, &chunk->redir_in_count);
+            chunk->redir_in = get_args(chunk->redir_in, split, &j, &chunk->redir_in_count);
         }
         else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
-            chunk->cmd = get_args(chunk, split, &j, &chunk->cmd_count);
+            chunk->cmd = get_args(chunk->cmd, split, &j, &chunk->cmd_count);
         if (split[j])
             j++;
     }
