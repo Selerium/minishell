@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/25 16:02:18 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/03 17:16:28 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,36 @@ enum e_redir    *get_redir_type(enum e_redir *redir, char *input, size_t *j, siz
 char    **get_args(char **var, char *input, size_t *j, size_t *size)
 {
     size_t  len;
-    // size_t  len_2d;
     char    **new;
+    int     quote;
+    bool    end_arg;
 
     len = 0;
-    // len_2d = strlen_2d(out);
+    quote = 0;
+    end_arg = false;
     new = (char **)realloc_2d((void **)var, *size + 1);
     while ((input[*j] && check_space(input[*j]))
         || (input[*j] == '>' || input[*j] == '<'))
         (*j)++;
-    while (input[(*j)] && !check_space(input[(*j)])
-        && (input[*j] != '>' && input[*j] != '<'))
+    while (input[*j] && !end_arg)
     {
-        len++;
-        (*j)++;
+        quote = is_quotes_closed(quote, input[*j]);
+        if (check_space(input[*j]) && (quote == 0))
+            end_arg = true;
+        else if ((input[*j] == '>' || input[*j] == '<') && (quote == 0))
+            end_arg = true;
+        else
+        {
+            len++;
+            (*j)++;       
+        }
     }
+    // while (input[(*j)] && !check_space(input[(*j)])
+    //     && (input[*j] != '>' && input[*j] != '<'))
+    // {
+    //     len++;
+    //     (*j)++;
+    // }
     (*size)++;
     new[(*size) - 1] = ft_substr(input, (*j) - len, len);
     (*j)--;

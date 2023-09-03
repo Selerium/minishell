@@ -24,6 +24,7 @@ static size_t	str_count(char const *s, char c)
 
 int	is_quotes_closed(int qflag, char q)
 {
+	printf("char: %c | qflag value: %d\n", q, qflag);
 	if (q == SINGLE && qflag == 0)
 		return (1);
 	else if (q == DOUBLE && qflag == 0)
@@ -74,6 +75,7 @@ char	**my_split(char *s, char c)
 		return (NULL);
 	while (s[i] != '\0')
 	{
+		qflag = is_quotes_closed(qflag, s[i]);
 		if (s[i] != c && qflag == 0)
 		{
 			str[j] = ft_substr(s, i, wordinstr_len(&s[i], c, qflag));
