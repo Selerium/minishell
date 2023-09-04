@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 16:33:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:14:55 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define STRUCTS_H
 
 /**
-               |-> t_minishell  minishell->cmd
-               |
+			   |-> t_minishell  minishell->cmd
+			   |
 |- -------------------------------------------------|
  echo    hi     >     test.txt   |   cat       -e
  |____________________________|     |_____________|
@@ -26,11 +26,11 @@
    |            |         |       v        |
    v            |         |    args[0]     |
  args[0]        |         |                v
-                |         v            cmd->next;
-                |    redir_out[0]
-                |   redir_out_type[0] = REDIR_OUT
-                v
-            t_cmd *cmd;
+				|         v            cmd->next;
+				|    redir_out[0]
+				|   redir_out_type[0] = REDIR_OUT
+				v
+			t_cmd *cmd;
 **/
 
 # include <sys/types.h>
@@ -51,14 +51,14 @@ typedef enum e_def
 *	
 *	>	values for the type of the redirection
 */
-enum	e_redir
+typedef enum	e_redir
 {
 	NON,
 	REDIR_IN,
 	HEREDOC,
-	REDIR_OUT, 
+	REDIR_OUT,
 	APPEND,
-};
+}	t_redir;
 
 /**
 *	linked list to hold env vars.

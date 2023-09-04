@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:25:13 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/04 16:35:47 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:13:48 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_redirection(char *input, t_flag *flag, size_t *i, char n)
 	flag->redir = false;
 	while (input[(*i)] == n)
 	{
-	count++;
+		count++;
 		(*i)++;
 	}
 	if (count > 2)
@@ -45,7 +45,7 @@ void	handle_quotes(char *input, t_flag *flag, size_t *i, char n)
 			flag->quote = true;
 			break ;
 		}
-	(*i)++;
+		(*i)++;
 	}
 	if (input[*i] == '\0')
 		(*i)--;
