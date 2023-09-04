@@ -6,50 +6,75 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/22 19:02:18 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:06:41 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+*	handles setting the env vars, freeing, printing them
+*/
+
 #include"../include/minishell.h"
 
-t_env	*make_lst(char *name, char *value)
+t_env	*add_env(char *str)
 {
-	t_env	*item;
+	t_env	*new_env;
+	int		i;
 
-	item = (t_env *) malloc (sizeof(t_env));
-	if (!item)
+	i = 0;
+	new_env = malloc (sizeof(t_env));
+	if (!new_env)
 		return (NULL);
-	item->name = name;
-	item->value = value;
-	item->next = NULL;
-	return (item);
+	while (str[i] && str[i] != '=')
+		i++;
+	new_env->name = ft_substr(str, 0, i);
+	new_env->value = ft_substr(str, i + 1, ft_strlen(str));
+	new_env->next = NULL;
+	return (new_env);
 }
 
-t_env	*fill_vars(char **env)
+t_env	*create_envs(char **env)
 {
-	int		i;
-	int		j;
-	int		len;
-	t_env	*item;
 	t_env	*start;
+	t_env	*next;
+	int		i;
 
-	j = 0;
 	i = 0;
-	while (env[i][j] != '=')
-		j++;
-	len = ft_strlen(env[i]);
-	start = make_lst(ft_substr(env[i], 0, j), ft_substr(env[i], j + 1, len));
-	item = start;
-	while (env[++i])
+	start = add_env(env[i]);
+	next = start;
+	while (env[++i] && next)
 	{
-		j = 0;
-		while (env[i][j] != '=')
-			j++;
-		len = ft_strlen(env[i]);
-		item->next = make_lst(ft_substr(env[i], 0, j),
-				ft_substr(env[i], j + 1, len));
-		item = item->next;
+		next->next = add_env(env[i]);
+		next = next->next;
 	}
-	item->next = NULL;
+	if (!next)
+		return (NULL);
 	return (start);
+}
+
+void	print_envs(t_env *envs)
+{
+	while (envs)
+	{
+		printf("%s = %s\n", envs->name, envs->value);
+		envs = envs->next;
+	}
+}
+
+/**
+*	free the envs list safely (i think).
+*/
+void	free_envs(t_env *envs)
+{
+	t_env	*next;
+
+	printf("%s", envs->name);
+	while (envs)
+	{
+		free(envs->name);
+		free(envs->value);
+		next = envs->next;
+		free(envs);
+		envs = next;
+	}
 }

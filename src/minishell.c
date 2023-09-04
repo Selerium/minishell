@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/28 19:47:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:05:12 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,45 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
-/**
-*	free the envs list safely (i think).
-*/
-void	free_envs(t_env *envs)
+void	free_cmd(t_chunk *cmd)
 {
-	t_env	*next;
+	int		i;
+	t_chunk	*hold;
 
-	while (envs)
+	while (cmd)
 	{
-		free(envs->name);
-		free(envs->value);
-		next = envs->next;
-		free(envs);
-		envs = next;
+		i = 0;
+		while (cmd->args[i])
+			free(cmd->args[i++]);
+		free(cmd->args);
+		// i = 0;
+		// while (cmd->redir_in[i])
+		// 	free(cmd->redir_in[i++]);
+		// i = 0;
+		// while (cmd->redir_out[i])
+		// 	free(cmd->redir_out[i++]);
+		hold = cmd->next;
+		free(cmd);
+		cmd = hold;
 	}
 }
 
-void	free_cmd(char **cmd)
+void	free_fds(int **fds, int n)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i])
-	{
-		free(cmd[i]);
-		i++;
-	}
-	if (cmd)
-		free(cmd);
+	while (i < n)
+		free(fds[i++]);
+	free(fds);
 }
 
-t_env	*add_env(char *str)
+void	free_shell(t_minishell *shell)
 {
-	t_env	*new_env;
-	int		i;
-
-	i = 0;
-	new_env = malloc (sizeof(t_env));
-	if (!new_env)
-		return (NULL);
-	while (str[i] && str[i] != '=')
-		i++;
-	new_env->name = ft_substr(str, 0, i);
-	new_env->value = ft_substr(str, i + 1, ft_strlen(str));
-	new_env->next = NULL;
-	return (new_env);
-}
-
-t_env	*create_envs(char **env)
-{
-	t_env	*start;
-	t_env	*next;
-	int		i;
-
-	i = 0;
-	start = add_env(env[i]);
-	next = start;
-	while (env[++i] && next)
-	{
-		next->next = add_env(env[i]);
-		next = next->next;
-	}
-	if (!next)
-		return (NULL);
-	return (start);
-}
-
-void	print_envs(t_env *envs)
-{
-	while (envs)
-	{
-		printf("%s = %s\n", envs->name, envs->value);
-		envs = envs->next;
-	}
+	free_cmd(shell->cmds);
+	free_envs(shell->envs);
+	free_fds(shell->fds, shell->num_chunks);
+	free(shell->processes);
 }
 
 int	our_readline(t_minishell *shell)
@@ -104,6 +69,24 @@ int	our_readline(t_minishell *shell)
 	return (0);
 }
 
+t_chunk	*test_cmds(void)
+{
+	t_chunk	*cmd1;
+	t_chunk	*cmd2;
+	t_chunk	*cmd3;
+
+	cmd1 = malloc (sizeof(t_chunk));
+	cmd2 = malloc (sizeof(t_chunk));
+	cmd3 = malloc (sizeof(t_chunk));
+	cmd1->next = cmd2;
+	cmd2->next = cmd3;
+	cmd3->next = NULL;
+	cmd1->args = ft_split("ls -la", ' ');
+	cmd2->args = ft_split("cat", ' ');
+	cmd3->args = ft_split("ls", ' ');
+	return (cmd1);
+}
+
 /**
 	currently it's just running forever with a prompt and i've added builtins
 	to test.
@@ -111,19 +94,27 @@ int	our_readline(t_minishell *shell)
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	shell;
-	char		**array_out;
 
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
+	print_envs(shell.envs);
+	set_handlers(&shell);
 	shell.flag = 1;
 	while (shell.flag)
 	{
-		our_readline(&shell);
-		add_history(shell.str);
-		set_flags(shell.str);
-		array_out = ft_split(shell.str, ' ');
-		free_cmd(array_out);
+		shell.str = readline("hi bestie $> ");
+		if (shell.str)
+		{
+			add_history(shell.str);
+			set_flags(shell.str);
+			shell.cmds = test_cmds();
+			set_num_chunks(shell.cmds, &shell);
+			run_cmd(shell.cmds, &shell);
+			free_cmd(shell.cmds);
+		}
+		else
+			shell.flag = 0;
 	}
 	free_envs(shell.envs);
 }

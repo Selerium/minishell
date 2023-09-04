@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/28 18:44:45 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:09:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
                 v
             t_cmd *cmd;
 **/
+
+# include <sys/types.h>
+# include <signal.h>
 
 typedef enum e_def
 {
@@ -101,6 +104,19 @@ typedef struct s_flag
 	bool	env_var;
 }	t_flag;
 
+typedef struct s_pid
+{
+	pid_t			pid;
+	struct s_chunk	*next;
+}				t_pid;
+
+typedef struct s_signals
+{
+	__sighandler_t	ctrl_c;
+	__sighandler_t	ctrl_z;
+	__sighandler_t	ctrl_slash;
+}				t_signals;
+
 /**
 *	the BIG struct.
 *	
@@ -113,9 +129,13 @@ typedef struct s_minishell
 {
 	int				exit_code;
 	int				flag;
+	int				**fds;
 	char			*str;
 	struct s_chunk	*cmds;
+	int				*processes;
+	int				num_chunks;
 	struct s_env	*envs;
+	t_signals		signal_list;
 }			t_minishell;
 
 #endif
