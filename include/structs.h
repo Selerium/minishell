@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 17:59:59 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:14:55 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define STRUCTS_H
 
 /**
-               |-> t_minishell  minishell->cmd
-               |
+			   |-> t_minishell  minishell->cmd
+			   |
 |- -------------------------------------------------|
  echo    hi     >     test.txt   |   cat       -e
  |____________________________|     |_____________|
@@ -26,13 +26,15 @@
    |            |         |       v        |
    v            |         |    args[0]     |
  args[0]        |         |                v
-                |         v            cmd->next;
-                |    redir_out[0]
-                |   redir_out_type[0] = REDIR_OUT
-                v
-            t_cmd *cmd;
+				|         v            cmd->next;
+				|    redir_out[0]
+				|   redir_out_type[0] = REDIR_OUT
+				v
+			t_cmd *cmd;
 **/
 
+# include <sys/types.h>
+# include <signal.h>
 
 typedef enum e_def
 {
@@ -102,6 +104,19 @@ typedef struct s_flag
 	bool	env_var;
 }	t_flag;
 
+typedef struct s_pid
+{
+	pid_t			pid;
+	struct s_chunk	*next;
+}				t_pid;
+
+typedef struct s_signals
+{
+	__sighandler_t	ctrl_c;
+	__sighandler_t	ctrl_z;
+	__sighandler_t	ctrl_slash;
+}				t_signals;
+
 /**
 *	the BIG struct.
 *	
@@ -113,9 +128,14 @@ typedef struct s_flag
 typedef struct s_minishell
 {
 	int				exit_code;
+	int				flag;
+	int				**fds;
 	char			*str;
 	struct s_chunk	*cmds;
+	int				*processes;
+	int				num_chunks;
 	struct s_env	*envs;
+	t_signals		signal_list;
 }			t_minishell;
 
 #endif
