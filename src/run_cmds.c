@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/31 15:28:58 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:03:55 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	(void) cmd;
 	(void) shell;
 	(void) i;
-	printf("we made it %s\n", cmd->args[0]);
+	printf("we made it %s\n", cmd->cmd[0]);
 	free_shell(shell);
 	exit(0);
 }
