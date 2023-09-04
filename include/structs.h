@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/19 18:09:24 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:33:59 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,13 @@ typedef enum e_def
 *	
 *	>	values for the type of the redirection
 */
-enum	e_redir_in
+enum	e_redir
 {
+	NON,
 	REDIR_IN,
-	HEREDOC
-};
-
-enum	e_redir_out
-{
-	REDIR_OUT,
-	APPEND
+	HEREDOC,
+	REDIR_OUT, 
+	APPEND,
 };
 
 /**
@@ -88,11 +85,14 @@ typedef struct s_env {
 */
 typedef struct s_chunk
 {
-	char				**args;
+	char				**cmd;
+	size_t				cmd_count;
 	char				**redir_in;
-	enum e_redir_in		*redir_in_type;
+	size_t				redir_in_count;
+	enum e_redir		*redir_in_type;
 	char				**redir_out;
-	enum e_redir_out	*redir_out_type;
+	enum e_redir		*redir_out_type;
+	size_t				redir_out_count;
 	struct s_chunk		*next;
 }			t_chunk;
 

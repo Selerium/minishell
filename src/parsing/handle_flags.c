@@ -6,20 +6,11 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:25:13 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/07/28 19:45:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:35:47 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
-
-bool	check_space(char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ')
-		return (true);
-	else
-		return (false);
-}
 
 void	handle_redirection(char *input, t_flag *flag, size_t *i, char n)
 {

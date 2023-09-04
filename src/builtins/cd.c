@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/07/26 18:18:51 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:52:36 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	ms_cd(char **input)
 		if (input[i + 1] != NULL && chdir(input[i + 1]) == 0)
 			printf("%s\n", getcwd(NULL, 0));
 		else
-		{
-			errno = 20;
 			perror("Error");
-		}
 	}
 	return (0);
 }
