@@ -22,6 +22,10 @@ static size_t	str_count(char const *s, char c)
 	return (count);
 }
 
+// qflag = 0
+// if single quote (') is encounted, set it to one
+// if double quote (") set it to 2
+// if a closing quote of the specific is encountered, reset to 0
 int	is_quotes_closed(int qflag, char q)
 {
 	if (q == SINGLE && qflag == 0)
@@ -52,10 +56,6 @@ static size_t	wordinstr_len(char const *s, char c, int qflag)
 	return (i);
 }
 
-// qflag = 0
-// if single quote (') is encounted, set it to one
-// if double quote (") set it to 2
-// if a closing quote of the specific is encountered, reset to 0
 
 char	**my_split(char *s, char c)
 {
@@ -74,6 +74,7 @@ char	**my_split(char *s, char c)
 		return (NULL);
 	while (s[i] != '\0')
 	{
+		qflag = is_quotes_closed(qflag, s[i]);
 		if (s[i] != c && qflag == 0)
 		{
 			str[j] = ft_substr(s, i, wordinstr_len(&s[i], c, qflag));

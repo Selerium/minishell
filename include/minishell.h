@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/28 10:07:49 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/01 18:44:11 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void    handle_pipes(char *input, t_flag *flag, size_t *i);
 
 //tokenizing the string
 void    fill_struct(t_minishell *shell);
+
+int	is_quotes_closed(int qflag, char q);
 
 // debug
 void    deboog(t_chunk *chunk);
