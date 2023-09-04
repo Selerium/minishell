@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/03 17:16:28 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/03 18:20:39 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ char    **get_args(char **var, char *input, size_t *j, size_t *size)
             (*j)++;       
         }
     }
-    // while (input[(*j)] && !check_space(input[(*j)])
-    //     && (input[*j] != '>' && input[*j] != '<'))
-    // {
-    //     len++;
-    //     (*j)++;
-    // }
     (*size)++;
     new[(*size) - 1] = ft_substr(input, (*j) - len, len);
     (*j)--;

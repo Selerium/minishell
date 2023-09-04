@@ -22,9 +22,12 @@ static size_t	str_count(char const *s, char c)
 	return (count);
 }
 
+// qflag = 0
+// if single quote (') is encounted, set it to one
+// if double quote (") set it to 2
+// if a closing quote of the specific is encountered, reset to 0
 int	is_quotes_closed(int qflag, char q)
 {
-	printf("char: %c | qflag value: %d\n", q, qflag);
 	if (q == SINGLE && qflag == 0)
 		return (1);
 	else if (q == DOUBLE && qflag == 0)
@@ -53,10 +56,6 @@ static size_t	wordinstr_len(char const *s, char c, int qflag)
 	return (i);
 }
 
-// qflag = 0
-// if single quote (') is encounted, set it to one
-// if double quote (") set it to 2
-// if a closing quote of the specific is encountered, reset to 0
 
 char	**my_split(char *s, char c)
 {
