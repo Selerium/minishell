@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/14 19:22:49 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/04 17:59:59 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ typedef enum e_def
 *	
 *	>	values for the type of the redirection
 */
-enum	e_redir
+typedef enum	e_redir
 {
 	NON,
 	REDIR_IN,
 	HEREDOC,
-	REDIR_OUT, 
+	REDIR_OUT,
 	APPEND,
-};
+}	t_redir;
 
 /**
 *	linked list to hold env vars.
