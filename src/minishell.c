@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/25 13:08:58 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/04 16:46:59 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,59 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
-/**
-*	free the envs list safely (i think).
-*/
-void	free_envs(t_env *envs)
+void	free_cmd(t_chunk *cmd)
 {
-	t_env	*next;
+	int		i;
+	t_chunk	*hold;
 
-	while (envs)
+	while (cmd)
 	{
-		free(envs->name);
-		free(envs->value);
-		next = envs->next;
-		free(envs);
-		envs = next;
+		i = 0;
+		while (cmd->cmd[i])
+			free(cmd->cmd[i++]);
+		free(cmd->cmd);
+		// i = 0;
+		// while (cmd->redir_in[i])
+		// 	free(cmd->redir_in[i++]);
+		// i = 0;
+		// while (cmd->redir_out[i])
+		// 	free(cmd->redir_out[i++]);
+		hold = cmd->next;
+		free(cmd);
+		cmd = hold;
 	}
 }
 
-void	free_cmd(char **cmd)
+void	free_fds(int **fds, int n)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i])
-	{
-		free(cmd[i]);
-		i++;
-	}
-	if (cmd)
-		free(cmd);
+	while (i < n)
+		free(fds[i++]);
+	free(fds);
 }
 
-t_env	*add_env(char *str)
+void	free_shell(t_minishell *shell)
 {
-	t_env	*new_env;
-	int		i;
-
-	i = 0;
-	new_env = malloc (sizeof(t_env));
-	if (!new_env)
-		return (NULL);
-	while (str[i] && str[i] != '=')
-		i++;
-	new_env->name = ft_substr(str, 0, i);
-	new_env->value = ft_substr(str, i + 1, ft_strlen(str));
-	new_env->next = NULL;
-	return (new_env);
+	free_cmd(shell->cmds);
+	free_envs(shell->envs);
+	free_fds(shell->fds, shell->num_chunks);
+	free(shell->processes);
 }
 
-t_env	*create_envs(char **env)
+int	our_readline(t_minishell *shell)
 {
-	t_env	*start;
-	t_env	*next;
-	int		i;
+	char	*text;
 
-	i = 0;
-	start = add_env(env[i]);
-	next = start;
-	while (env[++i] && next)
+	(void) shell;
+	text = readline("hi bestie $> ");
+	if (text)
 	{
-		next->next = add_env(env[i]);
-		next = next->next;
+		shell->str = text;
+		return (1);
 	}
-	if (!next)
-		return (NULL);
-	return (start);
-}
-
-void	print_envs(t_env *envs)
-{
-	while (envs)
-	{
-		printf("%s = %s\n", envs->name, envs->value);
-		envs = envs->next;
-	}
+	return (0);
 }
 
 /**
@@ -96,22 +75,21 @@ void	print_envs(t_env *envs)
 */
 int	main(int argc, char **argv, char **env)
 {
-	int			flag;
 	t_minishell	shell;
 
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
-	flag = 1;
-	set_handlers();
-	while (flag)
+	print_envs(shell.envs);
+	set_handlers(&shell);
+	shell.flag = 1;
+	while (shell.flag)
 	{
 		shell.str = readline("hi bestie $> ");
 		add_history(shell.str);
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 	}
-	print_envs(shell.envs);
 	free_envs(shell.envs);
 }
  

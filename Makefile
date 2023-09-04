@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/08/21 12:54:08 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/09/04 16:34:48 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME := minishell
 SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/env_vars.c\
 		$(SRCDIR)/signals.c\
+		$(SRCDIR)/run_cmds.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
@@ -54,10 +55,14 @@ bonus: $(BONUS)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/$(BUILTINS):
 	mkdir -p $(OBJDIR)/$(BUILTINS)
+
+$(OBJDIR)/$(PARSING):
 	mkdir -p $(OBJDIR)/$(PARSING)
 
-$(NAME): $(OBJDIR) $(OBJS) $(LIB)
+$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
 
 $(BONUS): $(B_OBJS)
