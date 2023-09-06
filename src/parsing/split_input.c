@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/04 18:03:12 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:15:18 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_chunk	*fill_struct_mini(char *split)
 		else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
 		{
 			chunk->cmd = get_args(chunk->cmd, split, &j, &chunk->cmd_count);
-			printf("cmd count: %ld\n", chunk->cmd_count);
+			// printf("cmd count: %ld\n", chunk->cmd_count);
 		}
 		if (split[j])
 			j++;

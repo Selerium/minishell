@@ -6,34 +6,59 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 17:03:55 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:48:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
+#include <errno.h>
 #include <readline/readline.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
 
-void	set_num_chunks(t_chunk *cmd, t_minishell *shell)
+void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell)
 {
 	shell->num_chunks = 0;
+	shell->num_envs = 0;
 	while (cmd)
 	{
 		shell->num_chunks++;
 		cmd = cmd->next;
 	}
+	while (env)
+	{
+		shell->num_envs++;
+		env = env->next;
+	}
 }
 
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 {
+	int		n;
+	char	**envs;
+	char	*hold;
+	t_env	*temp;
+	char	*cmdpath;
+
 	(void) cmd;
-	(void) shell;
 	(void) i;
-	printf("we made it %s\n", cmd->cmd[0]);
-	free_shell(shell);
-	exit(0);
+	temp = shell->envs;
+	envs = malloc (sizeof(char *) * (shell->num_envs + 1));
+	if (!envs)
+		printf("exec cmd - malloc eror\n");
+	n = 0;
+	while (temp)
+	{
+		hold = ft_strjoin(temp->name, "=");
+		envs[n] = ft_strjoin(hold, temp->value);
+		free(hold);
+		temp = temp->next;
+		n++;
+	}
+	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
+	execve(cmdpath, cmd->cmd, envs);
 }
 
 int	**create_fds(t_minishell *shell)

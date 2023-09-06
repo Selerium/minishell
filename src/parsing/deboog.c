@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deboog.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:46:54 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/04 18:09:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:15:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	deboog(t_chunk *chunk)
 		cmd = 0;
 		while (chunk->cmd && chunk->cmd[cmd])
 		{
-			printf("cmd[%ld] = [%s]\n", cmd, chunk->cmd[cmd]);
+			// printf("cmd[%ld] = [%s]\n", cmd, chunk->cmd[cmd]);
 			cmd++;
 		}
 		while ((chunk->redir_out && chunk->redir_out[i] != NULL)
@@ -54,7 +54,7 @@ void	deboog(t_chunk *chunk)
 				chunk->redir_in_type[j]);
 			j++;
 		}
-		printf("---------------------------------------------------------\n");
+		// printf("---------------------------------------------------------\n");
 		chunk = chunk->next;
 	}
 }

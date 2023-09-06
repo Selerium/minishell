@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/04 16:34:48 by jadithya         ###   ########.fr        #
+#    Updated: 2023/09/04 18:51:00 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/env_vars.c\
 		$(SRCDIR)/signals.c\
 		$(SRCDIR)/run_cmds.c\
+		$(SRCDIR)/find_cmd.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
@@ -43,7 +44,7 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -fsanitize=address
+CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
 
 LINKERS := -lreadline -L/usr/local/opt/readline/lib
 

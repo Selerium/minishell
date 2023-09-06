@@ -6,13 +6,14 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 16:46:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:40:35 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <stdio.h>
 
 void	free_cmd(t_chunk *cmd)
 {
@@ -25,12 +26,12 @@ void	free_cmd(t_chunk *cmd)
 		while (cmd->cmd[i])
 			free(cmd->cmd[i++]);
 		free(cmd->cmd);
-		// i = 0;
-		// while (cmd->redir_in[i])
-		// 	free(cmd->redir_in[i++]);
-		// i = 0;
-		// while (cmd->redir_out[i])
-		// 	free(cmd->redir_out[i++]);
+		i = 0;
+		while (cmd->redir_in[i])
+			free(cmd->redir_in[i++]);
+		i = 0;
+		while (cmd->redir_out[i])
+			free(cmd->redir_out[i++]);
 		hold = cmd->next;
 		free(cmd);
 		cmd = hold;
@@ -80,7 +81,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
-	print_envs(shell.envs);
+	// print_envs(shell.envs);
 	set_handlers(&shell);
 	shell.flag = 1;
 	while (shell.flag)
@@ -89,6 +90,8 @@ int	main(int argc, char **argv, char **env)
 		add_history(shell.str);
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
+		set_num_chunks(shell.cmds, shell.envs, &shell);
+		run_cmd(shell.cmds, &shell);
 	}
 	free_envs(shell.envs);
 }

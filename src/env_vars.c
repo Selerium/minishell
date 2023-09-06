@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/19 19:06:41 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:37:06 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	free_envs(t_env *envs)
 {
 	t_env	*next;
 
-	printf("%s", envs->name);
 	while (envs)
 	{
 		free(envs->name);

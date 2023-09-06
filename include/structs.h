@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 18:14:55 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/04 20:40:39 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,10 @@ typedef struct s_minishell
 	int				**fds;
 	char			*str;
 	struct s_chunk	*cmds;
-	int				*processes;
 	int				num_chunks;
+	int				*processes;
 	struct s_env	*envs;
+	int				num_envs;
 	t_signals		signal_list;
 }			t_minishell;
 

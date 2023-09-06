@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 16:45:42 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:41:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ enum e_redir	*realloc_xd(enum e_redir *og, size_t new_size);
 bool	check_space(int c);
 char	**my_split(char *s, char c); // using ft_split from jensen's libft 
 
+//find command path:
+char	*ft_findcmd(char *cmd, t_env *env);
+
 //execution:
 void	free_shell(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
-void	set_num_chunks(t_chunk *cmd, t_minishell *shell);
+void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
 
 #endif
