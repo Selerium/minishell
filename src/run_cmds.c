@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/06 10:48:24 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:57:12 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell)
@@ -71,6 +72,7 @@ int	**create_fds(t_minishell *shell)
 	while (i < shell->num_chunks)
 	{
 		fds[i] = (int *) malloc (sizeof(int) * 2);
+		pipe(fds[i]);
 		i++;
 	}
 	return (fds);
@@ -85,22 +87,17 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	int		i;
 	int		status;
 
-	shell->fds = create_fds(shell);
-	shell->processes = malloc (sizeof(int) * shell->num_chunks);
 	iter_cmd = cmds;
 	i = 0;
-	// pipe(shell->fds[0]);
-	// dup2(shell->fds[0][WRITE], STDOUT_FILENO);
 	while (iter_cmd)
 	{
-		// if (i < shell->num_chunks - 1)
-		// 	pipe(shell->fds[i + 1]);
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
-			// dup2(shell->fds[i][READ], STDIN_FILENO);
-			// if (i != shell->num_chunks - 1)
-				// dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
+			if (i != 0)
+				dup2(shell->fds[i][READ], STDIN_FILENO);
+			if (i != shell->num_chunks - 1)
+				dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
 			execute_cmd(iter_cmd, shell, i);
 		}
 		iter_cmd = iter_cmd->next;
@@ -110,8 +107,8 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	while (i < shell->num_chunks)
 	{
 		waitpid(shell->processes[i], &status, WEXITED);
-		printf("process %d completed with an exit status %d\n", i, WEXITSTATUS(status));
 		i++;
 	}
+	shell->exit_code = WEXITSTATUS(status);
 	free (shell->processes);
 }
