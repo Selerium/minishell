@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/07 23:00:52 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:42:37 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	main(int argc, char **argv, char **env)
 		shell.fds = create_fds(&shell);
 		shell.processes = malloc (sizeof(int) * shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
+		print_split(shell.cmds->redir_out);
 	}
 	free_envs(shell.envs);
 }

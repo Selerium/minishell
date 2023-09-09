@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/09 17:12:35 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:40:38 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ size_t	strlen_2d(char **arr);
 void	**realloc_2d(void **og, size_t new_size);
 enum e_redir	*realloc_xd(enum e_redir *og, size_t new_size);
 bool	check_space(int c);
-char	**my_split(char *s, char c); // using ft_split from jensen's libft 
+char	**ms_split(char *s, char c); // using ft_split from jensen's libft 
 
 //find command path:
 char	*ft_findcmd(char *cmd, t_env *env);

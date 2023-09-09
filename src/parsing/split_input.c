@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/05 10:15:18 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:40:04 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,21 @@ t_chunk	*fill_struct_mini(char *split)
 	{
 		if (split[j] == '>')
 		{
-			chunk->redir_out_type = get_redir_type(chunk->redir_out_type, split, &j, chunk->redir_out_count); 
-			chunk->redir_out = get_args(chunk->redir_out, split, &j, &chunk->redir_out_count);
+			chunk->redir_out_type = get_redir_type(chunk->redir_out_type,
+					split, &j, chunk->redir_out_count);
+			chunk->redir_out = get_args(chunk->redir_out,
+					split, &j, &chunk->redir_out_count);
 		}
 		else if (split[j] == '<')
 		{
-			chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split, &j, chunk->redir_in_count); 
-			chunk->redir_in = get_args(chunk->redir_in, split, &j, &chunk->redir_in_count);
+			chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split,
+					&j, chunk->redir_in_count); 
+			chunk->redir_in = get_args(chunk->redir_in, split,
+					&j, &chunk->redir_in_count);
 		}
 		else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
 		{
 			chunk->cmd = get_args(chunk->cmd, split, &j, &chunk->cmd_count);
-			// printf("cmd count: %ld\n", chunk->cmd_count);
 		}
 		if (split[j])
 			j++;
@@ -140,7 +143,7 @@ void	fill_struct(t_minishell *shell)
 	size_t	i;
 
 	i = 0;
-	split = my_split(shell->str, '|');
+	split = ms_split(shell->str, '|');
 	shell->cmds = NULL;
 	head = shell->cmds;
 	while (split[i])
@@ -150,5 +153,5 @@ void	fill_struct(t_minishell *shell)
 		i++;
 	}
 	shell->cmds = head;
-	deboog(shell->cmds);
+	// deboog(shell->cmds);
 }
