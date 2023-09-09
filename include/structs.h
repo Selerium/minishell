@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/04 18:14:55 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/05 17:59:31 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum e_def
 *	
 *	>	values for the type of the redirection
 */
-typedef enum	e_redir
+typedef enum e_redir
 {
 	NON,
 	REDIR_IN,
