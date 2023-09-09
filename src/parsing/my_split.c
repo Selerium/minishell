@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 18:03:07 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/09/05 18:17:30 by jebucoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"../../include/minishell.h"
 
 static size_t	str_count(char const *s, char c)
@@ -37,7 +49,6 @@ int	is_quotes_closed(int qflag, char q)
 	else if (q == DOUBLE && qflag == 2)
 		return (0);
 	return (qflag);
-
 }
 
 // counts the characters in s[i] for malloc
@@ -56,13 +67,12 @@ static size_t	wordinstr_len(char const *s, char c, int qflag)
 	return (i);
 }
 
-
-char	**my_split(char *s, char c)
+char	**ms_split(char *s, char c)
 {
 	size_t		i;
 	size_t		j;
-	char	**str;
-	int		qflag;
+	char		**str;
+	int			qflag;
 
 	i = 0;
 	j = 0;
