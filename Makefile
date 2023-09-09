@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/04 18:51:00 by jadithya         ###   ########.fr        #
+#    Updated: 2023/09/09 17:17:07 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,10 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
+		$(SRCDIR)/$(BUILTINS)/echo.c\
+		$(SRCDIR)/$(BUILTINS)/unset.c\
+		$(SRCDIR)/$(BUILTINS)/exit.c\
+		$(SRCDIR)/$(BUILTINS)/env.c\
 		$(SRCDIR)/$(PARSING)/syntax_check.c\
 		$(SRCDIR)/$(PARSING)/handle_flags.c\
 		$(SRCDIR)/$(PARSING)/split_input.c\

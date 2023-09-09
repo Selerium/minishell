@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 19:40:20 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/09 13:53:46 by jadithya         ###   ########.fr       */
+/*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
+/*   Updated: 2023/09/09 16:19:09 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include"../../include/minishell.h"
 
-int	run_env(t_minishell *shell)
+void	run_exit(char *num)
 {
-	print_envs(shell->envs, true);
-	exit(0);
+	exit(ft_atoi(num));
 }

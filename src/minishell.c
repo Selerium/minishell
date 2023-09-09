@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/07 22:57:56 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/07 23:00:52 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	shell.envs = create_envs(env);
-	// print_envs(shell.envs);
 	set_handlers(&shell);
 	shell.flag = 1;
 	while (shell.flag)
@@ -97,4 +96,3 @@ int	main(int argc, char **argv, char **env)
 	}
 	free_envs(shell.envs);
 }
- 

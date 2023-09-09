@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/07 22:19:03 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:38:17 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_chunk
 	enum e_redir		*redir_out_type;
 	size_t				redir_out_count;
 	struct s_chunk		*next;
+	int					*fds_in;
+	int					*fds_out;
 }			t_chunk;
 
 typedef struct s_flag

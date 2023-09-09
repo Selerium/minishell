@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/07 22:57:45 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:12:35 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,10 @@
 # define DOUBLE '\"'
 # define SINGLE '\''
 
-//built-ins:
-int		pwd(void);
-t_env	*new_export(t_env *var, t_env *env);
-int		ms_cd(char **input);
-
 //environment variables:
 t_env	*add_env(char *str);
 t_env	*create_envs(char **env);
-void	print_envs(t_env *envs);
+void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
 
 //signal handlers:
@@ -87,5 +82,14 @@ void	free_shell(t_minishell *shell);
 int		**create_fds(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
+
+//built-ins:
+int		run_env(t_minishell *shell);
+int		run_pwd(void);
+int		run_cd(char **input);
+void	run_export(char **cmd, t_minishell *shell);
+void	run_exit(char *num);
+void	run_echo(char **cmd);
+void	run_unset(char *cmd, t_minishell *shell);
 
 #endif
