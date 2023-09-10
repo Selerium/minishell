@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 18:46:54 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/08 15:43:17 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:01:40 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_split(char **str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		printf("str[%ld] = [%s]\n", i, str[i]);
