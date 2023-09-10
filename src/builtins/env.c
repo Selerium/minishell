@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/09 14:14:42 by jadithya         ###   ########.fr       */
+/*   Created: 2023/07/21 19:40:20 by jebucoy           #+#    #+#             */
+/*   Updated: 2023/09/09 13:53:46 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/minishell.h"
+#include "../../include/minishell.h"
 
-/**
-*	a replacement to the system pwd.
-*
-*	uses getcwd() to return current working directory
-*/
-int	run_pwd(void)
+int	run_env(t_minishell *shell)
 {
-	char	*str;
-
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	free (str);
-	exit (0);
+	print_envs(shell->envs, true);
+	exit(0);
 }

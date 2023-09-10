@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/08/07 17:52:36 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/09 14:15:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
 *	finds cd keyword and gets required file path from the next string
 */
-int	ms_cd(char **input)
+int	run_cd(char **input)
 {
 	int	i;
 
@@ -29,5 +29,5 @@ int	ms_cd(char **input)
 		else
 			perror("Error");
 	}
-	return (0);
+	exit (0);
 }

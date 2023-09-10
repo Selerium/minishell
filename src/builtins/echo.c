@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/09 14:14:42 by jadithya         ###   ########.fr       */
+/*   Created: 2023/09/09 16:19:42 by jadithya          #+#    #+#             */
+/*   Updated: 2023/09/10 14:44:18 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
+#include <stdbool.h>
 
-/**
-*	a replacement to the system pwd.
-*
-*	uses getcwd() to return current working directory
-*/
-int	run_pwd(void)
+void	run_echo(char **cmd)
 {
-	char	*str;
+	int		i;
+	bool	n;
 
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	free (str);
-	exit (0);
+	n = (ft_strncmp(cmd[1], "-n ", 3) == 0);
+	i = 0;
+	while (cmd[++i])
+	{
+		if (n && i == 1)
+			continue ;
+		printf("%s", cmd[i]);
+		if (cmd[i + 1])
+			printf(" ");
+	}
+	if (!n)
+		printf("\n");
+	exit(0);
 }

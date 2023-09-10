@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/07/22 18:38:00 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:12:22 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,31 @@
 *	>	if name is biggest name, adds to the end of the env list.
 */
 
-t_env	*new_export(t_env *var, t_env *env)
+void	run_export(char **cmd, t_minishell *shell)
 {
-	(void) var;
-	(void) env;
-	return (NULL);
+	t_env	*i;
+	t_env	*left;
+	t_env	*right;
+
+	i = shell->envs;
+	while (i)
+	{
+		if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) == 0)
+		{
+			i->value = ft_substr(cmd[1], ft_strlen(i->name),
+					ft_strlen(cmd[1]) - ft_strlen(i->name));
+			exit(0);
+		}
+		else
+		{
+			if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) < 0)
+				left = i;
+			if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) > 0)
+				right = i;
+			if (left && right)
+				break ;
+		}
+		left->next = add_env(cmd[1]);
+		left->next->next = right;
+	}
 }

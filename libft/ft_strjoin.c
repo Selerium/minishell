@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 17:39:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/08/27 20:01:13 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/06 10:18:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (++j < l2)
 		newstr[i + j] = s2[j];
 	newstr[i + j] = '\0';
-	free(s1);
 	return (newstr);
 }
