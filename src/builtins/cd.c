@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/09 14:15:08 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:54:51 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	run_cd(char **input)
 		i++;
 	if (input[i])
 	{
-		if (input[i + 1] != NULL && chdir(input[i + 1]) == 0)
+		if (input[i + 1] != NULL)
 			printf("%s\n", getcwd(NULL, 0));
 		else
 			perror("Error");
