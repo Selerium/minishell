@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/10 19:53:41 by jadithya         ###   ########.fr        #
+#    Updated: 2023/09/11 17:27:22 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,11 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
+# CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
+CFLAGS := -g3 -Wall -Wextra -Werror -I/Users/jebucoy/.brew/opt/readline/include -g3
 
-LINKERS := -lreadline -L/usr/local/opt/readline/lib
+# LINKERS := -lreadline -L/usr/local/opt/readline/lib
+LINKERS := -lreadline -L/Users/jebucoy/.brew/opt/readline/lib
 
 LIB := libft/libft.a
 
