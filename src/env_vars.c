@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/09 20:51:59 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/11 16:30:01 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 */
 
 #include"../include/minishell.h"
+
+t_env	*get_env(char *name, t_minishell shell)
+{
+	t_env	*temp;
+
+	temp = shell.envs;
+	while (temp)
+	{
+		if (ft_strncmp(temp->name, name, ft_strlen(name)) == 0)
+			return (temp);
+	}
+	return (NULL);
+}
 
 t_env	*add_env(char *str)
 {
@@ -52,11 +65,12 @@ t_env	*create_envs(char **env)
 	return (start);
 }
 
-void	print_envs(t_env *envs)
+void	print_envs(t_env *envs, bool is_env)
 {
 	while (envs)
 	{
-		printf("%s = %s\n", envs->name, envs->value);
+		if (is_env && envs->value)
+			printf("%s=%s\n", envs->name, envs->value);
 		envs = envs->next;
 	}
 }
@@ -68,7 +82,6 @@ void	free_envs(t_env *envs)
 {
 	t_env	*next;
 
-	printf("%s", envs->name);
 	while (envs)
 	{
 		free(envs->name);

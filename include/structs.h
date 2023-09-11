@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/05 17:59:31 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/09 18:41:22 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_chunk
 	enum e_redir		*redir_out_type;
 	size_t				redir_out_count;
 	struct s_chunk		*next;
+	int					*fds_in;
+	int					*fds_out;
 }			t_chunk;
 
 typedef struct s_flag
@@ -132,9 +134,10 @@ typedef struct s_minishell
 	int				**fds;
 	char			*str;
 	struct s_chunk	*cmds;
-	int				*processes;
 	int				num_chunks;
+	int				*processes;
 	struct s_env	*envs;
+	int				num_envs;
 	t_signals		signal_list;
 }			t_minishell;
 

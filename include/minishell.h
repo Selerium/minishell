@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/05 18:17:30 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/10 21:33:37 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@
 # define DOUBLE '\"'
 # define SINGLE '\''
 
-//built-ins:
-int		pwd(void);
-t_env	*new_export(t_env *var, t_env *env);
-int		ms_cd(char **input);
+void	free_shell(t_minishell *shell);
 
 //environment variables:
 t_env	*add_env(char *str);
 t_env	*create_envs(char **env);
-void	print_envs(t_env *envs);
+void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
 
 //signal handlers:
@@ -79,9 +76,36 @@ enum e_redir	*realloc_xd(enum e_redir *og, size_t new_size);
 bool	check_space(int c);
 char	**ms_split(char *s, char c); // using ft_split from jensen's libft 
 
+//find command path:
+char	*ft_findcmd(char *cmd, t_env *env);
+
 //execution:
-void	free_shell(t_minishell *shell);
+void	dup_redirects(t_chunk *cmd);
+void	close_pipes(t_minishell *shell);
+void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
+int		**create_fds(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
-void	set_num_chunks(t_chunk *cmd, t_minishell *shell);
+
+//redirections:
+int		set_redir_counts(char **list);
+void	open_outfiles(t_chunk *cmd);
+void	open_infiles(t_chunk *cmd);
+void	set_redirects(t_chunk *cmd);
+void	dup_redirects(t_chunk *cmd);
+
+//execute separate commands:
+void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i);
+void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
+void	close_pipes(t_minishell *shell);
+void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i);
+
+//built-ins:
+int		run_env(t_minishell *shell);
+int		run_pwd(void);
+int		run_cd(char **input);
+void	run_export(char **cmd, t_minishell *shell);
+void	run_exit(char *num);
+void	run_echo(char **cmd);
+void	run_unset(char *cmd, t_minishell *shell);
 
 #endif
