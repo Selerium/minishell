@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/10 18:30:12 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:15:58 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 void	free_cmd(t_chunk *cmd)
 {
@@ -70,6 +72,26 @@ int	our_readline(t_minishell *shell)
 	return (0);
 }
 
+void	print_welcome(void)
+{
+	int		startfile;
+	char	*text;
+
+	startfile = open(".startfile", O_RDONLY, 0644);
+	if (startfile <= 0)
+	{
+		printf("Missing startup text file. Create your own if you'd like.\n\n");
+		return ;
+	}
+	text = get_next_line(startfile);
+	while (text)
+	{
+		printf("%s", text);
+		free(text);
+		text = get_next_line(startfile);
+	}
+}
+
 /**
 	currently it's just running forever with a prompt and i've added builtins
 	to test.
@@ -80,6 +102,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
+	print_welcome();
 	shell.envs = create_envs(env);
 	set_handlers(&shell);
 	shell.flag = 1;

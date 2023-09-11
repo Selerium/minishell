@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 14:50:55 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:14:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	open_outfiles(t_chunk *cmd)
 			}
 			else if (cmd->redir_out_type[i] == APPEND)
 			{
-				cmd->fds_out[i] = open(cmd->redir_out[i], O_APPEND | O_CREAT,
+				cmd->fds_out[i] = open(cmd->redir_out[i], O_APPEND | O_CREAT | O_TRUNC,
 						0644);
 			}
 			i++;
