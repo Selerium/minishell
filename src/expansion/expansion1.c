@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/13 19:52:41 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:12:45 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ char	*get_env_name(char *input)
 	while (input[i] != '$')
 		i++;
 	start = i + 1;
-	
-	
-	
+	while (isalnum(input[i]) || input[i] == '_')
+	;
 }
 
 /*go through each node in linked list*/
