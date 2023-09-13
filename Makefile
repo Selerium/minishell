@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/13 19:33:09 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/09/13 19:55:40 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,14 @@ B_SRCS :=
 
 B_OBJS := $(B_SRCS:$(B_SRCDIR)/%.c=$(B_OBJDIR)/%.o)
 
-# CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3
-CFLAGS := -g3 -Wall -Wextra -Werror -I/Users/jebucoy/.brew/opt/readline/include -g3
+ifeq (${OS}, Darwin)
+	CFLAGS := -g3 -Wall -Wextra -Werror -I/Users/jebucoy/.brew/opt/readline/include -g3
+	LINKERS := -lreadline -L/Users/jebucoy/.brew/opt/readline/lib
+else
+	CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -D LINUX
+	LINKERS := -lreadline -L/usr/local/opt/readline/lib
+endif
 
-# LINKERS := -lreadline -L/usr/local/opt/readline/lib
-LINKERS := -lreadline -L/Users/jebucoy/.brew/opt/readline/lib
 
 LIB := libft/libft.a
 

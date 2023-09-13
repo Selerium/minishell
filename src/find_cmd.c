@@ -48,7 +48,7 @@ char	*ft_findcmd(char *cmd, t_env *env)
 {
 	char	*path;
 
-	if (cmd[0] == '/')
+	if (cmd[0] == '/' || cmd[0] == '.')
 	{
 		path = ft_strdup(cmd);
 		return (path);
