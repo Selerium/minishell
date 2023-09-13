@@ -6,29 +6,25 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/11 19:36:13 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:52:41 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	check_exp(t_chunk *node, char **cmd_array)
+char	*get_env_name(char *input)
 {
 	size_t	i;
-	size_t	j;
+	size_t	start;
 
 	i = 0;
-	j = 0;
-	while (cmd_array[i])
-	{
-		while (cmd_array[i][j] != '$')
-			j++;
-		is_exp_exist();
-		
-	}
+	while (input[i] != '$')
+		i++;
+	start = i + 1;
+	
+	
+	
 }
-
-
 
 /*go through each node in linked list*/
 /*go through each array

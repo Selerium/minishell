@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/11 17:27:22 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/09/13 19:33:09 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC := cc
 
 BUILTINS := builtins
 PARSING	:=	parsing
+EXPANSION := expansion
 SRCDIR := src
 OBJDIR := obj
 B_SRCDIR := bonussrcs
@@ -43,6 +44,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
+		$(SRCDIR)/$(EXPANSION)/expansion1.c
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -71,7 +73,10 @@ $(OBJDIR)/$(BUILTINS):
 $(OBJDIR)/$(PARSING):
 	mkdir -p $(OBJDIR)/$(PARSING)
 
-$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJS) $(LIB)
+$(OBJDIR)/$(EXPANSION):
+	mkdir -p $(OBJDIR)/$(EXPANSION)
+
+$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJDIR)/$(EXPANSION) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
 
 $(BONUS): $(B_OBJS)
@@ -91,7 +96,7 @@ clean:
 	rm -rf $(OBJDIR) $(B_OBJDIR)
 
 fclean: clean
-	rm $(LIB)
+	rm -f $(LIB)
 	rm -f $(NAME) $(BONUS)
 
 re: fclean all
