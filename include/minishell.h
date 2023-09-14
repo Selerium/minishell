@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/13 19:29:32 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:54:30 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell);
 
-void	check_exp(char **cmd_array);
+void	get_env_name(char *input);
+void	expand_env(char *input, t_minishell shell);
 
 #endif
