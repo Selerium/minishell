@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/13 19:55:40 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/09/15 21:27:58 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
-		$(SRCDIR)/$(EXPANSION)/expansion1.c
+		$(SRCDIR)/$(EXPANSION)/expansion_utils.c
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 

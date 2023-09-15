@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/14 15:54:30 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:09:01 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_env	*add_env(char *str);
 t_env	*create_envs(char **env);
 void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
+t_env	*get_env(char *name, t_minishell shell);
 
 //signal handlers:
 void	sigint_handler(int n);
@@ -108,7 +109,7 @@ void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell);
 
-void	get_env_name(char *input);
-void	expand_env(char *input, t_minishell shell);
+char	*get_env_name(char *input);
+char	*expand_env(char *input, t_minishell shell);
 
 #endif
