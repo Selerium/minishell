@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/16 18:59:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:37:02 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,15 @@
 
 void	run_export(char **cmd, t_minishell *shell, bool parent)
 {
-	t_env	*i;
-	t_env	*left;
-	t_env	*right;
+	t_env	*iter_env;
+	t_env	*new_env;
 
-	i = shell->envs;
-	while (i)
-	{
-		if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) == 0)
-		{
-			i->value = ft_substr(cmd[1], ft_strlen(i->name),
-					ft_strlen(cmd[1]) - ft_strlen(i->name));
-			exit(0);
-		}
-		else
-		{
-			if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) < 0)
-				left = i;
-			if (ft_strncmp(i->name, cmd[1], ft_strlen(i->name)) > 0)
-				right = i;
-			if (left && right)
-				break ;
-		}
-		left->next = add_env(cmd[1]);
-		left->next->next = right;
-	}
+	iter_env = shell->envs;
+	while (iter_env->next)
+		iter_env = iter_env->next;
+	new_env = add_env(cmd[1]);
+	printf("%s = %s\n", new_env->name, new_env->value);
+	iter_env->next = new_env;
 	if (!parent)
 		exit(0);
 }
