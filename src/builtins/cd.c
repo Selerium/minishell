@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/11 16:54:51 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:59:45 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
 *	finds cd keyword and gets required file path from the next string
 */
-int	run_cd(char **input)
+void	run_cd(char **input, bool parent)
 {
 	int	i;
 
@@ -24,10 +24,11 @@ int	run_cd(char **input)
 		i++;
 	if (input[i])
 	{
-		if (input[i + 1] != NULL)
+		if (input[i + 1] != NULL && chdir(input[i + 1]) != 0)
 			printf("%s\n", getcwd(NULL, 0));
 		else
 			perror("Error");
 	}
-	exit (0);
+	if (!parent)
+		exit (0);
 }

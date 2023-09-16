@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 16:30:01 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/16 21:05:47 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_env	*get_env(char *name, t_minishell shell)
 	temp = shell.envs;
 	while (temp)
 	{
-		if (ft_strncmp(temp->name, name, ft_strlen(name)) == 0)
+		if (ft_strncmp(temp->name, name, ft_strlen(name) + 1) == 0)
 			return (temp);
+		temp = temp->next;
 	}
 	return (NULL);
 }
