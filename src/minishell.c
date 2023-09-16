@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/16 21:07:02 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 23:09:47 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,8 @@ void	print_welcome(void)
 
 void	check_last_cmd(t_chunk *cmds, t_minishell *shell)
 {
-	printf("hi");
-	while (cmds->next)
-		cmds = cmds->next;
-	if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
-	{
-		if (chdir(cmds->cmd[1]) != 0)
-			perror("Error in changing directories.");
-	}
-	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
-		run_unset(cmds->cmd[0], shell, true);
-	else if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
-		run_export(cmds->cmd, shell, true);
-	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
-		run_exit(cmds->cmd[1]);
+	(void) cmds;
+	(void) shell;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -131,6 +119,7 @@ int	main(int argc, char **argv, char **env)
 		shell.fds = create_fds(&shell);
 		shell.processes = malloc (sizeof(int) * shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
+		check_last_cmd(shell.cmds, &shell);
 	}
 	free_envs(shell.envs);
 }
