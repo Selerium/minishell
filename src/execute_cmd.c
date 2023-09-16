@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/12 12:25:41 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:58:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		run_env(shell);
 	if (ft_strncmp(cmd[0], "export", 6) == 0)
 	{
-		run_export(cmd, shell);
+		run_export(cmd, shell, false);
 		exit(0);
 	}
 	if (ft_strncmp(cmd[0], "unset", 5) == 0)
-		run_unset(cmd[1], shell);
+		run_unset(cmd[1], shell, false);
 	if (ft_strncmp(cmd[0], "echo", 4) == 0)
 		run_echo(cmd);
 	if (ft_strncmp(cmd[0], "exit", 4) == 0)
@@ -100,7 +100,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 	if (ft_strncmp(cmd[0], "pwd", 3) == 0)
 		run_pwd();
 	if (ft_strncmp(cmd[0], "cd", 2) == 0)
-		run_cd(cmd);
+		run_cd(cmd, false);
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
 	exit(-1);

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/09 17:12:22 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:59:16 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 *	>	if name is biggest name, adds to the end of the env list.
 */
 
-void	run_export(char **cmd, t_minishell *shell)
+void	run_export(char **cmd, t_minishell *shell, bool parent)
 {
 	t_env	*i;
 	t_env	*left;
@@ -47,4 +47,6 @@ void	run_export(char **cmd, t_minishell *shell)
 		left->next = add_env(cmd[1]);
 		left->next->next = right;
 	}
+	if (!parent)
+		exit(0);
 }

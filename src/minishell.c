@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 18:11:03 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:07:02 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -92,10 +93,24 @@ void	print_welcome(void)
 	}
 }
 
-/**
-	currently it's just running forever with a prompt and i've added builtins
-	to test.
-*/
+void	check_last_cmd(t_chunk *cmds, t_minishell *shell)
+{
+	printf("hi");
+	while (cmds->next)
+		cmds = cmds->next;
+	if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
+	{
+		if (chdir(cmds->cmd[1]) != 0)
+			perror("Error in changing directories.");
+	}
+	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
+		run_unset(cmds->cmd[0], shell, true);
+	else if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
+		run_export(cmds->cmd, shell, true);
+	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
+		run_exit(cmds->cmd[1]);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	shell;
