@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/11 19:36:13 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:14:14 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	check_exp(t_chunk *node, char **cmd_array)
 {
 	size_t	i;
 	size_t	j;
+	size_t	start;
 
 	i = 0;
 	j = 0;
@@ -23,7 +24,9 @@ void	check_exp(t_chunk *node, char **cmd_array)
 	{
 		while (cmd_array[i][j] != '$')
 			j++;
-		is_exp_exist();
+		start = j;
+		while (cmd_array[i][j] != j)
+		
 		
 	}
 }
