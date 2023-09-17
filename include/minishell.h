@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/16 18:59:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/17 17:49:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	close_pipes(t_minishell *shell);
 void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i);
 
 //built-ins:
-int		run_env(t_minishell *shell);
 int		run_pwd(void);
+void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
 void	run_export(char **cmd, t_minishell *shell, bool parent);
 void	run_exit(char *num);
