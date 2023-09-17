@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 16:43:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:25:41 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,6 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 	if (ft_strncmp(cmd[0], "cd", 2) == 0)
 		run_cd(cmd);
 	execve(cmdpath, cmd, envs);
+	perror("Command not found");
+	exit(-1);
 }

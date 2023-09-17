@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 16:15:58 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:18:03 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_welcome(void)
 	int		startfile;
 	char	*text;
 
-	startfile = open(".startfile", O_RDONLY, 0644);
+	startfile = open("src/.startfile", O_RDONLY, 0644);
 	if (startfile <= 0)
 	{
 		printf("Missing startup text file. Create your own if you'd like.\n\n");
@@ -105,7 +105,7 @@ int	main(int argc, char **argv, char **env)
 	print_welcome();
 	shell.envs = create_envs(env);
 	set_handlers(&shell);
-	shell.flag = 1;
+	shell.flag = 1; 
 	while (shell.flag)
 	{
 		shell.str = readline("hi bestie $> ");
