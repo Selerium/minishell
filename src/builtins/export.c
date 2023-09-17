@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/16 21:37:02 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:16:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	run_export(char **cmd, t_minishell *shell, bool parent)
 	while (iter_env->next)
 		iter_env = iter_env->next;
 	new_env = add_env(cmd[1]);
-	printf("%s = %s\n", new_env->name, new_env->value);
 	iter_env->next = new_env;
 	if (!parent)
+	{
+		printf("%s = %s\n", new_env->name, new_env->value);
 		exit(0);
+	}
 }
