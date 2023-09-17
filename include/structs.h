@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/13 20:11:58 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/17 20:12:20 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ typedef struct s_pid
 
 typedef struct s_signals
 {
-	// __sighandler_t	ctrl_c;
-	// __sighandler_t	ctrl_z;
-	// __sighandler_t	ctrl_slash;
+	void	*ctrl_c;
+	void	*ctrl_z;
+	void	*ctrl_slash;
 }				t_signals;
 
 /**

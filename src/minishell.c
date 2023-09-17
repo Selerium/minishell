@@ -6,14 +6,16 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/15 17:18:03 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/17 20:14:24 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -92,13 +94,27 @@ void	print_welcome(void)
 	}
 }
 
-/**
-	currently it's just running forever with a prompt and i've added builtins
-	to test.
-*/
+int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
+{
+	while (cmds->next)
+		cmds = cmds->next;
+	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
+		run_export(cmds->cmd, shell, true);
+	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
+		run_env(shell, true);
+	else if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
+		run_cd(cmds->cmd, true);
+	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
+		run_unset(cmds->cmd[1], shell, true);
+	else
+		return (0);
+	return (1);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	shell;
+	char		*text;
 
 	(void) argc;
 	(void) argv;
@@ -108,11 +124,16 @@ int	main(int argc, char **argv, char **env)
 	shell.flag = 1; 
 	while (shell.flag)
 	{
-		shell.str = readline("hi bestie $> ");
+		text = ft_strjoin(getcwd(NULL, 0), "\e[33m : hi bestie $>\e[0m ");
+		shell.str = readline(text);
+		free(text);
 		add_history(shell.str);
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
+		if (shell.num_chunks == 1)
+			if (run_single_cmd(shell.cmds, &shell))
+				continue ;
 		shell.fds = create_fds(&shell);
 		shell.processes = malloc (sizeof(int) * shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
