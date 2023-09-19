@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/11 16:54:03 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:53:19 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	while (iter_cmd)
 	{
 		set_redirects(iter_cmd);
-		if (ft_strncmp(iter_cmd->cmd[0], "cd", 3) == 0)
-			if (chdir(iter_cmd->cmd[1]) != 0)
-				perror("Error in changing directories.");
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
