@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/15 23:08:29 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/20 16:42:38 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,18 @@ void	set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
 	}
 }
 
+void	expand_tokens(char **args, t_minishell shell)
+{
+	size_t	i;
+
+	i = 0;
+	while (args && args[i])
+	{
+		args[i] = expand_env(args[i], shell);
+		i++;
+	}
+}
+
 void	fill_struct(t_minishell *shell)
 {
 	t_chunk	*new;
@@ -148,11 +160,15 @@ void	fill_struct(t_minishell *shell)
 	head = shell->cmds;
 	while (split[i])
 	{
-		split[i] = expand_env(split[i], *shell);
 		new = fill_struct_mini(split[i]);
+		expand_tokens(new->cmd, *shell);
+		expand_tokens(new->redir_in, *shell);
+		expand_tokens(new->redir_out, *shell);
 		set_next_node(shell, new, &head);
 		i++;
 	}
 	shell->cmds = head;
 	// deboog(shell->cmds);
 }
+
+
