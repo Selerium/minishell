@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/17 20:11:24 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/23 16:10:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	handle_pipes(char *input, t_flag *flag, size_t *i);
 //tokenizing the string
 void	fill_struct(t_minishell *shell);
 
-int		is_quotes_closed(int qflag, char q);
-
 // debug
 void	deboog(t_chunk *chunk);
 void	print_split(char **str);
@@ -74,9 +72,10 @@ void	print_split(char **str);
 // utils
 size_t	strlen_2d(char **arr);
 void	**realloc_2d(void **og, size_t new_size);
-enum e_redir	*realloc_xd(enum e_redir *og, size_t new_size);
+t_redir	*realloc_xd(t_redir *og, size_t new_size);
 bool	check_space(int c);
-char	**ms_split(char *s, char c); // using ft_split from jensen's libft 
+char	**ms_split(char *s, char c); 
+// using ft_split from jensen's libft 
 
 //find command path:
 char	*ft_findcmd(char *cmd, t_env *env);
@@ -110,7 +109,14 @@ void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);
 
+// expansion
 char	*get_env_name(char *input);
+char	*replace_env(char *input, size_t *idx, char *var_name, t_env *env);
 char	*expand_env(char *input, t_minishell shell);
+void	expand_tokens(char **args, t_minishell shell);
 
+// quotes
+int		is_quotes_closed(int qflag, char q);
+char	*remove_quotes(char *input);
+void	unquote(char **input);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/20 16:42:38 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/23 16:10:06 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,18 +135,6 @@ void	set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
 	}
 }
 
-void	expand_tokens(char **args, t_minishell shell)
-{
-	size_t	i;
-
-	i = 0;
-	while (args && args[i])
-	{
-		args[i] = expand_env(args[i], shell);
-		i++;
-	}
-}
-
 void	fill_struct(t_minishell *shell)
 {
 	t_chunk	*new;
@@ -170,5 +158,4 @@ void	fill_struct(t_minishell *shell)
 	shell->cmds = head;
 	// deboog(shell->cmds);
 }
-
 

@@ -6,7 +6,7 @@
 #    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/15 21:27:58 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/09/22 19:02:09 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC := cc
 BUILTINS := builtins
 PARSING	:=	parsing
 EXPANSION := expansion
+QUOTES := quotes
 SRCDIR := src
 OBJDIR := obj
 B_SRCDIR := bonussrcs
@@ -44,7 +45,8 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
-		$(SRCDIR)/$(EXPANSION)/expansion_utils.c
+		$(SRCDIR)/$(EXPANSION)/expansion_utils.c \
+		$(SRCDIR)/$(QUOTES)/quotes.c
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
@@ -79,7 +81,10 @@ $(OBJDIR)/$(PARSING):
 $(OBJDIR)/$(EXPANSION):
 	mkdir -p $(OBJDIR)/$(EXPANSION)
 
-$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJDIR)/$(EXPANSION) $(OBJS) $(LIB)
+$(OBJDIR)/$(QUOTES):
+	mkdir -p $(OBJDIR)/$(QUOTES)
+
+$(NAME): $(OBJDIR) $(OBJDIR)/$(BUILTINS) $(OBJDIR)/$(PARSING) $(OBJDIR)/$(EXPANSION) $(OBJDIR)/$(QUOTES) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LINKERS) $(LIB) -o $@
 
 $(BONUS): $(B_OBJS)

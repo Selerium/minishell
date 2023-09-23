@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/16 20:51:40 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/23 16:10:50 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ char	*expand_env(char *input, t_minishell shell)
 	}
 	return (input);
 }
+
+void	expand_tokens(char **args, t_minishell shell)
+{
+	size_t	i;
+
+	i = 0;
+	while (args && args[i])
+	{
+		args[i] = expand_env(args[i], shell);
+		i++;
+	}
+}
+
 /*go through each node in linked list*/
 /*go through each array
 	if string contains '$'
