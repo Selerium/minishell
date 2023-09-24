@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/23 16:25:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/24 20:01:45 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ char	*remove_quotes(char *input)
 		qflag = is_quotes_closed(qflag, input[i]);
 		if ((qflag != 0) && (input[i] == SINGLE || input[i] == DOUBLE))
 			nquote++;
-		
+		unquoted[j] = input[i];
+		i++;
+		j++;
 	}
-	if (input[i] == '\0' && nquote == 0)
-		return (input);
 	unquoted[j] = '\0';
+	if (nquote == 0)
+		return (input);
 	return (unquoted);
 }
 

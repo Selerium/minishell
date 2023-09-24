@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/23 16:10:06 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/24 19:58:10 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,9 @@ void	fill_struct(t_minishell *shell)
 		expand_tokens(new->cmd, *shell);
 		expand_tokens(new->redir_in, *shell);
 		expand_tokens(new->redir_out, *shell);
+		// unquote(new->cmd);
+		// unquote(new->redir_in);
+		// unquote(new->redir_out);
 		set_next_node(shell, new, &head);
 		i++;
 	}
