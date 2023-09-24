@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/24 16:13:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:54:27 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,31 @@ void	free_cmd(t_chunk *cmd)
 	while (cmd)
 	{
 		i = 0;
-		while (cmd->cmd[i])
-			free(cmd->cmd[i++]);
-		free(cmd->cmd);
+		if (cmd->cmd)
+		{
+			while (cmd->cmd[i])
+				free(cmd->cmd[i++]);
+			free(cmd->cmd);
+		}
 		i = 0;
-		while (cmd->redir_in[i])
-			free(cmd->redir_in[i++]);
+		if (cmd->redir_in)
+		{
+			while (cmd->redir_in[i])
+				free(cmd->redir_in[i++]);
+			free(cmd->redir_in);
+		}
 		i = 0;
-		while (cmd->redir_out[i])
-			free(cmd->redir_out[i++]);
+		if (cmd->redir_out)
+		{
+			while (cmd->redir_out[i])
+				free(cmd->redir_out[i++]);
+			free(cmd->redir_out);
+		}
+		i = 0;
+		if (cmd->fds_in)
+			free(cmd->fds_in);
+		if (cmd->fds_out)
+			free(cmd->fds_out);
 		hold = cmd->next;
 		free(cmd);
 		cmd = hold;
@@ -47,17 +63,18 @@ void	free_fds(int **fds, int n)
 	int	i;
 
 	i = 0;
-	while (i < n)
+	while (i < n && fds[i])
 		free(fds[i++]);
-	free(fds);
+	if (fds)
+		free(fds);
 }
 
 void	free_shell(t_minishell *shell)
 {
 	free_cmd(shell->cmds);
-	free_envs(shell->envs);
 	free_fds(shell->fds, shell->num_chunks);
-	free(shell->processes);
+	if (shell->processes)
+		free(shell->processes);
 }
 
 void	our_readline(t_minishell *shell)
@@ -94,6 +111,7 @@ void	print_welcome(int ac, char **av)
 		free(text);
 		text = get_next_line(startfile);
 	}
+	close(startfile);
 }
 
 int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
@@ -128,6 +146,8 @@ int	main(int argc, char **argv, char **env)
 		our_readline(&shell);
 		if (!shell.str)
 			break ;
+		if (ft_strlen(shell.str) == 0)
+			continue ;
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
@@ -137,6 +157,7 @@ int	main(int argc, char **argv, char **env)
 		shell.fds = create_fds(&shell);
 		shell.processes = malloc (sizeof(int) * shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
+		free_shell(&shell);
 	}
 	free_envs(shell.envs);
 }

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/09 18:40:04 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:09:05 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,9 @@ void	fill_struct(t_minishell *shell)
 	{
 		new = fill_struct_mini(split[i]);
 		set_next_node(shell, new, &head);
+		free (split[i]);
 		i++;
 	}
+	free(split);
 	shell->cmds = head;
-	// deboog(shell->cmds);
 }

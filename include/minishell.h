@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/17 17:49:44 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:11:06 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define SINGLE '\''
 
 void	free_shell(t_minishell *shell);
+void	free_fds(int **fds, int n);
 
 //environment variables:
 t_env	*get_env(char *name, t_minishell shell);
