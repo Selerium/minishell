@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/17 18:55:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:13:31 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,27 @@ void	free_shell(t_minishell *shell)
 	free(shell->processes);
 }
 
-int	our_readline(t_minishell *shell)
+void	our_readline(t_minishell *shell)
 {
 	char	*text;
+	char	*cwd;
 
-	(void) shell;
-	text = readline("hi bestie $> ");
-	if (text)
-	{
-		shell->str = text;
-		return (1);
-	}
-	return (0);
+	cwd = getcwd(NULL, 0);
+	printf("\e[34m");
+	text = ft_strjoin(cwd, "\e[0m\e[33;1m:hi bestie $>\e[0m ");
+	shell->str = readline(text);
+	free(cwd);
+	free(text);
+	add_history(shell->str);
 }
 
-void	print_welcome(void)
+void	print_welcome(int ac, char **av)
 {
 	int		startfile;
 	char	*text;
 
+	(void) ac;
+	(void) av;
 	startfile = open("src/.startfile", O_RDONLY, 0644);
 	if (startfile <= 0)
 	{
@@ -106,6 +108,8 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 		run_cd(cmds->cmd, true);
 	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
 		run_unset(cmds->cmd[1], shell, true);
+	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
+		run_exit(0);
 	else
 		return (0);
 	return (1);
@@ -114,20 +118,16 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	shell;
-	char		*text;
 
-	(void) argc;
-	(void) argv;
-	print_welcome();
+	print_welcome(argc, argv);
 	shell.envs = create_envs(env);
 	set_handlers(&shell);
 	shell.flag = 1;
 	while (shell.flag)
 	{
-		text = ft_strjoin(getcwd(NULL, 0), "\e[33m : hi bestie $>\e[0m ");
-		shell.str = readline(text);
-		free(text);
-		add_history(shell.str);
+		our_readline(&shell);
+		if (!shell.str)
+			break ;
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
