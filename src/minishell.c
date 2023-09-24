@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/23 20:02:21 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:13:31 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,15 @@ int	main(int argc, char **argv, char **env)
 		our_readline(&shell);
 		if (!shell.str)
 			break ;
-		// if (is_syntax_valid(shell.str) == true)
-		// 	fill_struct(&shell);
-		// set_num_chunks(shell.cmds, shell.envs, &shell);
-		// if (shell.num_chunks == 1)
-		// 	if (run_single_cmd(shell.cmds, &shell))
-		// 		continue ;
-		// shell.fds = create_fds(&shell);
-		// shell.processes = malloc (sizeof(int) * shell.num_chunks);
-		// run_cmd(shell.cmds, &shell);
+		if (is_syntax_valid(shell.str) == true)
+			fill_struct(&shell);
+		set_num_chunks(shell.cmds, shell.envs, &shell);
+		if (shell.num_chunks == 1)
+			if (run_single_cmd(shell.cmds, &shell))
+				continue ;
+		shell.fds = create_fds(&shell);
+		shell.processes = malloc (sizeof(int) * shell.num_chunks);
+		run_cmd(shell.cmds, &shell);
 	}
 	free_envs(shell.envs);
 }
