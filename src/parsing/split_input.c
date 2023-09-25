@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/24 21:09:05 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:49:59 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,7 @@ t_chunk	*fill_struct_mini(char *split)
 					&j, &chunk->redir_in_count);
 		}
 		else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
-		{
 			chunk->cmd = get_args(chunk->cmd, split, &j, &chunk->cmd_count);
-		}
 		if (split[j])
 			j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/24 23:15:15 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:00:01 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
+	check_to_free_envs(cmd, envs, shell, cmdpath);
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
@@ -108,39 +109,37 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 	exit(-1);
 }
 
-void	check_to_free_envs(char *cmd, char **envs, t_minishell *shell, char *cmdpath)
+void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell, char *cmdpath)
 {
-	(void) shell;
-	(void) envs;
-	(void) cmdpath;
+	int	i;
 
-	if ((ft_strncmp(cmd, "env", 3) == 0
-			|| ft_strncmp(cmd, "export", 6) == 0
-			|| ft_strncmp(cmd, "unset", 6) == 0
-			|| ft_strncmp(cmd, "echo", 5) == 0
-			|| ft_strncmp(cmd, "exit", 5) == 0
-			|| ft_strncmp(cmd, "pwd", 4) == 0
-			|| ft_strncmp(cmd, "cd", 3) == 0))
+	if ((ft_strncmp(cmd->cmd[0], "env", 3) == 0
+			|| ft_strncmp(cmd->cmd[0], "export", 6) == 0
+			|| ft_strncmp(cmd->cmd[0], "unset", 6) == 0
+			|| ft_strncmp(cmd->cmd[0], "echo", 5) == 0
+			|| ft_strncmp(cmd->cmd[0], "exit", 5) == 0
+			|| ft_strncmp(cmd->cmd[0], "pwd", 4) == 0
+			|| ft_strncmp(cmd->cmd[0], "cd", 3) == 0))
 	{
-		// free_fds(shell->fds, shell->num_chunks);
-		// if (shell->processes)
-		// 	free(shell->processes);
-		// if (cmdpath)
-		// 	free(cmdpath);
-		// if (envs)
-		// {
-		// 	i = 0;
-		// 	while (envs[i])
-		// 		free(envs[i++]);
-		// 	free(envs);
-		// }
-		// free_envs(shell->envs);
+		free_fds(shell->fds, shell->num_chunks);
+		free_redirs(cmd);
+		if (shell->processes)
+			free(shell->processes);
+		if (cmdpath)
+			free(cmdpath);
+		if (envs)
+		{
+			i = 0;
+			while (envs[i])
+				free(envs[i++]);
+			free(envs);
+		}
+		free_envs(shell->envs);
 	}
 }
 
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
-	check_to_free_envs(cmd[0], envs, shell, cmdpath);
 	if (ft_strncmp(cmd[0], "env", 3) == 0)
 		run_env(shell, false);
 	if (ft_strncmp(cmd[0], "export", 6) == 0)

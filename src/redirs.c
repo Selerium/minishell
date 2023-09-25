@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/16 18:47:37 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:54:21 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ void	open_infiles(t_chunk *cmd)
 void	set_redirects(t_chunk *cmd)
 {
 	cmd->fds_in = malloc (sizeof(int) * set_redir_counts(cmd->redir_in));
+	//handle malloc fail
 	cmd->fds_out = malloc (sizeof(int) * set_redir_counts(cmd->redir_out));
+	//handle malloc fail
 	open_outfiles(cmd);
 	open_infiles(cmd);
 }

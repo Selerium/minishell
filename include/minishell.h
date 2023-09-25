@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/24 23:11:06 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:59:09 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@
 # define DOUBLE '\"'
 # define SINGLE '\''
 
-void	free_shell(t_minishell *shell);
+//freeing:
+void	free_cmd(t_chunk *cmd);
 void	free_fds(int **fds, int n);
+void	free_shell(t_minishell *shell);
+void	free_redirs(t_chunk *cmd);
 
 //environment variables:
 t_env	*get_env(char *name, t_minishell shell);
@@ -87,6 +90,8 @@ void	close_pipes(t_minishell *shell);
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
 int		**create_fds(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
+void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell,
+			char *cmdpath);
 
 //redirections:
 int		set_redir_counts(char **list);
