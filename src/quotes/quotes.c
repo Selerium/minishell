@@ -6,15 +6,15 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/24 20:01:45 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/27 16:27:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // qflag = 0
-// if single quote (') is encounted, set it to one
-// if double quote (") set it to 2
+// if single quote (\') is encounted, set it to one
+// if double quote (\") set it to 2
 // if a closing quote of the specific is encountered, reset to 0
 int	is_quotes_closed(int qflag, char q)
 {
@@ -29,41 +29,31 @@ int	is_quotes_closed(int qflag, char q)
 	return (qflag);
 }
 
-char	*remove_quotes(char *input)
+char	*eliminate_quotes(char *input, size_t *idx, int qflag)
 {
-	size_t	i;
-	size_t	j;
-	char	*unquoted;
-	int		qflag;
-	int		nquote;
+	char	*tmp1;
+	char	*tmp2;
+	char	*tmp3;
+	char	*final;
+	size_t	end_len;
 
-	i = 0;
-	j = 0;
-	nquote = 0;
-	unquoted = NULL;
-	while (input && input[i])
+	end_len = 0;
+	if (qflag != 0 && (*idx) == 0)
 	{
-		qflag = is_quotes_closed(qflag, input[i]);
-		if ((qflag != 0) && (input[i] == SINGLE || input[i] == DOUBLE))
-			nquote++;
-		unquoted[j] = input[i];
-		i++;
-		j++;
+		tmp1 = ft_substr(input, *idx + 1, )
 	}
-	unquoted[j] = '\0';
-	if (nquote == 0)
-		return (input);
-	return (unquoted);
 }
 
-void	unquote(char **input)
+char	*trim_quotes(char *input, int qflag)
 {
 	size_t	i;
 
 	i = 0;
-	while (input && input[i])
+	while (input[i])
 	{
-		input[i] = remove_quotes(input[i]);
+		qflag = is_quotes_closed(qflag, input[i]);
+		if (qflag != 0)
+			input = eliminate_quotes(input, &i, qflag);
 		i++;
 	}
 }

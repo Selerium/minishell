@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/23 16:10:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:55:09 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,23 @@ char	*replace_env(char *input, size_t *idx, char *var_name, t_env *env)
 	char	*tmp1;
 	char	*tmp2;
 	char	*tmp3;
-	char	*mixitup;
+	char	*final;
 
 	tmp1 = ft_substr(input, 0, *idx);
 	if (!env)
 		tmp2 = ft_strdup("");
 	else 
 		tmp2 = ft_strdup(env->value);
-	tmp3 = ft_substr(input, *idx + ft_strlen(var_name) + 1, ft_strlen(input) - *idx - ft_strlen(var_name) - 1);
+	tmp3 = ft_substr(input, *idx + ft_strlen(var_name) + 1, ft_strlen(input)
+			- *idx - ft_strlen(var_name) - 1);
 	(*idx) += ft_strlen(tmp2) - 1;
-	mixitup =ft_strjoin(tmp1, tmp2);
+	final = ft_strjoin(tmp1, tmp2);
 	free (input);
-	input = ft_strjoin(mixitup, tmp3);
+	input = ft_strjoin(final, tmp3);
 	free (tmp1);
 	free (tmp2);
 	free (tmp3);
-	free (mixitup);
+	free (final);
 	return (input);
 }
 
@@ -81,6 +82,7 @@ void	expand_tokens(char **args, t_minishell shell)
 	while (args && args[i])
 	{
 		args[i] = expand_env(args[i], shell);
+		args[i] = trim_quotes(args[i]);
 		i++;
 	}
 }
