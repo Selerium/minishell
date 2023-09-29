@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/28 19:12:52 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/09/29 18:37:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ char	*eliminate_quotes(char *input, size_t *idx, int qflag, size_t start)
 	char	*tmp3;
 	char	*final;
 
-	printf("start: %zd\n", start);
-	printf("eliminiate_quotes() input: [%s]\n", input);
+	// (void)qflag;
+	printf("*idx: %zd\n", *idx);
 	if (start == 0)
 		tmp1 = ft_strdup("");
 	else
-		tmp1 = ft_substr(input, 0, (*idx) - 1);
+		tmp1 = ft_substr(input, 0, (*idx));
 	printf("tmp1: [%s]\n", tmp1);
 	start = *idx;
+	printf("input[%zd] before while loop: [%c]\n", *idx, input[*idx]);
+	// (*idx) += ft_strlen(input) - (ft_strlen(tmp1) + 2);
 	while (input[*idx] && qflag != 0)
 		(*idx)++;
-	tmp2 = ft_substr(input, start + 1, (*idx) - 2);
+	printf("input[%zd] after while loop: [%c]\n", *idx, input[*idx]);
+	tmp2 = ft_substr(input, start + 1, (*idx));
 	printf("tmp2: [%s]\n", tmp2);
 	tmp3 = ft_substr(input, (*idx + 1), ft_strlen(input) - (*idx));
-	printf("index value: %zd\n", *idx);
 	printf("tmp3: [%s]\n", tmp3);
 	final = ft_strjoin(tmp1, tmp2);
 	free (input);
@@ -72,8 +74,8 @@ char	*trim_quotes(char *input)
 	qflag = 0;
 	while (input[i])
 	{
-		printf("trim_quotes input: [%s]\n", input);
 		qflag = is_quotes_closed(qflag, input[i]);
+		printf("input[%zd]: [%c] | qflag value: %d\n", i, input[i], qflag);
 		if (qflag != 0)
 		{
 			start = i;
