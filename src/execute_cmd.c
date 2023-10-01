@@ -6,11 +6,12 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 17:00:01 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 20:23:54 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
+#include <unistd.h>
 
 void	dup_redirects(t_chunk *cmd)
 {
@@ -46,7 +47,6 @@ void	close_pipes(t_minishell *shell)
 
 void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i)
 {
-	(void) shell;
 	(void) cmd;
 	(void) i;
 	close_pipes(shell);
@@ -79,7 +79,7 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
-	check_to_free_envs(cmd, envs, shell, cmdpath);
+	check_to_free_envs(cmd, envs, shell);
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
@@ -109,9 +109,9 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 	exit(-1);
 }
 
-void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell, char *cmdpath)
+void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell)
 {
-	int	i;
+	int		i;
 
 	if ((ft_strncmp(cmd->cmd[0], "env", 3) == 0
 			|| ft_strncmp(cmd->cmd[0], "export", 6) == 0
@@ -122,11 +122,8 @@ void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell, char *cmd
 			|| ft_strncmp(cmd->cmd[0], "cd", 3) == 0))
 	{
 		free_fds(shell->fds, shell->num_chunks);
-		free_redirs(cmd);
 		if (shell->processes)
 			free(shell->processes);
-		if (cmdpath)
-			free(cmdpath);
 		if (envs)
 		{
 			i = 0;
@@ -138,28 +135,37 @@ void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell, char *cmd
 	}
 }
 
+void	wrap_execve(char *cmdpath, char **cmd, char **envs)
+{
+	execve(cmdpath, cmd, envs);
+	perror("Command not found");
+	exit(-1);
+}
+
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
 	if (ft_strncmp(cmd[0], "env", 3) == 0)
 		run_env(shell, false);
-	if (ft_strncmp(cmd[0], "export", 6) == 0)
+	else if (ft_strncmp(cmd[0], "export", 6) == 0)
 	{
 		run_export(cmd, shell, false);
 		exit(0);
 	}
-	if (ft_strncmp(cmd[0], "unset", 6) == 0)
+	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
 		run_unset(cmd[1], shell, false);
-	if (ft_strncmp(cmd[0], "echo", 5) == 0)
+	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
 		run_echo(cmd);
-	if (ft_strncmp(cmd[0], "exit", 5) == 0)
+	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
 		run_exit(cmd[1]);
-	if (ft_strncmp(cmd[0], "pwd", 4) == 0)
+	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
 		run_pwd();
-	if (ft_strncmp(cmd[0], "cd", 3) == 0)
+	else if (ft_strncmp(cmd[0], "cd", 3) == 0)
 		run_cd(cmd, false);
-	if (ft_strncmp(cmd[0], "./minishell", 12) == 0)
+	else if (ft_strncmp(cmd[0], "./minishell", 12) == 0)
 		run_minishell(cmdpath, cmd, envs, *shell);
-	execve(cmdpath, cmd, envs);
-	perror("Command not found");
-	exit(-1);
+	else
+		wrap_execve(cmdpath, cmd, envs);
+	free (cmdpath);
+	free_cmd(shell->cmds);
+	exit(0);
 }

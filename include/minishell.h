@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 16:59:09 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:07:26 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void	close_pipes(t_minishell *shell);
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
 int		**create_fds(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
-void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell,
-			char *cmdpath);
+void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell);
 
 //redirections:
 int		set_redir_counts(char **list);
@@ -114,5 +113,8 @@ void	run_export(char **cmd, t_minishell *shell, bool parent);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);
+
+// test con:
+//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | echo > hey > also hiiii thereeee < oat
 
 #endif

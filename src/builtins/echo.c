@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:19:42 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 16:58:11 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 13:59:00 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ void	run_echo(char **cmd)
 	}
 	if (!n)
 		printf("\n");
-	exit(0);
 }

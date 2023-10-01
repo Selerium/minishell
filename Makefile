@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/25 12:48:38 by jadithya         ###   ########.fr        #
+#    Updated: 2023/09/30 17:36:58 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ else
 	CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -D LINUX
 	LINKERS := -lreadline -L/usr/local/opt/readline/lib
 endif
-
 
 LIB := libft/libft.a
 

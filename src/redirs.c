@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 12:54:21 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 21:19:41 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,19 @@ void	open_infiles(t_chunk *cmd)
 
 void	set_redirects(t_chunk *cmd)
 {
-	cmd->fds_in = malloc (sizeof(int) * set_redir_counts(cmd->redir_in));
-	//handle malloc fail
-	cmd->fds_out = malloc (sizeof(int) * set_redir_counts(cmd->redir_out));
-	//handle malloc fail
+	int	a;
+	int	b;
+
+	a = set_redir_counts(cmd->redir_in);
+	b = set_redir_counts(cmd->redir_out);
+	if (a != 0)
+		cmd->fds_in = ft_calloc (sizeof(int), a);
+	if (a != 0 && !cmd->fds_in)
+		printf("we have a situation. abort. :/ \n");
+	if (b != 0)
+		cmd->fds_out = ft_calloc (sizeof(int), b);
+	if (b != 0 && !cmd->fds_out)
+		printf("we have a situation. abort. :/ \n");
 	open_outfiles(cmd);
 	open_infiles(cmd);
 }

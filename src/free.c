@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:46:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 16:57:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 21:17:05 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_cmd(t_chunk *cmd)
 			while (cmd->redir_in[i])
 				free(cmd->redir_in[i++]);
 			free(cmd->redir_in);
+			free(cmd->redir_in_type);
 		}
 		i = 0;
 		if (cmd->redir_out)
@@ -39,7 +40,12 @@ void	free_cmd(t_chunk *cmd)
 			while (cmd->redir_out[i])
 				free(cmd->redir_out[i++]);
 			free(cmd->redir_out);
+			free(cmd->redir_out_type);
 		}
+		if (cmd->fds_in)
+			free(cmd->fds_in);
+		if (cmd->fds_out)
+			free(cmd->fds_out);
 		hold = cmd->next;
 		free(cmd);
 		cmd = hold;
@@ -75,7 +81,6 @@ void	free_fds(int **fds, int n)
 
 void	free_shell(t_minishell *shell)
 {
-	free_cmd(shell->cmds);
 	free_fds(shell->fds, shell->num_chunks);
 	if (shell->processes)
 		free(shell->processes);

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/25 16:49:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:24:10 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,6 @@ void	fill_struct(t_minishell *shell)
 		i++;
 	}
 	free(split);
+	free(shell->str);
 	shell->cmds = head;
 }
