@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 14:24:10 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:01:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_chunk	*init_chunk(void)
 {
 	t_chunk	*chunk;
 
-	chunk = (t_chunk *)malloc(sizeof(t_chunk));
+	chunk = (t_chunk *)ft_calloc(sizeof(t_chunk), 1);
 	chunk->redir_in = NULL;
 	chunk->redir_out = NULL;
 	chunk->cmd = NULL;

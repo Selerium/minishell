@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:46:27 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/09 19:03:54 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/01 22:01:33 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	**realloc_2d(void **og, size_t new_size)
 	void	**new;
 
 	i = 0;
-	new = (void **)malloc(sizeof(void *) * (new_size + 1));
+	new = (void **)ft_calloc(sizeof(void *), (new_size + 1));
 	while (og && og[i])
 	{
 		new[i] = og[i];
@@ -47,7 +47,7 @@ t_redir	*realloc_xd(t_redir *og, size_t new_size)
 	t_redir	*new;
 
 	i = 0;
-	new = (t_redir *)malloc(sizeof(t_redir) * (new_size + 1));
+	new = (t_redir *)ft_calloc(sizeof(t_redir), (new_size + 1));
 	while (og && og[i])
 	{
 		new[i] = og[i];

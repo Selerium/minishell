@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 21:15:54 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:01:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	**create_fds(t_minishell *shell)
 	int	**fds;
 	int	i;
 
-	fds = (int **) malloc (sizeof(int *) * shell->num_chunks);
+	fds = (int **) ft_calloc (sizeof(int *), shell->num_chunks);
 	i = 0;
 	while (i < shell->num_chunks)
 	{
-		fds[i] = (int *) malloc (sizeof(int) * 2);
+		fds[i] = (int *) ft_calloc (sizeof(int), 2);
 		pipe(fds[i]);
 		i++;
 	}
@@ -84,7 +84,7 @@ t_chunk	*free_iter(t_chunk *cmd)
 }
 
 //check if pipe creation is failing
-//check if processes malloc fails
+//check if processes ft_calloc fails
 //check if processes forking fails
 void	run_cmd(t_chunk *cmds, t_minishell *shell)
 {

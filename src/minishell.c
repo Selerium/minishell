@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 16:14:37 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:00:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int argc, char **argv, char **env)
 			if (run_single_cmd(shell.cmds, &shell))
 				continue ;
 		shell.fds = create_fds(&shell);
-		shell.processes = malloc (sizeof(int) * shell.num_chunks);
+		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
 		free_shell(&shell);
 	}

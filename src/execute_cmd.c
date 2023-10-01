@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 20:23:54 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:00:52 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 
 	set_child_handlers(shell);
 	temp = shell->envs;
-	envs = malloc (sizeof(char *) * (shell->num_envs + 1));
+	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
 	if (!envs)
-		printf("exec cmd - malloc eror\n");
+		printf("exec cmd - ft_calloc eror\n");
 	n = 0;
 	while (temp)
 	{
