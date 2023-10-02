@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 22:01:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:35:04 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 				dup2(shell->fds[i][READ], STDIN_FILENO);
 			if (i != shell->num_chunks - 1)
 				dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
-			set_redirects(iter_cmd);
+			set_redirects(iter_cmd, shell);
 			execute_cmd(iter_cmd, shell, i);
 		}
 		shell->cmds = shell->cmds->next;

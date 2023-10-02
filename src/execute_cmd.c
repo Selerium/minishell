@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 22:00:52 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:21:43 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,6 @@ void	dup_redirects(t_chunk *cmd)
 		while (--i >= 0)
 			close(cmd->fds_in[i]);
 	}
-}
-
-void	close_pipes(t_minishell *shell)
-{
-	int	n;
-
-	n = -1;
-	while (++n < shell->num_chunks)
-	{
-		close(shell->fds[n][READ]);
-		close(shell->fds[n][WRITE]);
-	}
-}
-
-void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i)
-{
-	(void) cmd;
-	(void) i;
-	close_pipes(shell);
-	unlink(".heredoc.tmp");
 }
 
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
@@ -80,6 +60,8 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
 	check_to_free_envs(cmd, envs, shell);
+	if (!cmdpath)
+		print_exit(envs, shell, "Command not found");
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
@@ -107,32 +89,6 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
 	exit(-1);
-}
-
-void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell)
-{
-	int		i;
-
-	if ((ft_strncmp(cmd->cmd[0], "env", 3) == 0
-			|| ft_strncmp(cmd->cmd[0], "export", 6) == 0
-			|| ft_strncmp(cmd->cmd[0], "unset", 6) == 0
-			|| ft_strncmp(cmd->cmd[0], "echo", 5) == 0
-			|| ft_strncmp(cmd->cmd[0], "exit", 5) == 0
-			|| ft_strncmp(cmd->cmd[0], "pwd", 4) == 0
-			|| ft_strncmp(cmd->cmd[0], "cd", 3) == 0))
-	{
-		free_fds(shell->fds, shell->num_chunks);
-		if (shell->processes)
-			free(shell->processes);
-		if (envs)
-		{
-			i = 0;
-			while (envs[i])
-				free(envs[i++]);
-			free(envs);
-		}
-		free_envs(shell->envs);
-	}
 }
 
 void	wrap_execve(char *cmdpath, char **cmd, char **envs)
