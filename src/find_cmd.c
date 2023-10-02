@@ -14,8 +14,11 @@
 
 char	*ft_wrapjoin(char *str1, char *str2)
 {
-	str1 = ft_strjoin(str1, str2);
-	return (str1);
+	char	*newstr;
+
+	newstr = ft_strjoin(str1, str2);
+	free (str1);
+	return (newstr);
 }
 
 char	*ft_findpath(t_env *paths, char *cmd)

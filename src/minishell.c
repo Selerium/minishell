@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/24 16:13:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:00:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-void	free_cmd(t_chunk *cmd)
-{
-	int		i;
-	t_chunk	*hold;
-
-	while (cmd)
-	{
-		i = 0;
-		while (cmd->cmd[i])
-			free(cmd->cmd[i++]);
-		free(cmd->cmd);
-		i = 0;
-		while (cmd->redir_in[i])
-			free(cmd->redir_in[i++]);
-		i = 0;
-		while (cmd->redir_out[i])
-			free(cmd->redir_out[i++]);
-		hold = cmd->next;
-		free(cmd);
-		cmd = hold;
-	}
-}
-
-void	free_fds(int **fds, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-		free(fds[i++]);
-	free(fds);
-}
-
-void	free_shell(t_minishell *shell)
-{
-	free_cmd(shell->cmds);
-	free_envs(shell->envs);
-	free_fds(shell->fds, shell->num_chunks);
-	free(shell->processes);
-}
 
 void	our_readline(t_minishell *shell)
 {
@@ -94,6 +53,7 @@ void	print_welcome(int ac, char **av)
 		free(text);
 		text = get_next_line(startfile);
 	}
+	close(startfile);
 }
 
 int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
@@ -128,6 +88,8 @@ int	main(int argc, char **argv, char **env)
 		our_readline(&shell);
 		if (!shell.str)
 			break ;
+		if (ft_strlen(shell.str) == 0)
+			continue ;
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
@@ -135,8 +97,9 @@ int	main(int argc, char **argv, char **env)
 			if (run_single_cmd(shell.cmds, &shell))
 				continue ;
 		shell.fds = create_fds(&shell);
-		shell.processes = malloc (sizeof(int) * shell.num_chunks);
+		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
+		free_shell(&shell);
 	}
 	free_envs(shell.envs);
 }

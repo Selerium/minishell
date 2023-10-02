@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/17 17:49:37 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 13:59:38 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	run_cd(char **input, bool parent)
 {
 	int	i;
 
+	(void) parent;
 	i = 0;
 	while (input[i] != NULL && ft_strncmp(input[i], "cd", 2) != 0)
 		i++;
@@ -27,6 +28,4 @@ void	run_cd(char **input, bool parent)
 		if (input[i + 1] == NULL || chdir(input[i + 1]) != 0)
 			perror("cd Error");
 	}
-	if (!parent)
-		exit (0);
 }

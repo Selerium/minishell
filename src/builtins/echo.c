@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:19:42 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/10 15:05:33 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:08:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	run_echo(char **cmd)
 	int		i;
 	bool	n;
 
-	n = (ft_strncmp(cmd[1], "-n", 2) == 0 && ft_strlen(cmd[1]) == 2);
+	n = (cmd[1] && ft_strncmp(cmd[1], "-n", 2) == 0 && ft_strlen(cmd[1]) == 2);
 	i = 0;
 	while (cmd[++i])
 	{
@@ -30,5 +30,4 @@ void	run_echo(char **cmd)
 	}
 	if (!n)
 		printf("\n");
-	exit(0);
 }
