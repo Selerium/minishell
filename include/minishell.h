@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 18:55:58 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 22:46:37 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	close_pipes(t_minishell *shell);
 void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i);
 void	print_exit(char **envs, t_minishell *shell, char *error);
 void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell);
+void	close_fds(t_minishell *shell, int *fds, int n);
 
 //redirections:
 int		set_redir_counts(char **list);

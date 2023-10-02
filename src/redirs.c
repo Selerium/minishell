@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 19:01:52 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 22:51:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 				&& access(cmd->redir_out[i], W_OK) == -1)
 			{
 				close_pipes(shell);
-				print_exit(NULL, shell, "Outfile couldn't be opened");
+				close_fds(shell, cmd->fds_out, i);
+				print_exit(NULL, shell, "Outfile access error");
 			}
 			if (cmd->redir_out_type[i] == REDIR_OUT)
 			{
@@ -97,7 +98,9 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				&& access(cmd->redir_in[i], R_OK) == -1)
 			{
 				close_pipes(shell);
-				print_exit(NULL, shell, "Infile couldn't be opened");
+				close_fds(shell, cmd->fds_in, i);
+				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
+				print_exit(NULL, shell, "Infile access error");
 			}
 			if (cmd->redir_in_type[i] == REDIR_IN)
 				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);

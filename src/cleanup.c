@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 18:20:52 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 22:50:03 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,22 @@ void	print_exit(char **envs, t_minishell *shell, char *error)
 	free_shell(shell);
 	perror(error);
 	exit(0);
+}
+
+void	close_fds(t_minishell *shell, int *fds, int n)
+{
+	int		i;
+	t_chunk	*hold;
+
+	hold = shell->cmds;
+	while (hold)
+	{
+		i = 0;
+		while (i < n)
+		{
+			close (fds[i]);
+			i++;
+		}
+		hold = hold->next;
+	}
 }
