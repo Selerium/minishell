@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 18:27:51 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 19:01:52 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 	{
 		while (cmd->redir_out[i])
 		{
+			if (access(cmd->redir_out[i], F_OK) == 0
+				&& access(cmd->redir_out[i], W_OK) == -1)
+			{
+				close_pipes(shell);
+				print_exit(NULL, shell, "Outfile couldn't be opened");
+			}
 			if (cmd->redir_out_type[i] == REDIR_OUT)
 			{
-				if (access(cmd->redir_out[i], W_OK | X_OK) == -1)
-				{
-					close_pipes(shell);
-					print_exit(NULL, shell, "Outfile couldn't be opened");
-				}
 				unlink(cmd->redir_out[i]);
 				cmd->fds_out[i] = open(cmd->redir_out[i], O_CREAT | O_WRONLY,
 						0644);
@@ -92,6 +93,12 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 	{
 		while (cmd->redir_in[i])
 		{
+			if (access(cmd->redir_in[i], F_OK) == 0
+				&& access(cmd->redir_in[i], R_OK) == -1)
+			{
+				close_pipes(shell);
+				print_exit(NULL, shell, "Infile couldn't be opened");
+			}
 			if (cmd->redir_in_type[i] == REDIR_IN)
 				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);
 			else if (cmd->redir_in_type[i] == HEREDOC)
