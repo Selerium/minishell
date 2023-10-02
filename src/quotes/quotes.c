@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 18:59:47 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/02 19:27:44 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,37 +63,46 @@ int	is_quotes_closed(int qflag, char q)
 // 	return (input);
 // }
 
-char	*eliminate_quotes(char *input, size_t *idx)
+char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag) 
 {
 	char	*tmp1;
 	char	*tmp2;
+	size_t	start;
 
+	(void)old_qflag;
 	tmp1 = ft_substr(input, 0, (*idx));
-	tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
+	start = (*idx) + 1;
+	while (qflag != 0)
+	{
+		qflag = is_quotes_closed(qflag, input[*idx]);
+		printf("input[%zd] = %c | qflag = %d\n", *idx, input[*idx], qflag);
+		(*idx)++;
+	}
+	tmp2 = ft_substr(input, start, ft_strlen(input) - start - 1);
+	// tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
 	(*idx)--;
+	free (tmp1);
+	free (tmp2);
 	return (input);
 }
 
 char	*trim_quotes(char *input)
 {
 	size_t	i;
-	size_t	start;
 	int		qflag;
 	int		old_qflag;
 
 	i = 0;
-	start = 0;
 	qflag = 0;
 	while (input[i])
 	{
 		old_qflag = qflag;
 		qflag = is_quotes_closed(qflag, input[i]);
-		if (qflag != 0 || (!qflag && old_qflag))
+		if ((qflag != 0) || (!qflag && old_qflag))
 		{
-			start = i;
-			input = eliminate_quotes(input, &i);
+			input = eliminate_quotes(input, &i, qflag, old_qflag);
 			qflag = 0;
 		}
 		printf("input[%zd] = %c\n", i, input[i]);

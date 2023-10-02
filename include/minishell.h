@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 19:00:31 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/02 19:12:27 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ void	expand_tokens(char **args, t_minishell shell);
 // quotes
 int		is_quotes_closed(int qflag, char q);
 char	*trim_quotes(char *input);
-char	*eliminate_quotes(char *input, size_t *idx);
+char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag);
 #endif
