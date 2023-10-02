@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 22:51:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/02 22:59:19 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			if (cmd->fds_out[i] < 0)
 			{
 				close_pipes(shell);
+				close_fds(shell, cmd->fds_out, i);
 				print_exit(NULL, shell, "Outfile couldn't be opened");
 			}
 			i++;
@@ -115,6 +116,8 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 			if (cmd->fds_in[i] < 0)
 			{
 				close_pipes(shell);
+				close_fds(shell, cmd->fds_in, i);
+				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
 				print_exit(NULL, shell, "Infile couldn't be opened");
 			}
 			i++;
@@ -124,18 +127,15 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 
 void	set_redirects(t_chunk *cmd, t_minishell *shell)
 {
-	int	a;
-	int	b;
-
-	a = set_redir_counts(cmd->redir_in);
-	b = set_redir_counts(cmd->redir_out);
-	if (a != 0)
-		cmd->fds_in = ft_calloc (sizeof(int), a);
-	if (a != 0 && !cmd->fds_in)
+	cmd->redir_in_count = set_redir_counts(cmd->redir_in);
+	cmd->redir_out_count = set_redir_counts(cmd->redir_out);
+	if (cmd->redir_in_count != 0)
+		cmd->fds_in = ft_calloc (sizeof(int), cmd->redir_in_count);
+	if (cmd->redir_in_count != 0 && !cmd->fds_in)
 		printf("we have a situation. abort. :/ \n");
-	if (b != 0)
-		cmd->fds_out = ft_calloc (sizeof(int), b);
-	if (b != 0 && !cmd->fds_out)
+	if (cmd->redir_out_count != 0)
+		cmd->fds_out = ft_calloc (sizeof(int), cmd->redir_out_count);
+	if (cmd->redir_out_count != 0 && !cmd->fds_out)
 		printf("we have a situation. abort. :/ \n");
 	open_outfiles(cmd, shell);
 	open_infiles(cmd, shell);
