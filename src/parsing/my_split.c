@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:03:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/26 17:11:02 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/03 20:15:19 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static size_t	wordinstr_len(char const *s, char c, int qflag)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		qflag = is_quotes_closed(qflag, s[i]);
+		qflag = get_quote_type(qflag, s[i]);
 		if (s[i] == c && s[i] && qflag == 0)
 			return (i);
 		i++;
@@ -67,7 +67,7 @@ char	**ms_split(char *s, char c)
 		return (NULL);
 	while (s[i] != '\0')
 	{
-		qflag = is_quotes_closed(qflag, s[i]);
+		qflag = get_quote_type(qflag, s[i]);
 		if (s[i] != c && qflag == 0)
 		{
 			str[j] = ft_substr(s, i, wordinstr_len(&s[i], c, qflag));

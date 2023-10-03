@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/03 13:23:46 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/03 20:21:00 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 if single quote (\') is encounted, set it to one
 if double quote (\") set it to 2
 if a closing quote of the specific is encountered, reset to 0*/
-int	is_quotes_closed(int qflag, char q)
+int	get_quote_type(int qflag, char q)
 {
 	if (q == SINGLE && qflag == 0)
 		return (1);
@@ -67,21 +67,23 @@ char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag)
 {
 	char	*tmp1;
 	char	*tmp2;
-	size_t	start;
+	// size_t	start;
 
+	(void)qflag;
 	(void)old_qflag;
+	printf("idx: %zd\n", *idx);
 	tmp1 = ft_substr(input, 0, (*idx));
 	printf("tmp1: [%s]\n", tmp1);
-	start = (*idx) + 1;
-	while (qflag != 0)
-	{
-		qflag = is_quotes_closed(qflag, input[*idx]);
-		printf("input[%zd] = [%c] | qflag = %d\n", *idx, input[*idx], qflag);
-		(*idx)++;
-	}
-	tmp2 = ft_substr(input, start, ft_strlen(input) - start -1);
+	// start = (*idx) + 1;
+	// while (qflag != 0)
+	// {
+	// 	qflag = is_quotes_closed(qflag, input[*idx]);
+	// 	printf("2: input[%zd] = [%c] | qflag = %d\n", *idx, input[*idx], qflag);
+	// 	(*idx)++;
+	// }
+	// tmp2 = ft_substr(input, start, ft_strlen(input) - start - 1);
+	tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
 	printf("tmp2: [%s]\n", tmp2);
-	// tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
 	(*idx)--;
@@ -98,16 +100,17 @@ char	*trim_quotes(char *input)
 
 	i = 0;
 	qflag = 0;
+	qflag = get_quote_type(qflag, input[i]);
 	while (input[i])
 	{
 		old_qflag = qflag;
-		qflag = is_quotes_closed(qflag, input[i]);
-		if ((qflag != 0) || (!qflag && old_qflag))
+		qflag = get_quote_type(qflag, input[i]);
+		if (((qflag == 1) && (input[i] == SINGLE)) || (qflag == 2 && input[i] == DOUBLE))
 		{
-			printf("qflag = %d | old_qflag = %d\n", qflag, old_qflag);
+			printf("1: input[%zd] qflag = %d | old_qflag = %d\n",i, qflag, old_qflag);
 			input = eliminate_quotes(input, &i, qflag, old_qflag);
-			qflag = 0;
 		}
+		qflag = 0;
 		printf("input[%zd] = %c\n", i, input[i]);
 		i++;
 	}

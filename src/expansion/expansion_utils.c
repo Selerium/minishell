@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 19:00:43 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/03 20:15:19 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*expand_env(char *input, t_minishell shell)
 	i = 0;
 	while (input[i])
 	{
-		qflag = is_quotes_closed(qflag, input[i]);
+		qflag = get_quote_type(qflag, input[i]);
 		if (input[i] == '$' && qflag != 1)
 		{
 			name = get_env_name(input + i);

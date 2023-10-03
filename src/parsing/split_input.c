@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/28 19:01:24 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/03 20:15:19 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**get_args(char **var, char *input, size_t *j, size_t *size)
 		(*j)++;
 	while (input[*j] && !end_arg)
 	{
-		quote = is_quotes_closed(quote, input[*j]);
+		quote = get_quote_type(quote, input[*j]);
 		if (check_space(input[*j]) && (quote == 0))
 			end_arg = true;
 		else if ((input[*j] == '>' || input[*j] == '<') && (quote == 0))
