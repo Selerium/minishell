@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/02 19:27:44 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/03 13:23:46 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,16 @@ char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag)
 
 	(void)old_qflag;
 	tmp1 = ft_substr(input, 0, (*idx));
+	printf("tmp1: [%s]\n", tmp1);
 	start = (*idx) + 1;
 	while (qflag != 0)
 	{
 		qflag = is_quotes_closed(qflag, input[*idx]);
-		printf("input[%zd] = %c | qflag = %d\n", *idx, input[*idx], qflag);
+		printf("input[%zd] = [%c] | qflag = %d\n", *idx, input[*idx], qflag);
 		(*idx)++;
 	}
-	tmp2 = ft_substr(input, start, ft_strlen(input) - start - 1);
+	tmp2 = ft_substr(input, start, ft_strlen(input) - start -1);
+	printf("tmp2: [%s]\n", tmp2);
 	// tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
@@ -102,6 +104,7 @@ char	*trim_quotes(char *input)
 		qflag = is_quotes_closed(qflag, input[i]);
 		if ((qflag != 0) || (!qflag && old_qflag))
 		{
+			printf("qflag = %d | old_qflag = %d\n", qflag, old_qflag);
 			input = eliminate_quotes(input, &i, qflag, old_qflag);
 			qflag = 0;
 		}
