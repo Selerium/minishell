@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/04 14:57:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:10:44 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,8 @@ char	*eliminate_quotes(char *input, size_t *idx)
 	char	*tmp1;
 	char	*tmp2;
 
-	printf("idx: %zd\n", *idx);
 	tmp1 = ft_substr(input, 0, (*idx));
-	printf("tmp1: [%s]\n", tmp1);
 	tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
-	printf("tmp2: [%s]\n", tmp2);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
 	free (tmp1);
