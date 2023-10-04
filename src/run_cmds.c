@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 17:35:04 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:09:41 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,5 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	i = -1;
 	close_pipes(shell);
 	while (++i < shell->num_chunks)
-		waitpid(shell->processes[i], &shell->exit_code, 0);
+		waitpid(shell->processes[i], &g_exitcode, 0);
 }
