@@ -31,6 +31,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/run_cmds.c\
 		$(SRCDIR)/find_cmd.c\
 		$(SRCDIR)/execute_cmd.c\
+		$(SRCDIR)/cleanup.c\
 		$(SRCDIR)/redirs.c\
 		$(SRCDIR)/free.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
