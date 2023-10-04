@@ -6,11 +6,18 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 19:57:55 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:53:10 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
+
+void	single_exit(t_chunk *cmds, t_env *envs, char *cmd)
+{
+	free_cmd(cmds);
+	free_envs(envs);
+	run_exit(cmd);
+}
 
 void	run_exit(char *num)
 {

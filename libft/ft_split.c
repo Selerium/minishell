@@ -12,13 +12,13 @@
 
 #include"libft.h"
 
-// static int	ft_condition(size_t i, size_t j, const char *s, char c)
-// {
-// 	if ((s[i] != c || s[j] == '"') && 
-// 		s[i] != '\0' && (i - 1 == j || s[i - 1] != '"'))
-// 		return (1);
-// 	return (0);
-// }
+static int	ft_condition(size_t i, size_t j, const char *s, char c)
+{
+	if ((s[i] != c || s[j] == '"')
+		&& s[i] != '\0' && (i - 1 == j || s[i - 1] != '"'))
+		return (1);
+	return (0);
+}
 
 static int	ft_count(char const *s, char c)
 {
@@ -39,9 +39,7 @@ static int	ft_count(char const *s, char c)
 		j = i++;
 		if (s[j] != '\0')
 		{
-			while (s[i] != '\0' && (flag && s[i] != c)  //fix
-				&& (i - 1 == j || s[i - 1] != '"')
-				&& s[i] != '\n')
+			while (ft_condition(i, j, s, c))
 				i++;
 		}
 		count++;

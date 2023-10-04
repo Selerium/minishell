@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 19:57:59 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:14:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,33 @@ void	dup_redirects(t_chunk *cmd)
 	}
 }
 
+void	make_envs_array(t_env *envs, char **list)
+{
+	char	*hold;
+	int		n;
+
+	n = 0;
+	while (envs)
+	{
+		hold = ft_strjoin(envs->name, "=");
+		list[n] = ft_strjoin(hold, envs->value);
+		free(hold);
+		envs = envs->next;
+		n++;
+	}
+	list[n] = NULL;
+}
+
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 {
-	int		n;
 	char	**envs;
-	char	*hold;
-	t_env	*temp;
 	char	*cmdpath;
 
 	set_child_handlers(shell);
-	temp = shell->envs;
 	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");
-	n = 0;
-	while (temp)
-	{
-		hold = ft_strjoin(temp->name, "=");
-		envs[n] = ft_strjoin(hold, temp->value);
-		free(hold);
-		temp = temp->next;
-		n++;
-	}
-	envs[n] = NULL;
+	make_envs_array(shell->envs, envs);
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
