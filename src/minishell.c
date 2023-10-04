@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:23:48 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:46:10 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	print_welcome(int ac, char **av)
 
 int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 {
+	char	*cmd;
+
+	cmd = NULL;
+	if (cmds->cmd[1])
+		cmd = ft_strdup(cmds->cmd[1]);
 	while (cmds->next)
 		cmds = cmds->next;
 	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
@@ -69,9 +74,19 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
 		run_unset(cmds->cmd[1], shell, true);
 	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
-		run_exit(0);
+	{
+		free_cmd(cmds);
+		free_envs(shell->envs);
+		run_exit(cmd);
+	}
 	else
+	{
+		if (cmd)
+			free(cmd);
 		return (0);
+	}
+	if (cmd)
+		free(cmd);
 	free_cmd(cmds);
 	g_exitcode = 0;
 	printf("exitcode: [%d]\n", g_exitcode);

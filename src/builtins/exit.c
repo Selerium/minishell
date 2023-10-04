@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/25 16:58:25 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:57:55 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 void	run_exit(char *num)
 {
+	int	n;
+
+	n = ft_atoi(num);
+	free(num);
+	if (n > 255)
+		run_exit(ft_itoa(n - 256, '0', 0));
 	printf("Exiting minishell. Thanks :\")");
-	exit(ft_atoi(num));
+	exit(n);
 }
