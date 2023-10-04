@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:23:48 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:55:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ void	print_welcome(int ac, char **av)
 
 int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 {
-	while (cmds->next)
-		cmds = cmds->next;
+	char	*cmd;
+
+	cmd = NULL;
+	if (cmds->cmd[1])
+		cmd = ft_strdup(cmds->cmd[1]);
 	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
 		run_export(cmds->cmd, shell, true);
 	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
@@ -69,12 +72,15 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
 		run_unset(cmds->cmd[1], shell, true);
 	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
-		run_exit(0);
+		single_exit(cmds, shell->envs, cmd);
 	else
+	{
+		wrap_free(cmd);
 		return (0);
+	}
+	wrap_free(cmd);
 	free_cmd(cmds);
 	g_exitcode = 0;
-	printf("exitcode: [%d]\n", g_exitcode);
 	return (1);
 }
 
@@ -98,9 +104,8 @@ int	main(int argc, char **argv, char **env)
 		if (is_syntax_valid(shell.str) == true)
 			fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
-		if (shell.num_chunks == 1)
-			if (run_single_cmd(shell.cmds, &shell))
-				continue ;
+		if (shell.num_chunks == 1 && run_single_cmd(shell.cmds, &shell))
+			continue ;
 		shell.fds = create_fds(&shell);
 		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);

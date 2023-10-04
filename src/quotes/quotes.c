@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/04 14:57:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/04 23:10:21 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_quote_type(int qflag, char q)
 // 	return (input);
 // }
 
-char	*eliminate_quotes(char *input, size_t *idx) 
+char	*eliminate_quotes(char *input, size_t *idx)
 {
 	char	*tmp1;
 	char	*tmp2;

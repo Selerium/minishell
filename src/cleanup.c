@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:15:25 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:00:25 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	print_exit(char **envs, t_minishell *shell, char *error, int errnum)
 	int	i;
 
 	i = 0;
+	(void) errnum;
 	if (envs)
 	{
 		while (envs[i])

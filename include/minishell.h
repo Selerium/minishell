@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:15:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:55:03 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell);
 void	set_redirects(t_chunk *cmd, t_minishell *shell);
 
 //freeing:
+void	wrap_free(void *item);
 void	free_cmd(t_chunk *cmd);
 void	free_redirs(t_chunk *cmd);
 void	free_fds(int **fds, int n);
@@ -125,6 +126,7 @@ int		run_pwd(void);
 void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
 void	run_export(char **cmd, t_minishell *shell, bool parent);
+void	single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);
