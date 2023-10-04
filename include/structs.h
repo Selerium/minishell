@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:40:22 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/13 18:58:09 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/09/17 20:12:20 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

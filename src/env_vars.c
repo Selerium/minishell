@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
 /*   Updated: 2023/10/03 23:07:28 by jadithya         ###   ########.fr       */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 22:46:37 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:55:36 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_env	*add_env(char *str);
 t_env	*create_envs(char **env);
 void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
+t_env	*get_env(char *name, t_minishell shell);
 
 //signal handlers:
 void	sigint_handler(int n);
@@ -105,8 +106,6 @@ void	handle_pipes(char *input, t_flag *flag, size_t *i);
 //tokenizing the string
 void	fill_struct(t_minishell *shell);
 
-int		is_quotes_closed(int qflag, char q);
-
 // debug
 void	deboog(t_chunk *chunk);
 void	print_split(char **str);
@@ -114,9 +113,10 @@ void	print_split(char **str);
 // utils
 size_t	strlen_2d(char **arr);
 void	**realloc_2d(void **og, size_t new_size);
-t_redir	*realloc_xd(enum e_redir *og, size_t new_size);
+t_redir	*realloc_xd(t_redir *og, size_t new_size);
 bool	check_space(int c);
-char	**ms_split(char *s, char c); // using ft_split from jensen's libft 
+char	**ms_split(char *s, char c); 
+// using ft_split from jensen's libft 
 
 //built-ins:
 int		run_pwd(void);
@@ -126,6 +126,17 @@ void	run_export(char **cmd, t_minishell *shell, bool parent);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);
+
+// expansion
+char	*get_env_name(char *input);
+char	*replace_env(char *input, size_t *idx, char *var_name, t_env *env);
+char	*expand_env(char *input, t_minishell shell);
+void	expand_tokens(char **args, t_minishell shell);
+
+// quotes
+int		get_quote_type(int qflag, char q);
+char	*trim_quotes(char *input);
+char	*eliminate_quotes(char *input, size_t *idx);
 
 // test con:
 //  ls < oat > outals < oat > outaaa | pwd < outie < outa > also

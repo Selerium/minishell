@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
 /*   Updated: 2023/10/01 13:59:38 by jadithya         ###   ########.fr       */
@@ -29,3 +29,4 @@ void	run_cd(char **input, bool parent)
 			perror("cd Error");
 	}
 }
+

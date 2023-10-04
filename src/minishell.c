@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
 /*   Updated: 2023/10/01 22:00:50 by jadithya         ###   ########.fr       */
@@ -82,7 +82,7 @@ int	main(int argc, char **argv, char **env)
 	print_welcome(argc, argv);
 	shell.envs = create_envs(env);
 	set_handlers(&shell);
-	shell.flag = 1;
+	shell.flag = 1; 
 	while (shell.flag)
 	{
 		our_readline(&shell);
