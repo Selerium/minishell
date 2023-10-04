@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/03 20:15:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/01 22:01:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_chunk	*init_chunk(void)
 {
 	t_chunk	*chunk;
 
-	chunk = (t_chunk *)malloc(sizeof(t_chunk));
+	chunk = (t_chunk *)ft_calloc(sizeof(t_chunk), 1);
 	chunk->redir_in = NULL;
 	chunk->redir_out = NULL;
 	chunk->cmd = NULL;
@@ -112,9 +112,7 @@ t_chunk	*fill_struct_mini(char *split)
 					&j, &chunk->redir_in_count);
 		}
 		else if (split[j] != '>' && split[j] != '>' && !check_space(split[j]))
-		{
 			chunk->cmd = get_args(chunk->cmd, split, &j, &chunk->cmd_count);
-		}
 		if (split[j])
 			j++;
 	}
@@ -153,9 +151,11 @@ void	fill_struct(t_minishell *shell)
 		expand_tokens(new->redir_in, *shell);
 		expand_tokens(new->redir_out, *shell);
 		set_next_node(shell, new, &head);
+		free (split[i]);
 		i++;
 	}
+	free(split);
+	free(shell->str);
 	shell->cmds = head;
-	// deboog(shell->cmds);
 }
 

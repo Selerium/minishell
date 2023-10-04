@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:03:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/03 20:15:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/01 22:01:17 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,24 @@ static size_t	str_count(char const *s, char c)
 	return (count);
 }
 
-// counts the characters in s[i] for malloc
+// qflag = 0
+// if single quote (') is encounted, set it to one
+// if double quote (") set it to 2
+// if a closing quote of the specific is encountered, reset to 0
+int	is_quotes_closed(int qflag, char q)
+{
+	if (q == SINGLE && qflag == 0)
+		return (1);
+	else if (q == DOUBLE && qflag == 0)
+		return (2);
+	else if (q == SINGLE && qflag == 1)
+		return (0);
+	else if (q == DOUBLE && qflag == 2)
+		return (0);
+	return (qflag);
+}
+
+// counts the characters in s[i] for ft_calloc
 static size_t	wordinstr_len(char const *s, char c, int qflag)
 {
 	size_t	i;
@@ -62,7 +79,7 @@ char	**ms_split(char *s, char c)
 	qflag = 0;
 	if (s == NULL)
 		return (NULL);
-	str = (char **)malloc(sizeof(char *) * (str_count(s, c) + 1));
+	str = (char **)ft_calloc(sizeof(char *), (str_count(s, c) + 1));
 	if (str == NULL)
 		return (NULL);
 	while (s[i] != '\0')

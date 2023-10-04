@@ -41,7 +41,11 @@
 # define DOUBLE '\"'
 # define SINGLE '\''
 
+//freeing:
+void	free_cmd(t_chunk *cmd);
+void	free_fds(int **fds, int n);
 void	free_shell(t_minishell *shell);
+void	free_redirs(t_chunk *cmd);
 
 //environment variables:
 t_env	*get_env(char *name, t_minishell shell);
@@ -86,6 +90,7 @@ void	close_pipes(t_minishell *shell);
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
 int		**create_fds(t_minishell *shell);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
+void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell);
 
 //redirections:
 int		set_redir_counts(char **list);
@@ -119,4 +124,8 @@ void	expand_tokens(char **args, t_minishell shell);
 int		get_quote_type(int qflag, char q);
 char	*trim_quotes(char *input);
 char	*eliminate_quotes(char *input, size_t *idx);
+
+// test con:
+//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | echo > hey > also hiiii thereeee < oat
+
 #endif

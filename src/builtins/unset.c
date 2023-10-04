@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:30:40 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/17 19:04:35 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:00:30 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent)
 	t_env	*iter;
 	t_env	*remove;
 
+	(void) parent;
 	remove = shell->envs;
 	iter = NULL;
 	while (remove)
@@ -46,6 +47,4 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent)
 		iter = remove;
 		remove = remove->next;
 	}
-	if (!parent)
-		exit(0);
 }

@@ -32,6 +32,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/find_cmd.c\
 		$(SRCDIR)/execute_cmd.c\
 		$(SRCDIR)/redirs.c\
+		$(SRCDIR)/free.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
 		$(SRCDIR)/$(BUILTINS)/cd.c\
@@ -61,7 +62,6 @@ else
 	CFLAGS := -g3 -Wall -Wextra -Werror -I/usr/local/opt/readline/include -g3 -D LINUX
 	LINKERS := -lreadline -L/usr/local/opt/readline/lib
 endif
-
 
 LIB := libft/libft.a
 

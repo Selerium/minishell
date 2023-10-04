@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/09/19 15:40:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/01 22:00:29 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_env	*add_env(char *str)
 	int		i;
 
 	i = 0;
-	new_env = malloc (sizeof(t_env));
+	new_env = ft_calloc (sizeof(t_env), 1);
 	if (!new_env)
 		return (NULL);
 	while (str[i] && str[i] != '=')
