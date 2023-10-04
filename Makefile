@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/09/22 19:02:09 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/10/04 22:45:43 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(BUILTINS)/unset.c\
 		$(SRCDIR)/$(BUILTINS)/exit.c\
 		$(SRCDIR)/$(BUILTINS)/env.c\
+		$(SRCDIR)/$(BUILTINS)/miniminishell.c\
 		$(SRCDIR)/$(PARSING)/syntax_check.c\
 		$(SRCDIR)/$(PARSING)/handle_flags.c\
 		$(SRCDIR)/$(PARSING)/split_input.c\

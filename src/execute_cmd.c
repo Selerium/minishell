@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 22:14:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:44:16 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,6 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	if (!cmdpath)
 		print_exit(envs, shell, "Command not found", 127);
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
-}
-
-void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
-{
-	char	*num;
-	int		val;
-	int		i;
-
-	i = 0;
-	while (shell.envs)
-	{
-		if (ft_strncmp(shell.envs->name, "SHLVL", 6) == 0)
-		{
-			val = ft_atoi(shell.envs->value) + 1;
-			num = ft_itoa(val, '0', 0);
-			free(envs[i]);
-			envs[i] = ft_strjoin("SHLVL=", num);
-			printf("here %s\n", envs[i]);
-			break ;
-		}
-		shell.envs = shell.envs->next;
-		i++;
-	}
-	execve(cmdpath, cmd, envs);
-	perror("Command not found");
-	exit(127);
 }
 
 void	wrap_execve(char *cmdpath, char **cmd, char **envs)
