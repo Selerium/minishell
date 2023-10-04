@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
 /*   Updated: 2023/10/01 22:01:23 by jadithya         ###   ########.fr       */
@@ -54,7 +54,7 @@ char	**get_args(char **var, char *input, size_t *j, size_t *size)
 		(*j)++;
 	while (input[*j] && !end_arg)
 	{
-		quote = is_quotes_closed(quote, input[*j]);
+		quote = get_quote_type(quote, input[*j]);
 		if (check_space(input[*j]) && (quote == 0))
 			end_arg = true;
 		else if ((input[*j] == '>' || input[*j] == '<') && (quote == 0))
@@ -147,6 +147,9 @@ void	fill_struct(t_minishell *shell)
 	while (split[i])
 	{
 		new = fill_struct_mini(split[i]);
+		expand_tokens(new->cmd, *shell);
+		expand_tokens(new->redir_in, *shell);
+		expand_tokens(new->redir_out, *shell);
 		set_next_node(shell, new, &head);
 		free (split[i]);
 		i++;
@@ -155,3 +158,4 @@ void	fill_struct(t_minishell *shell)
 	free(shell->str);
 	shell->cmds = head;
 }
+

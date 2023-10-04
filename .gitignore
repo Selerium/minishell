@@ -1,0 +1,6 @@
+.vscode
+obj
+minishell-tester
+libft/printf/*.o
+libft/gnl/*.o
+libft/*.o
