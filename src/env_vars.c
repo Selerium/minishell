@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 22:00:29 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/03 23:07:28 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_envs(t_env *envs, bool is_env)
 {
 	while (envs)
 	{
-		if (is_env && envs->value)
+		if (is_env && envs->value && envs->name)
 			printf("%s=%s\n", envs->name, envs->value);
 		envs = envs->next;
 	}
@@ -85,8 +85,10 @@ void	free_envs(t_env *envs)
 
 	while (envs)
 	{
-		free(envs->name);
-		free(envs->value);
+		if (envs->name)
+			free(envs->name);
+		if (envs->value)
+			free(envs->value);
 		next = envs->next;
 		free(envs);
 		envs = next;
