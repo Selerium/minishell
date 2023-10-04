@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 14:55:36 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/04 16:15:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 
 # define DOUBLE '\"'
 # define SINGLE '\''
+
+extern int	g_exitcode;
 
 void	our_readline(t_minishell *shell);
 void	print_welcome(int ac, char **av);
@@ -80,7 +82,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 //cleanup:
 void	close_pipes(t_minishell *shell);
 void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i);
-void	print_exit(char **envs, t_minishell *shell, char *error);
+void	print_exit(char **envs, t_minishell *shell, char *error, int errnum);
 void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell);
 void	close_fds(t_minishell *shell, int *fds, int n);
 
@@ -115,7 +117,7 @@ size_t	strlen_2d(char **arr);
 void	**realloc_2d(void **og, size_t new_size);
 t_redir	*realloc_xd(t_redir *og, size_t new_size);
 bool	check_space(int c);
-char	**ms_split(char *s, char c); 
+char	**ms_split(char *s, char c);
 // using ft_split from jensen's libft 
 
 //built-ins:

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 22:59:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:16:48 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
-				print_exit(NULL, shell, "Outfile access error");
+				print_exit(NULL, shell, "Outfile access error", 1);
 			}
 			if (cmd->redir_out_type[i] == REDIR_OUT)
 			{
@@ -78,7 +78,7 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
-				print_exit(NULL, shell, "Outfile couldn't be opened");
+				print_exit(NULL, shell, "Outfile couldn't be opened", 1);
 			}
 			i++;
 		}
@@ -101,7 +101,7 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
-				print_exit(NULL, shell, "Infile access error");
+				print_exit(NULL, shell, "Infile access error", 1);
 			}
 			if (cmd->redir_in_type[i] == REDIR_IN)
 				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);
@@ -118,7 +118,7 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
-				print_exit(NULL, shell, "Infile couldn't be opened");
+				print_exit(NULL, shell, "Infile couldn't be opened", 1);
 			}
 			i++;
 		}

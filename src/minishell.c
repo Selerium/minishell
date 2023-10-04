@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 22:00:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:23:48 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,13 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 		run_exit(0);
 	else
 		return (0);
+	free_cmd(cmds);
+	g_exitcode = 0;
+	printf("exitcode: [%d]\n", g_exitcode);
 	return (1);
 }
+
+int	g_exitcode;
 
 int	main(int argc, char **argv, char **env)
 {
@@ -82,7 +87,7 @@ int	main(int argc, char **argv, char **env)
 	print_welcome(argc, argv);
 	shell.envs = create_envs(env);
 	set_handlers(&shell);
-	shell.flag = 1; 
+	shell.flag = 1;
 	while (shell.flag)
 	{
 		our_readline(&shell);
@@ -100,6 +105,7 @@ int	main(int argc, char **argv, char **env)
 		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
 		free_shell(&shell);
+		printf("exitcode: [%d]\n", g_exitcode);
 	}
 	free_envs(shell.envs);
 }

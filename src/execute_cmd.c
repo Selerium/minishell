@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/02 18:21:43 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:14:53 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	close_unneededs(cmd, shell, i);
 	check_to_free_envs(cmd, envs, shell);
 	if (!cmdpath)
-		print_exit(envs, shell, "Command not found");
+		print_exit(envs, shell, "Command not found", 127);
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
@@ -88,14 +88,14 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 	}
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
-	exit(-1);
+	exit(127);
 }
 
 void	wrap_execve(char *cmdpath, char **cmd, char **envs)
 {
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
-	exit(-1);
+	exit(127);
 }
 
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
