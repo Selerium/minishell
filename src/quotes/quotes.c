@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/03 20:21:00 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:57:19 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,18 @@ int	get_quote_type(int qflag, char q)
 // 	return (input);
 // }
 
-char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag) 
+char	*eliminate_quotes(char *input, size_t *idx) 
 {
 	char	*tmp1;
 	char	*tmp2;
-	// size_t	start;
 
-	(void)qflag;
-	(void)old_qflag;
 	printf("idx: %zd\n", *idx);
 	tmp1 = ft_substr(input, 0, (*idx));
 	printf("tmp1: [%s]\n", tmp1);
-	// start = (*idx) + 1;
-	// while (qflag != 0)
-	// {
-	// 	qflag = is_quotes_closed(qflag, input[*idx]);
-	// 	printf("2: input[%zd] = [%c] | qflag = %d\n", *idx, input[*idx], qflag);
-	// 	(*idx)++;
-	// }
-	// tmp2 = ft_substr(input, start, ft_strlen(input) - start - 1);
 	tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
 	printf("tmp2: [%s]\n", tmp2);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
-	(*idx)--;
 	free (tmp1);
 	free (tmp2);
 	return (input);
@@ -95,23 +83,20 @@ char	*eliminate_quotes(char *input, size_t *idx, int qflag, int old_qflag)
 char	*trim_quotes(char *input)
 {
 	size_t	i;
-	int		qflag;
-	int		old_qflag;
+	char	quote_type;
 
 	i = 0;
-	qflag = 0;
-	qflag = get_quote_type(qflag, input[i]);
 	while (input[i])
 	{
-		old_qflag = qflag;
-		qflag = get_quote_type(qflag, input[i]);
-		if (((qflag == 1) && (input[i] == SINGLE)) || (qflag == 2 && input[i] == DOUBLE))
+		if (input[i] == SINGLE || input[i] == DOUBLE)
 		{
-			printf("1: input[%zd] qflag = %d | old_qflag = %d\n",i, qflag, old_qflag);
-			input = eliminate_quotes(input, &i, qflag, old_qflag);
+			quote_type = input[i];
+			input = eliminate_quotes(input, &i);
+			while (input[i] && quote_type != input[i])
+				i++;
+			input = eliminate_quotes(input, &i);
+			i--;
 		}
-		qflag = 0;
-		printf("input[%zd] = %c\n", i, input[i]);
 		i++;
 	}
 	return (input);
