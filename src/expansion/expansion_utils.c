@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/05 19:17:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/04 22:46:10 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_env_name(char *input)
 {
 	size_t	i;
 	size_t	start;
-	char 	*env_name;
+	char	*env_name;
 
 	i = 1;
 	start = 1;
@@ -59,7 +59,7 @@ char	*replace_env(char *input, size_t *idx, char *var_name, t_env *env)
 	tmp1 = ft_substr(input, 0, *idx);
 	if (!env)
 		tmp2 = ft_strdup("");
-	else 
+	else
 		tmp2 = ft_strdup(env->value);
 	tmp3 = ft_substr(input, *idx + ft_strlen(var_name) + 1, ft_strlen(input)
 			- *idx - ft_strlen(var_name) - 1);

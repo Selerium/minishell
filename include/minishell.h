@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:15:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:03:16 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,37 +94,42 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell);
 void	set_redirects(t_chunk *cmd, t_minishell *shell);
 
 //freeing:
+void	wrap_free(void *item);
 void	free_cmd(t_chunk *cmd);
 void	free_redirs(t_chunk *cmd);
 void	free_fds(int **fds, int n);
 void	free_shell(t_minishell *shell);
 
-//pre-parsing 
+//pre-parsing:
 bool	is_syntax_valid(char *input);
 void	handle_redirection(char *input, t_flag *flag, size_t *i, char n);
 void	handle_quotes(char *input, t_flag *flag, size_t *i, char n);
 void	handle_pipes(char *input, t_flag *flag, size_t *i);
 
-//tokenizing the string
+//tokenizing the string:
+t_redir	*get_redir_type(t_redir *redir, char *input, size_t *j, size_t size);
 void	fill_struct(t_minishell *shell);
 
-// debug
+// debug:
 void	deboog(t_chunk *chunk);
 void	print_split(char **str);
 
-// utils
+// utils:
 size_t	strlen_2d(char **arr);
 void	**realloc_2d(void **og, size_t new_size);
 t_redir	*realloc_xd(t_redir *og, size_t new_size);
 bool	check_space(int c);
-char	**ms_split(char *s, char c);
-// using ft_split from jensen's libft 
+t_chunk	*init_chunk(void);
+
+// using ft_split from jensen's libft:
+char	**ms_split(char *s, char c, size_t i, size_t j);
 
 //built-ins:
 int		run_pwd(void);
 void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
 void	run_export(char **cmd, t_minishell *shell, bool parent);
+void	single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);

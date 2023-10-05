@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:46:27 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 22:01:33 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:58:39 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	**realloc_2d(void **og, size_t new_size)
 
 	i = 0;
 	new = (void **)ft_calloc(sizeof(void *), (new_size + 1));
+	if (!new)
+		return (NULL);
 	while (og && og[i])
 	{
 		new[i] = og[i];
@@ -48,6 +50,8 @@ t_redir	*realloc_xd(t_redir *og, size_t new_size)
 
 	i = 0;
 	new = (t_redir *)ft_calloc(sizeof(t_redir), (new_size + 1));
+	if (!new)
+		return (NULL);
 	while (og && og[i])
 	{
 		new[i] = og[i];
@@ -63,4 +67,21 @@ bool	check_space(int c)
 	if ((c >= 9 && c <= 13) || (c == 32))
 		return (true);
 	return (false);
+}
+
+t_chunk	*init_chunk(void)
+{
+	t_chunk	*chunk;
+
+	chunk = (t_chunk *)ft_calloc(sizeof(t_chunk), 1);
+	chunk->redir_in = NULL;
+	chunk->redir_out = NULL;
+	chunk->cmd = NULL;
+	chunk->next = NULL;
+	chunk->redir_in_type = NULL;
+	chunk->redir_out_type = NULL;
+	chunk->redir_in_count = 0;
+	chunk->redir_out_count = 0;
+	chunk->cmd_count = 0;
+	return (chunk);
 }
