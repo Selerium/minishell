@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:09:41 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:45:18 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,11 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	}
 	i = -1;
 	close_pipes(shell);
+	int ok;
+	ok = 0;
 	while (++i < shell->num_chunks)
-		waitpid(shell->processes[i], &g_exitcode, 0);
+		{
+			waitpid(shell->processes[i], &ok, 0);
+		g_exitcode = ok % 255;
+			}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:23:48 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:18:47 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 		return (0);
 	free_cmd(cmds);
 	g_exitcode = 0;
-	printf("exitcode: [%d]\n", g_exitcode);
+	// printf("exitcode: [%d]\n", g_exitcode);
 	return (1);
 }
 
@@ -105,7 +105,7 @@ int	main(int argc, char **argv, char **env)
 		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
 		free_shell(&shell);
-		printf("exitcode: [%d]\n", g_exitcode);
+		// printf("exitcode: [%d]\n", g_exitcode);
 	}
 	free_envs(shell.envs);
 }

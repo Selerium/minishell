@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:16:48 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:35:41 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	heredoc(int fd, char *delimiter)
 	{
 		printf("[%s] heredoc> ", delimiter);
 		text = readline("");
+		// if (!text)
+		// 	return ;
+	// signal(SIGINT, SIG_IGN);
+	// signal(SIGQUIT, SIG_IGN);
 		if (ft_strlen(text) == 0)
 			continue ;
 		if (ft_strncmp(text, delimiter, ft_strlen(text)) == 0)
