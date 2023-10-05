@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/10/04 22:45:43 by jadithya         ###   ########.fr        #
+#    Updated: 2023/10/05 11:05:01 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,13 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/syntax_check.c\
 		$(SRCDIR)/$(PARSING)/handle_flags.c\
 		$(SRCDIR)/$(PARSING)/split_input.c\
-		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
+		$(SRCDIR)/$(PARSING)/get_redir.c\
 		$(SRCDIR)/$(EXPANSION)/expansion_utils.c \
 		$(SRCDIR)/$(QUOTES)/quotes.c
+
+# $(SRCDIR)/$(PARSING)/deboog.c\
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
