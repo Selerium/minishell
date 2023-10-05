@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/05 11:43:30 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 00:13:45 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	condition(char c, int quote)
 	return (false);
 }
 
-char	**get_args(char **var, char *input, size_t *j, size_t *size)
+char	**get_args(char **var, char *i, size_t *j, size_t *size)
 {
 	size_t	len;
 	char	**new;
@@ -38,22 +38,20 @@ char	**get_args(char **var, char *input, size_t *j, size_t *size)
 	quote = 0;
 	end_arg = false;
 	new = (char **)realloc_2d((void **)var, *size + 1);
-	while ((input[*j] && check_space(input[*j]))
-		|| (input[*j] == '>' || input[*j] == '<'))
+	while ((i[*j] && check_space(i[*j])) || (i[*j] == '>' || i[*j] == '<'))
 		(*j)++;
-	while (input[*j] && !end_arg)
+	while (i[*j] && !end_arg)
 	{
-		quote = get_quote_type(quote, input[*j]);
-		if (condition(input[*j], quote))
-			end_arg = true;
-		else
+		quote = get_quote_type(quote, i[*j]);
+		end_arg = (condition(i[*j], quote));
+		if (!end_arg)
 		{
 			len++;
 			(*j)++;
 		}
 	}
 	(*size)++;
-	new[(*size) - 1] = ft_substr(input, (*j) - len, len);
+	new[(*size) - 1] = ft_substr(i, (*j) - len, len);
 	(*j)--;
 	return (new);
 }

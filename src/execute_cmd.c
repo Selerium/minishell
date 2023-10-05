@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 22:44:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 00:18:12 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	make_envs_array(t_env *envs, char **list)
 	n = 0;
 	while (envs)
 	{
+		if (!envs->name || !envs->value)
+			break ;
 		hold = ft_strjoin(envs->name, "=");
 		list[n] = ft_strjoin(hold, envs->value);
 		free(hold);
