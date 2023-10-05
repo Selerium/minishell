@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:01:24 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 23:57:35 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_env	*create_envs(char **env)
 	int		i;
 
 	i = 0;
+	if (! env || !env[0])
+		return (NULL);
 	start = add_env(env[i]);
 	next = start;
 	while (env[++i] && next)
