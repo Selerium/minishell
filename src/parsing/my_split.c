@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:03:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 22:01:17 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:50:30 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,11 @@ static size_t	wordinstr_len(char const *s, char c, int qflag)
 	return (i);
 }
 
-char	**ms_split(char *s, char c)
+char	**ms_split(char *s, char c, size_t i, size_t j)
 {
-	size_t		i;
-	size_t		j;
 	char		**str;
 	int			qflag;
 
-	i = 0;
-	j = 0;
 	qflag = 0;
 	if (s == NULL)
 		return (NULL);
