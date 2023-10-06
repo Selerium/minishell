@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:13:03 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:08:02 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/minishell.h"
+#include <complex.h>
 #include <fcntl.h>
+#include <readline/readline.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -38,10 +40,13 @@ void	heredoc(int fd, char *delimiter)
 		printf("[%s] heredoc> ", delimiter);
 		text = readline("");
 		if (!text)
+		{
+			write(fd, "\n", 1);
 			break ;
-		if (ft_strlen(text) == 0)
-			continue ;
-		if (ft_strncmp(text, delimiter, ft_strlen(text)) == 0)
+		}
+		if (ft_strlen(text) == 0 || text[0] == '\n')
+			printf("\n");
+		if (ft_strncmp(text, delimiter, ft_strlen(text) + 1) == 0)
 			break ;
 		write(fd, text, ft_strlen(text));
 		write(fd, "\n", 1);
@@ -112,8 +117,10 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				filename = ft_strjoin(cmd->redir_in[i], ".heredoc.tmp");
 				cmd->fds_in[i] = open(filename, O_CREAT | O_WRONLY, 0600);
 				heredoc(cmd->fds_in[i], cmd->redir_in[i]);
+				close(cmd->fds_in[i]);
 				cmd->fds_in[i] = open(filename, O_RDONLY, 0644);
 				unlink(filename);
+				free(filename);
 			}
 			if (cmd->fds_in[i] < 0)
 			{
