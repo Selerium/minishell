@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/04 14:57:19 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:24:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,50 +29,13 @@ int	get_quote_type(int qflag, char q)
 	return (qflag);
 }
 
-// char	*eliminate_quotes(char *input, size_t *idx, int qflag)
-// {
-// 	char	*tmp1;
-// 	char	*tmp2;
-// 	char	*tmp3;
-// 	char	*final;
-
-// 	printf("1 input[%zd] : [%c] | qflag value: %d\n", *idx, input[*idx], qflag);
-// 	tmp1 = ft_substr(input, 0, (*idx));
-// 	// start = *idx;
-// 	// (*idx)++;
-// 	// while (input[*idx] && qflag != 0)
-// 	// {
-// 	// 	qflag = is_quotes_closed(qflag, input[*idx]);
-// 	// 	printf("qflag = %d\n", qflag);
-// 	// 	if (qflag == 0)
-// 	// 		break ;
-// 	// 	(*idx)++;
-// 	// }
-// 	tmp2 = ft_substr(input, start + 1, (*idx) - (start + 1));
-// 	printf("tmp2: [%s]\n", tmp2);
-// 	tmp3 = ft_substr(input, (*idx + 1), ft_strlen(input) - (*idx));
-// 	printf("tmp3: [%s]\n", tmp3);
-// 	final = ft_strjoin(tmp1, tmp2);
-// 	free (input);
-// 	input = ft_strjoin(final, tmp3);
-// 	free(tmp1);
-// 	free(tmp2);
-// 	free(tmp3);
-// 	free(final);
-// 	// (*idx)--;
-// 	return (input);
-// }
-
-char	*eliminate_quotes(char *input, size_t *idx) 
+char	*eliminate_quotes(char *input, size_t *idx)
 {
 	char	*tmp1;
 	char	*tmp2;
 
-	printf("idx: %zd\n", *idx);
 	tmp1 = ft_substr(input, 0, (*idx));
-	printf("tmp1: [%s]\n", tmp1);
 	tmp2 = ft_substr(input, *idx + 1, ft_strlen(input) - (*idx) - 1);
-	printf("tmp2: [%s]\n", tmp2);
 	free (input);
 	input = ft_strjoin(tmp1, tmp2);
 	free (tmp1);

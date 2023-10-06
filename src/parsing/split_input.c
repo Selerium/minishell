@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/01 22:01:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 00:13:45 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,16 @@
 
 // tokenize each "word" in the string
 
-t_redir	*get_redir_type(t_redir *redir, char *input, size_t *j, size_t size)
+bool	condition(char c, int quote)
 {
-	t_redir	*new;
-	char	r;
-
-	r = input[*j];
-	new = realloc_xd(redir, size + 1);
-	if (input[*j])
-		(*j)++;
-	if (input[(*j)] == '>')
-		new[size] = APPEND;
-	else if (input[(*j)] == '<')
-		new[size] = HEREDOC;
-	else if (r == '>')
-		new[size] = REDIR_OUT;
-	else if (r == '<')
-		new[size] = REDIR_IN;
-	return (new);
+	if (check_space(c) && (quote == 0))
+		return (true);
+	else if ((c == '>' || c == '<') && (quote == 0))
+		return (true);
+	return (false);
 }
 
-char	**get_args(char **var, char *input, size_t *j, size_t *size)
+char	**get_args(char **var, char *i, size_t *j, size_t *size)
 {
 	size_t	len;
 	char	**new;
@@ -49,52 +38,29 @@ char	**get_args(char **var, char *input, size_t *j, size_t *size)
 	quote = 0;
 	end_arg = false;
 	new = (char **)realloc_2d((void **)var, *size + 1);
-	while ((input[*j] && check_space(input[*j]))
-		|| (input[*j] == '>' || input[*j] == '<'))
+	while ((i[*j] && check_space(i[*j])) || (i[*j] == '>' || i[*j] == '<'))
 		(*j)++;
-	while (input[*j] && !end_arg)
+	while (i[*j] && !end_arg)
 	{
-		quote = get_quote_type(quote, input[*j]);
-		if (check_space(input[*j]) && (quote == 0))
-			end_arg = true;
-		else if ((input[*j] == '>' || input[*j] == '<') && (quote == 0))
-			end_arg = true;
-		else
+		quote = get_quote_type(quote, i[*j]);
+		end_arg = (condition(i[*j], quote));
+		if (!end_arg)
 		{
 			len++;
 			(*j)++;
 		}
 	}
 	(*size)++;
-	new[(*size) - 1] = ft_substr(input, (*j) - len, len);
+	new[(*size) - 1] = ft_substr(i, (*j) - len, len);
 	(*j)--;
 	return (new);
 }
 
-t_chunk	*init_chunk(void)
-{
-	t_chunk	*chunk;
-
-	chunk = (t_chunk *)ft_calloc(sizeof(t_chunk), 1);
-	chunk->redir_in = NULL;
-	chunk->redir_out = NULL;
-	chunk->cmd = NULL;
-	chunk->next = NULL;
-	chunk->redir_in_type = NULL;
-	chunk->redir_out_type = NULL;
-	chunk->redir_in_count = 0;
-	chunk->redir_out_count = 0;
-	chunk->cmd_count = 0;
-	return (chunk);
-}
-
-t_chunk	*fill_struct_mini(char *split)
+void	fill_struct_mini(char *split, t_chunk *chunk)
 {
 	size_t	j;
-	t_chunk	*chunk;
 
 	j = 0;
-	chunk = init_chunk();
 	while (split[j])
 	{
 		if (split[j] == '>')
@@ -107,7 +73,7 @@ t_chunk	*fill_struct_mini(char *split)
 		else if (split[j] == '<')
 		{
 			chunk->redir_in_type = get_redir_type(chunk->redir_in_type, split,
-					&j, chunk->redir_in_count); 
+					&j, chunk->redir_in_count);
 			chunk->redir_in = get_args(chunk->redir_in, split,
 					&j, &chunk->redir_in_count);
 		}
@@ -116,7 +82,6 @@ t_chunk	*fill_struct_mini(char *split)
 		if (split[j])
 			j++;
 	}
-	return (chunk);
 }
 
 void	set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
@@ -141,12 +106,13 @@ void	fill_struct(t_minishell *shell)
 	size_t	i;
 
 	i = 0;
-	split = ms_split(shell->str, '|');
+	split = ms_split(shell->str, '|', 0, 0);
 	shell->cmds = NULL;
 	head = shell->cmds;
 	while (split[i])
 	{
-		new = fill_struct_mini(split[i]);
+		new = init_chunk();
+		fill_struct_mini(split[i], new);
 		expand_tokens(new->cmd, *shell);
 		expand_tokens(new->redir_in, *shell);
 		expand_tokens(new->redir_out, *shell);
@@ -158,4 +124,3 @@ void	fill_struct(t_minishell *shell)
 	free(shell->str);
 	shell->cmds = head;
 }
-

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 16:09:41 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:51:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,34 @@ t_chunk	*free_iter(t_chunk *cmd)
 	i = 0;
 	while (cmd->cmd && cmd->cmd[i])
 		free(cmd->cmd[i++]);
-	free(cmd->cmd);
+	wrap_free(cmd->cmd);
 	i = 0;
 	while (cmd->redir_in && cmd->redir_in[i])
 		free (cmd->redir_in[i++]);
-	free(cmd->redir_in);
+	wrap_free(cmd->redir_in);
 	i = 0;
 	while (cmd->redir_out && cmd->redir_out[i])
 		free (cmd->redir_out[i++]);
-	if (cmd->redir_out)
-		free(cmd->redir_out);
-	if (cmd->redir_in_type)
-		free(cmd->redir_in_type);
-	if (cmd->redir_out_type)
-		free(cmd->redir_out_type);
-	if (cmd->fds_in)
-		free(cmd->fds_in);
-	if (cmd->fds_out)
-		free(cmd->fds_out);
+	wrap_free(cmd->redir_out);
+	wrap_free(cmd->redir_in_type);
+	wrap_free(cmd->redir_out_type);
+	wrap_free(cmd->fds_in);
+	wrap_free(cmd->fds_out);
 	hold = cmd->next;
 	free (cmd);
 	return (hold);
+}
+
+void	close_run(t_minishell *shell)
+{
+	int	i;
+
+	i = -1;
+	close_pipes(shell);
+	while (++i < shell->num_chunks)
+		waitpid(shell->processes[i], &g_exitcode, 0);
+	if (WIFEXITED(g_exitcode))
+		g_exitcode = WEXITSTATUS(g_exitcode);
 }
 
 //check if pipe creation is failing
@@ -95,6 +102,7 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	i = 0;
 	while (iter_cmd)
 	{
+		set_redirects(iter_cmd, shell);
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
@@ -102,15 +110,14 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 				dup2(shell->fds[i][READ], STDIN_FILENO);
 			if (i != shell->num_chunks - 1)
 				dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
-			set_redirects(iter_cmd, shell);
+			set_child_handlers(shell);
 			execute_cmd(iter_cmd, shell, i);
 		}
+		close_fds(shell, iter_cmd->fds_in, iter_cmd->redir_in_count);
+		close_fds(shell, iter_cmd->fds_out, iter_cmd->redir_out_count);
 		shell->cmds = shell->cmds->next;
 		iter_cmd = free_iter(iter_cmd);
 		i++;
 	}
-	i = -1;
-	close_pipes(shell);
-	while (++i < shell->num_chunks)
-		waitpid(shell->processes[i], &g_exitcode, 0);
+	close_run(shell);
 }

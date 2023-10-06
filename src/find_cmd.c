@@ -28,6 +28,8 @@ char	*ft_findpath(t_env *paths, char *cmd)
 	char	*path;
 
 	i = 0;
+	if (!paths)
+		return (NULL);
 	while (paths->value[i])
 	{
 		j = 0;
@@ -51,6 +53,14 @@ char	*ft_findcmd(char *cmd, t_env *env)
 {
 	char	*path;
 
+	if ((ft_strncmp(cmd, "env", 3) == 0
+			|| ft_strncmp(cmd, "export", 6) == 0
+			|| ft_strncmp(cmd, "unset", 6) == 0
+			|| ft_strncmp(cmd, "echo", 5) == 0
+			|| ft_strncmp(cmd, "exit", 5) == 0
+			|| ft_strncmp(cmd, "pwd", 4) == 0
+			|| ft_strncmp(cmd, "cd", 3) == 0))
+		return (ft_strdup(cmd));
 	if (cmd[0] == '/' || cmd[0] == '.')
 	{
 		path = ft_strdup(cmd);

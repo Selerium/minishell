@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/05 20:56:14 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/06 12:24:46 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,39 @@ void	dup_redirects(t_chunk *cmd)
 	}
 }
 
+void	make_envs_array(t_env *envs, char **list)
+{
+	char	*hold;
+	int		n;
+
+	n = 0;
+	if (!envs)
+	{
+		list = NULL;
+		return ;
+	}
+	while (envs)
+	{
+		if (!envs->name || !envs->value)
+			break ;
+		hold = ft_strjoin(envs->name, "=");
+		list[n] = ft_strjoin(hold, envs->value);
+		free(hold);
+		envs = envs->next;
+		n++;
+	}
+	list[n] = NULL;
+}
+
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 {
-	int		n;
 	char	**envs;
-	char	*hold;
-	t_env	*temp;
 	char	*cmdpath;
 
-	set_child_handlers(shell);
-	temp = shell->envs;
 	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");
-	n = 0;
-	while (temp)
-	{
-		hold = ft_strjoin(temp->name, "=");
-		envs[n] = ft_strjoin(hold, temp->value);
-		free(hold);
-		temp = temp->next;
-		n++;
-	}
-	envs[n] = NULL;
+	make_envs_array(shell->envs, envs);
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
@@ -63,32 +73,6 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	if (!cmdpath)
 		print_exit(envs, shell, "Command not found", 127);
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
-}
-
-void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
-{
-	char	*num;
-	int		val;
-	int		i;
-
-	i = 0;
-	while (shell.envs)
-	{
-		if (ft_strncmp(shell.envs->name, "SHLVL", 6) == 0)
-		{
-			val = ft_atoi(shell.envs->value) + 1;
-			num = ft_itoa(val, '0', 0);
-			free(envs[i]);
-			envs[i] = ft_strjoin("SHLVL=", num);
-			printf("here %s\n", envs[i]);
-			break ;
-		}
-		shell.envs = shell.envs->next;
-		i++;
-	}
-	execve(cmdpath, cmd, envs);
-	perror("Command not found");
-	exit(127);
 }
 
 void	wrap_execve(char *cmdpath, char **cmd, char **envs)

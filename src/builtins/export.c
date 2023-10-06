@@ -6,11 +6,12 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/05 20:49:38 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/06 12:25:39 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
+#include <stdio.h>
 
 /**
 *	replaces the export function for the env vars.
@@ -30,6 +31,8 @@ void	run_export(char **cmd, t_minishell *shell, bool parent)
 	(void) parent;
 	i = 0;
 	flag = 0;
+	if (!cmd[1])
+		return (print_envs(shell->envs, true));
 	while (cmd[1][i])
 	{
 		if (cmd[1][i] == '=')
@@ -37,12 +40,10 @@ void	run_export(char **cmd, t_minishell *shell, bool parent)
 		i++;
 	}
 	if (!flag)
-		return ;
+		return ((void) printf("Invalid environment variable declaration\n"));
 	iter_env = shell->envs;
 	while (iter_env->next)
 		iter_env = iter_env->next;
 	new_env = add_env(cmd[1]);
 	iter_env->next = new_env;
-	// if (!parent)
-	// 	printf("%s = %s\n", new_env->name, new_env->value);
 }
