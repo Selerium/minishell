@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 22:44:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:34:50 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,15 @@ void	make_envs_array(t_env *envs, char **list)
 	int		n;
 
 	n = 0;
+	if (!envs)
+	{
+		list = NULL;
+		return ;
+	}
 	while (envs)
 	{
+		if (!envs->name || !envs->value)
+			break ;
 		hold = ft_strjoin(envs->name, "=");
 		list[n] = ft_strjoin(hold, envs->value);
 		free(hold);
@@ -55,7 +62,6 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	char	**envs;
 	char	*cmdpath;
 
-	set_child_handlers(shell);
 	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");

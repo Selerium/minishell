@@ -28,6 +28,8 @@ char	*ft_findpath(t_env *paths, char *cmd)
 	char	*path;
 
 	i = 0;
+	if (!paths)
+		return (NULL);
 	while (paths->value[i])
 	{
 		j = 0;
