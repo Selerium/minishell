@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 08:43:55 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:53:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell)
 			while (envs[i])
 				free(envs[i++]);
 			free(envs);
+			envs = NULL;
 		}
 		if (ft_strncmp(cmd->cmd[0], "env", 3) != 0)
 			free_envs(shell->envs);
@@ -67,9 +68,8 @@ void	print_exit(char **envs, t_minishell *shell, char *error, int errnum)
 	(void) errnum;
 	if (envs)
 	{
-		if (shell->num_envs > 0)
-			while (envs[i])
-				free(envs[i++]);
+		while (envs[i])
+			free(envs[i++]);
 		free(envs);
 	}
 	free_envs(shell->envs);
