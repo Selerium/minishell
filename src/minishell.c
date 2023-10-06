@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 21:55:44 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:27:19 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,8 @@
 
 void	our_readline(t_minishell *shell)
 {
-	char	*text;
-	char	*cwd;
-
-	cwd = getcwd(NULL, 0);
 	printf("\e[34m");
-	text = ft_strjoin(cwd, "\e[0m\e[33;1m:hi bestie $>\e[0m ");
-	shell->str = readline(text);
-	free(cwd);
-	free(text);
+	shell->str = readline("\e[0m\e[33;1mhi bestie $>\e[0m ");
 	add_history(shell->str);
 }
 
@@ -101,8 +94,9 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		if (ft_strlen(shell.str) == 0)
 			continue ;
-		if (is_syntax_valid(shell.str) == true)
-			fill_struct(&shell);
+		if (is_syntax_valid(shell.str) == false)
+			continue ;
+		fill_struct(&shell);
 		set_num_chunks(shell.cmds, shell.envs, &shell);
 		if (shell.num_chunks == 1 && run_single_cmd(shell.cmds, &shell))
 			continue ;
