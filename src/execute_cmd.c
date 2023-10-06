@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 08:59:36 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:01:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	char	*cmdpath;
 
 	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
-	printf("[%d]\n", shell->num_envs);
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");
 	make_envs_array(shell->envs, envs);
