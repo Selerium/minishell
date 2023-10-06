@@ -12,6 +12,29 @@
 
 #include "../../include/minishell.h"
 
+char	*get_exit_code(char *input)
+{
+	size_t	i;
+	char	*exit_code;
+	char	*tmp;
+
+	i = 0;
+	exit_code = NULL;
+	tmp = NULL;
+	if (input[i] == '$' && input[i + 1] == '?')
+	{
+		i++;
+		exit_code = ft_itoa(g_exitcode, 0, 0);
+		tmp = ft_substr(input, i + 1, ft_strlen(input) - i);
+		free(input);
+		input = ft_strjoin(exit_code, tmp);
+		free(exit_code);
+		free(tmp);
+		return (input);
+	}
+	return (input);
+}
+
 char	*get_env_name(char *input)
 {
 	size_t	i;
@@ -62,6 +85,7 @@ char	*expand_env(char *input, t_minishell shell)
 	while (input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
+		input = get_exit_code(input);
 		if (input[i] == '$' && qflag != 1)
 		{
 			name = get_env_name(input + i);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
 /*   Updated: 2023/10/06 09:27:45 by jadithya         ###   ########.fr       */

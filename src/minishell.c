@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
 /*   Updated: 2023/10/06 09:27:19 by jadithya         ###   ########.fr       */
@@ -104,7 +104,6 @@ int	main(int argc, char **argv, char **env)
 		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
 		free_shell(&shell);
-		printf("exitcode: [%d]\n", g_exitcode);
 	}
 	free_envs(shell.envs);
 }
