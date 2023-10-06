@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:20:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/05 18:00:38 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/06 09:25:05 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ bool	is_syntax_valid(char *input)
 		i++;
 	}
 	if (print_error(flag) == true)
+	{
+		g_exitcode = 257;
 		return (false);
+	}
 	return (true);
 }

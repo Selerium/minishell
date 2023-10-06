@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/05 11:03:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:04:50 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
