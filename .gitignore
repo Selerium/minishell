@@ -4,3 +4,5 @@ minishell-tester
 libft/printf/*.o
 libft/gnl/*.o
 libft/*.o
+.DS_Store
+*/.DS_Store
