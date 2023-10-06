@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:27:45 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:51:14 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	i = 0;
 	while (iter_cmd)
 	{
+		set_redirects(iter_cmd, shell);
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
@@ -110,9 +111,10 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 			if (i != shell->num_chunks - 1)
 				dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
 			set_child_handlers(shell);
-			set_redirects(iter_cmd, shell);
 			execute_cmd(iter_cmd, shell, i);
 		}
+		close_fds(shell, iter_cmd->fds_in, iter_cmd->redir_in_count);
+		close_fds(shell, iter_cmd->fds_out, iter_cmd->redir_out_count);
 		shell->cmds = shell->cmds->next;
 		iter_cmd = free_iter(iter_cmd);
 		i++;
