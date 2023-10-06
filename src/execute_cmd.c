@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 00:18:12 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 08:59:36 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	make_envs_array(t_env *envs, char **list)
 	int		n;
 
 	n = 0;
+	if (!envs)
+	{
+		list = NULL;
+		return ;
+	}
 	while (envs)
 	{
 		if (!envs->name || !envs->value)
@@ -57,8 +62,8 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	char	**envs;
 	char	*cmdpath;
 
-	set_child_handlers(shell);
 	envs = ft_calloc (sizeof(char *), (shell->num_envs + 1));
+	printf("[%d]\n", shell->num_envs);
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");
 	make_envs_array(shell->envs, envs);

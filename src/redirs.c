@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 22:01:43 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/06 09:13:03 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	heredoc(int fd, char *delimiter)
 	{
 		printf("[%s] heredoc> ", delimiter);
 		text = readline("");
+		if (!text)
+			break ;
 		if (ft_strlen(text) == 0)
 			continue ;
 		if (ft_strncmp(text, delimiter, ft_strlen(text)) == 0)
