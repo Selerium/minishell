@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:37:43 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 21:19:06 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 int	run_pwd(char **cmd)
 {
 	char	*str;
-
-	if (cmd[1])
-		return (printf("pwd: wrong number of arguments\n"));
+	(void)cmd;
+	// if (cmd[1])
+	// 	return (printf("pwd: wrong number of arguments\n"));
 	str = getcwd(NULL, 0);
 	if (!str)
 		return (printf("Folder deleted\n"));
