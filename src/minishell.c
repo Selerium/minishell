@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:27:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:16:22 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	char	*cmd;
 
 	cmd = NULL;
+	g_exitcode = 0;
 	if (cmds->cmd[1])
 		cmd = ft_strdup(cmds->cmd[1]);
 	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
-		run_export(cmds->cmd, shell, true);
+		wrap_export(cmds->cmd, shell, true);
 	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
 		run_env(shell, true);
 	else if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
@@ -73,7 +74,6 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	}
 	wrap_free(cmd);
 	free_cmd(cmds);
-	g_exitcode = 0;
 	return (1);
 }
 

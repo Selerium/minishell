@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 12:24:46 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 16:58:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,37 +75,55 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
-void	wrap_execve(char *cmdpath, char **cmd, char **envs)
+void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
+	int	i;
+
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
+	free_envs(shell->envs);
+	free_cmd(shell->cmds);
+	close_pipes(shell);
+	i = 0;
+	while (envs[i])
+		wrap_free(envs[i++]);
+	wrap_free(shell->processes);
+	i = 0;
+	while (shell->fds && shell->fds[i])
+		wrap_free(shell->fds[i++]);
+	wrap_free(shell->fds);
+	wrap_free(cmdpath);
+	i = 0;
+	while (envs && envs[i])
+		wrap_free(envs[i++]);
+	wrap_free(envs);
 	exit(127);
 }
 
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
-	if (ft_strncmp(cmd[0], "env", 3) == 0)
+	if (ft_strncmp(cmd[0], "env", 4) == 0)
 		run_env(shell, false);
-	else if (ft_strncmp(cmd[0], "export", 6) == 0)
+	else if (ft_strncmp(cmd[0], "export", 7) == 0)
 	{
-		run_export(cmd, shell, false);
+		wrap_export(cmd, shell, false);
 		exit(0);
 	}
 	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
-		run_unset(cmd[1], shell, false);
+		wrap_unset(cmd, shell, false);
 	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
 		run_echo(cmd);
 	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
 		run_exit(cmd[1]);
 	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
-		run_pwd();
+		run_pwd(cmd);
 	else if (ft_strncmp(cmd[0], "cd", 3) == 0)
 		run_cd(cmd, false);
 	else if (ft_strncmp(cmd[0], "./minishell", 12) == 0)
 		run_minishell(cmdpath, cmd, envs, *shell);
 	else
-		wrap_execve(cmdpath, cmd, envs);
+		wrap_execve(cmdpath, cmd, envs, shell);
 	free (cmdpath);
 	free_cmd(shell->cmds);
-	exit(0);
+	exit(g_exitcode);
 }

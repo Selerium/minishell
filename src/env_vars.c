@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/07 20:05:01 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 16:51:58 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*add_env(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	new_env->name = ft_substr(str, 0, i);
-	new_env->value = ft_substr(str, i + 1, ft_strlen(str));
+	new_env->value = ft_substr(str, i + 1, ft_strlen(str) - i);
 	new_env->next = NULL;
 	return (new_env);
 }
