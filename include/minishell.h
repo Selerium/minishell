@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 16:51:37 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 18:06:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		run_pwd(char **cmd);
 void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
 void	wrap_export(char **cmd, t_minishell *shell, bool parent);
-void	run_export(char *cmd, t_minishell *shell, bool parent);
+void	run_export(char *cmd, t_minishell *shell, bool parent, bool is_env);
 void	single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	run_exit(char *num);
 void	run_echo(char **cmd);

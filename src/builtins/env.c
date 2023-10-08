@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:40:20 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/08 15:19:04 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:58:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void	run_env(t_minishell *shell, bool parent)
 
 	i = 1;
 	if (!shell->cmds->cmd[1])
-		print_envs(shell->envs, parent);
-	else if (check_assignment(shell->cmds->cmd[1]))
-	{
+		print_envs(shell->envs, true);
+	else
 		while (shell->cmds->cmd[i])
-			run_export(shell->cmds->cmd[i++], shell, parent);
-		print_envs(shell->envs, parent);
-	}
+			if (check_assignment(shell->cmds->cmd[i++]))
+				run_export(shell->cmds->cmd[i - 1], shell, parent, true);
+	print_envs(shell->envs, true);
 	if (!parent)
 		free_envs(shell->envs);
 }
