@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 18:07:18 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 18:23:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	wrap_export(char **cmd, t_minishell *shell, bool parent)
 	int	i;
 
 	i = 1;
+	if (!cmd[1])
+		return (print_envs(shell->envs, false));
 	while (cmd[i])
 		run_export(cmd[i++], shell, parent, false);
-	if (!cmd[1])
-		print_envs(shell->envs, false);
 }
 
 bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
