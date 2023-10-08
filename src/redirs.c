@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 20:16:05 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:49:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
-				printf("Outfile access error");
+				printf("Outfile access error\n");
 				return (false);
 			}
 			i++;
