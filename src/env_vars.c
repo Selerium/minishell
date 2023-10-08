@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:19:33 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:29:19 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ t_env	*add_env(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	new_env->name = ft_substr(str, 0, i);
-	new_env->value = ft_substr(str, i + 1, ft_strlen(str) - i);
+	if (str[i] == '=' && !str[i + 1])
+		new_env->value = ft_strdup("");
+	else if (str[i] != '=')
+		new_env->value = NULL;
+	else
+		new_env->value = ft_substr(str, i + 1, ft_strlen(str) - i);
 	new_env->next = NULL;
 	return (new_env);
 }
@@ -72,8 +77,27 @@ void	print_envs(t_env *envs, bool is_env)
 {
 	while (envs)
 	{
-		if (is_env && envs->value && envs->name)
-			printf("%s=%s\n", envs->name, envs->value);
+		if (is_env)
+		{
+			if (envs->value && envs->name)
+			{
+				if (ft_strlen(envs->value))
+					printf("%s=%s\n", envs->name, envs->value);
+				else
+					printf("%s=\"\"\n", envs->name);
+			}
+		}
+		else
+		{
+			printf("declare -x ");
+			printf("%s", envs->name);
+			if (envs->value && ft_strlen(envs->value))
+				printf("=\"%s\"\n", envs->value);
+			else if (envs->value)
+				printf("=\"\"\n");
+			else
+				printf("\n");
+		}
 		envs = envs->next;
 	}
 }
