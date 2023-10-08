@@ -6,11 +6,12 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/06 00:13:45 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:29:46 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../../include/minishell.h"
+#include <unistd.h>
 
 // split input by the pipes
 
