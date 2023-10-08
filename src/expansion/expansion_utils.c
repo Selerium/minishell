@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/08 16:09:24 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 18:04:40 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*expand_env(char *input, t_minishell shell)
 	size_t	i;
 
 	i = 0;
+	qflag = 0;
 	while (input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
