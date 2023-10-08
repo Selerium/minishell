@@ -1,6 +1,6 @@
 .vscode
 obj
-minishell-tester
+minishell_tester
 libft/printf/*.o
 libft/gnl/*.o
 libft/*.o
