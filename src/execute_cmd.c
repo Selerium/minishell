@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 10:13:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 14:12:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	wrap_execve(char *cmdpath, char **cmd, char **envs)
 
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
-	if (ft_strncmp(cmd[0], "env", 3) == 0)
+	if (ft_strncmp(cmd[0], "env", 4) == 0)
 		run_env(shell, false);
-	else if (ft_strncmp(cmd[0], "export", 6) == 0)
+	else if (ft_strncmp(cmd[0], "export", 7) == 0)
 	{
 		run_export(cmd, shell, false);
 		exit(0);

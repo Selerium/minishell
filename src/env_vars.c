@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/05 23:57:35 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:19:33 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*add_env(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	new_env->name = ft_substr(str, 0, i);
-	new_env->value = ft_substr(str, i + 1, ft_strlen(str));
+	new_env->value = ft_substr(str, i + 1, ft_strlen(str) - i);
 	new_env->next = NULL;
 	return (new_env);
 }
