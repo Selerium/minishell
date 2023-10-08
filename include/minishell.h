@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:04:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 15:15:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	dup_redirects(t_chunk *cmd);
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i);
 void	run_minishell(char *cmdpath, char **cmd, char **envs,
 			t_minishell shell);
-void	wrap_execve(char *cmdpath, char **cmd, char **envs);
+void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 
 //cleanup:
@@ -125,13 +125,15 @@ t_chunk	*init_chunk(void);
 char	**ms_split(char *s, char c, size_t i, size_t j);
 
 //built-ins:
-int		run_pwd(void);
+int		run_pwd(char **cmd);
 void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
-void	run_export(char **cmd, t_minishell *shell, bool parent);
+void	wrap_export(char **cmd, t_minishell *shell, bool parent);
+void	run_export(char *cmd, t_minishell *shell, bool parent);
 void	single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
+void	wrap_unset(char **cmd, t_minishell *shell, bool parent);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);
 
 // expansion

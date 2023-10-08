@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:39:23 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/04 21:46:29 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:40:55 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	run_cd(char **input, bool parent)
 	if (input[1])
 	{
 		if (chdir(input[1]) != 0)
+		{
 			perror("cd: cannot change directory");
+			g_exitcode = 1;
+		}
 	}
 	else
 		chdir("/");
