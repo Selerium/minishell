@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniminishell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 22:44:05 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:43:12 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 22:55:16 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 			num = ft_itoa(val, '0', 0);
 			free(envs[i]);
 			envs[i] = ft_strjoin("SHLVL=", num);
-			printf("here %s\n", envs[i]);
 			break ;
 		}
 		shell.envs = shell.envs->next;

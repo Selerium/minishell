@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/08 21:50:34 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 22:55:33 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ char	*replace_env(char *input, size_t *idx, char *var_name, char *env)
 		tmp2 = ft_strdup(env);
 	tmp3 = ft_substr(input, *idx + ft_strlen(var_name) + 1, ft_strlen(input)
 			- *idx - ft_strlen(var_name) - 1);
-	printf("tmp1: %s\n", tmp1);
-	printf("tmp2: %s\n", tmp2);
-	printf("tmp3: %s\n", tmp3);
 	(*idx) += ft_strlen(tmp2) - 1;
 	if (!env)
 		(*idx)++;
@@ -86,7 +83,7 @@ char	*expand_env(char *input, t_minishell shell)
 			input = replace_env(input, &i, name, val);
 			wrap_free(name);
 		}
-		printf("input[%zd]: %c | %s : %ld\n", i, input[i], input, ft_strlen(input));
+		// printf("input[%zd]: %c | %s : %ld\n", i, input[i], input, ft_strlen(input));
 		if (input[i])
 			i++;
 	}
