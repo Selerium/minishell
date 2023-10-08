@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 16:31:26 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:54:55 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 *	>	goes through env, breaks if reached same variable or name < env[i].
 *	>	replaces env[i] w/ name=value, or adds to list right before it.
 *	>	if name is biggest name, adds to the end of the env list.
+
+*	>	(hell no we're not sorting)
 */
 
 void	wrap_export(char **cmd, t_minishell *shell, bool parent)
@@ -29,10 +31,12 @@ void	wrap_export(char **cmd, t_minishell *shell, bool parent)
 
 	i = 1;
 	while (cmd[i])
-		run_export(cmd[i++], shell, parent);
+		run_export(cmd[i++], shell, parent, false);
+	if (!cmd[1])
+		print_envs(shell->envs, false);
 }
 
-bool	env_exists(char *cmd, t_minishell *shell)
+bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
 {
 	t_env	*iter_env;
 	t_env	*hold;
@@ -49,9 +53,14 @@ bool	env_exists(char *cmd, t_minishell *shell)
 		}
 		iter_env = iter_env->next;
 	}
-	if (!flag)
+	if (!flag || !cmd)
 		return (false);
 	hold = add_env(cmd);
+	if (!hold->value || is_env)
+	{
+		free_envs(hold);
+		return (true);
+	}
 	wrap_free(iter_env->name);
 	wrap_free(iter_env->value);
 	iter_env->name = ft_strdup(hold->name);
@@ -60,7 +69,7 @@ bool	env_exists(char *cmd, t_minishell *shell)
 	return (true);
 }
 
-void	run_export(char *cmd, t_minishell *shell, bool parent)
+void	run_export(char *cmd, t_minishell *shell, bool parent, bool is_env)
 {
 	t_env	*iter_env;
 	t_env	*new_env;
@@ -68,16 +77,14 @@ void	run_export(char *cmd, t_minishell *shell, bool parent)
 	int		flag;
 
 	(void) parent;
-	if (env_exists(cmd, shell))
+	if (env_exists(cmd, shell, is_env))
 		return ;
 	i = 0;
-	flag = 0;
-	if (!cmd)
-		return (print_envs(shell->envs, true));
-	while (cmd[i])
+	flag = 1;
+	while (cmd[i] && cmd[i] != '=')
 	{
-		if (cmd[i] == '=')
-			flag = 1;
+		if (cmd[i] == '-')
+			flag = 0;
 		i++;
 	}
 	if (!flag)
