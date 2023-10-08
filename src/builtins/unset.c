@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:30:40 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 15:08:54 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:29:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	wrap_unset(char **cmd, t_minishell *shell, bool parent)
 	i = 1;
 	while (cmd[i])
 		run_unset(cmd[i++], shell, parent);
+	free_envs(shell->envs);
 }
 
 void	run_unset(char *cmd, t_minishell *shell, bool parent)

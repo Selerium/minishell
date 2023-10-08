@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:53:24 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:28:16 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell)
 			free(envs);
 			envs = NULL;
 		}
-		if (ft_strncmp(cmd->cmd[0], "env", 3) != 0)
+		if (ft_strncmp(cmd->cmd[0], "env", 3) != 0 && ft_strncmp(cmd->cmd[0],
+				"export", 6) != 0 && ft_strncmp(cmd->cmd[0], "unset", 6) != 0)
 			free_envs(shell->envs);
 	}
 }
