@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:02:01 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:47:26 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ void	close_run(t_minishell *shell)
 		g_exitcode = WEXITSTATUS(g_exitcode);
 }
 
+void	special_free(t_minishell *shell)
+{
+	free_cmd(shell->cmds);
+}
+
 //check if pipe creation is failing
 //check if processes ft_calloc fails
 //check if processes forking fails
@@ -99,10 +104,11 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	int		i;
 
 	iter_cmd = cmds;
-	i = 0;
-	while (iter_cmd)
+	i = -1;
+	while (iter_cmd && ++i >= 0)
 	{
-		set_redirects(iter_cmd, shell);
+		if (!set_redirects(iter_cmd, shell))
+			return (special_free(shell));
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
@@ -117,7 +123,6 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 		close_fds(shell, iter_cmd->fds_out, iter_cmd->redir_out_count);
 		shell->cmds = shell->cmds->next;
 		iter_cmd = free_iter(iter_cmd);
-		i++;
 	}
 	close_run(shell);
 }

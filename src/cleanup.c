@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 18:28:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:11:21 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	close_fds(t_minishell *shell, int *fds, int n)
 		i = 0;
 		while (i < n)
 		{
-			close (fds[i]);
+			if (fds[i] >= 0)
+				close (fds[i]);
 			i++;
 		}
 		hold = hold->next;

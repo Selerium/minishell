@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:31:28 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:12:47 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ void	dup_redirects(t_chunk *cmd)
 		i = set_redir_counts(cmd->redir_out);
 		dup2(cmd->fds_out[i - 1], STDOUT_FILENO);
 		while (--i >= 0)
-			close(cmd->fds_out[i]);
+			if (cmd->fds_out[i] >= 0)
+				close(cmd->fds_out[i]);
 	}
 	if (cmd->redir_in)
 	{
 		i = set_redir_counts(cmd->redir_in);
 		dup2(cmd->fds_in[i - 1], STDIN_FILENO);
 		while (--i >= 0)
-			close(cmd->fds_in[i]);
+			if (cmd->fds_in[i] >= 0)
+				close(cmd->fds_in[i]);
 	}
 }
 

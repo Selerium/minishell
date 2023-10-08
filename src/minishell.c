@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:37:35 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:53:08 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,34 @@ void	print_welcome(int ac, char **av)
 	close(startfile);
 }
 
+int	run_single_cmd_mini(t_chunk *cmds, t_minishell *shell, char *cmd)
+{
+	if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
+	{
+		if (!set_redirects(cmds, shell))
+			return (1);
+		run_unset(cmds->cmd[1], shell, true);
+	}
+	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
+	{
+		if (!set_redirects(cmds, shell))
+			return (1);
+		single_exit(cmds, shell->envs, cmd);
+	}
+	else if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
+	{
+		if (!set_redirects(cmds, shell))
+			return (1);
+		run_cd(cmds->cmd, true);
+	}
+	else
+	{
+		wrap_free(cmd);
+		return (0);
+	}
+	return (1);
+}
+
 int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 {
 	char	*cmd;
@@ -59,20 +87,21 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	if (cmds->cmd[1])
 		cmd = ft_strdup(cmds->cmd[1]);
 	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
-		wrap_export(cmds->cmd, shell, true);
-	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
-		run_env(shell, true);
-	else if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
-		run_cd(cmds->cmd, true);
-	else if (ft_strncmp(cmds->cmd[0], "unset", 6) == 0)
-		run_unset(cmds->cmd[1], shell, true);
-	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
-		single_exit(cmds, shell->envs, cmd);
-	else
 	{
-		wrap_free(cmd);
-		return (0);
+		if (!set_redirects(cmds, shell))
+			return (1);
+		wrap_export(cmds->cmd, shell, true);
 	}
+	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
+	{
+		if (!set_redirects(cmds, shell))
+			return (1);
+		run_env(shell, true);
+	}
+	else if (run_single_cmd_mini(cmds, shell, cmd))
+		return (1);
+	else
+		return (0);
 	wrap_free(cmd);
 	free_cmd(cmds);
 	return (1);
