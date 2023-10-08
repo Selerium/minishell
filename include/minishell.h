@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:04:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 14:28:01 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	dup_redirects(t_chunk *cmd);
 void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i);
 void	run_minishell(char *cmdpath, char **cmd, char **envs,
 			t_minishell shell);
-void	wrap_execve(char *cmdpath, char **cmd, char **envs);
+void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 
 //cleanup:

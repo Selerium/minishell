@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:12:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:38:35 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,28 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	ft_execve(cmdpath, cmd->cmd, envs, shell);
 }
 
-void	wrap_execve(char *cmdpath, char **cmd, char **envs)
+void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 {
+	int	i;
+
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
+	free_envs(shell->envs);
+	free_cmd(shell->cmds);
+	close_pipes(shell);
+	i = 0;
+	while (envs[i])
+		wrap_free(envs[i++]);
+	wrap_free(shell->processes);
+	i = 0;
+	while (shell->fds && shell->fds[i])
+		wrap_free(shell->fds[i++]);
+	wrap_free(shell->fds);
+	wrap_free(cmdpath);
+	i = 0;
+	while (envs && envs[i])
+		wrap_free(envs[i++]);
+	wrap_free(envs);
 	exit(127);
 }
 
@@ -104,7 +122,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 	else if (ft_strncmp(cmd[0], "./minishell", 12) == 0)
 		run_minishell(cmdpath, cmd, envs, *shell);
 	else
-		wrap_execve(cmdpath, cmd, envs);
+		wrap_execve(cmdpath, cmd, envs, shell);
 	free (cmdpath);
 	free_cmd(shell->cmds);
 	exit(0);
