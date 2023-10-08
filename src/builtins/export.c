@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 20:20:55 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 21:21:02 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void	run_export(char *cmd, t_minishell *shell, bool parent, bool is_env)
 		i++;
 	}
 	if (!flag)
-		return ((void) printf("Invalid environment variable declaration\n"));
+	{
+		g_exitcode = 1;
+		return (perror("Invalid environment variable declaration\n"));
+	}
 	iter_env = shell->envs;
 	while (iter_env && iter_env->next)
 		iter_env = iter_env->next;
