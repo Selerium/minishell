@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 18:28:49 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:31:28 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		run_minishell(cmdpath, cmd, envs, *shell);
 	else
 		wrap_execve(cmdpath, cmd, envs, shell);
-	free (cmdpath);
+	wrap_free(cmdpath);
 	free_cmd(shell->cmds);
 	exit(g_exitcode);
 }
