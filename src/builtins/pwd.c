@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 13:58:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:43:00 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	run_pwd(void)
 	str = getcwd(NULL, 0);
 	printf("%s\n", str);
 	free (str);
+	g_exitcode = 0;
 	return (0);
 }

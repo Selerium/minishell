@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:30:40 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/01 14:00:30 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:42:49 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent)
 		iter = remove;
 		remove = remove->next;
 	}
+	g_exitcode = 0;
 }

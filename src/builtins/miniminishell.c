@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 22:44:05 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/04 22:44:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:43:12 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	run_minishell(char *cmdpath, char **cmd, char **envs, t_minishell shell)
 		shell.envs = shell.envs->next;
 		i++;
 	}
+	g_exitcode = 0;
 	execve(cmdpath, cmd, envs);
 	perror("Command not found");
 	exit(127);
