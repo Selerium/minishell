@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 09:04:50 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 15:49:23 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent);
 
 // expansion
 char	*get_env_name(char *input);
-char	*replace_env(char *input, size_t *idx, char *var_name, t_env *env);
+char	*replace_env(char *input, size_t *idx, char *var_name, char *env);
 char	*expand_env(char *input, t_minishell shell);
 void	expand_tokens(char **args, t_minishell shell);
 
