@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:30:40 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:42:49 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:08:54 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ t_env	*free_single_env(t_env *env)
 	return (value);
 }
 
+void	wrap_unset(char **cmd, t_minishell *shell, bool parent)
+{
+	int	i;
+
+	i = 1;
+	while (cmd[i])
+		run_unset(cmd[i++], shell, parent);
+}
+
 void	run_unset(char *cmd, t_minishell *shell, bool parent)
 {
 	t_env	*iter;
@@ -31,6 +40,8 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent)
 	(void) parent;
 	remove = shell->envs;
 	iter = NULL;
+	if (!cmd)
+		return ;
 	while (remove)
 	{
 		if (ft_strncmp(cmd, remove->name, ft_strlen(remove->name) + 1) == 0)

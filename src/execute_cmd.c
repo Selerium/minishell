@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 14:41:11 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:16:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,17 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		run_env(shell, false);
 	else if (ft_strncmp(cmd[0], "export", 7) == 0)
 	{
-		run_export(cmd, shell, false);
+		wrap_export(cmd, shell, false);
 		exit(0);
 	}
 	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
-		run_unset(cmd[1], shell, false);
+		wrap_unset(cmd, shell, false);
 	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
 		run_echo(cmd);
 	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
 		run_exit(cmd[1]);
 	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
-		run_pwd();
+		run_pwd(cmd);
 	else if (ft_strncmp(cmd[0], "cd", 3) == 0)
 		run_cd(cmd, false);
 	else if (ft_strncmp(cmd[0], "./minishell", 12) == 0)
