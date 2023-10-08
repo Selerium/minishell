@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:31:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:45:25 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void	close_fds(t_minishell *shell, int *fds, int n);
 //redirections:
 int		set_redir_counts(char **list);
 void	heredoc(int fd, char *delimiter);
-void	open_outfiles(t_chunk *cmd, t_minishell *shell);
-void	open_infiles(t_chunk *cmd, t_minishell *shell);
-void	set_redirects(t_chunk *cmd, t_minishell *shell);
+bool	open_outfiles(t_chunk *cmd, t_minishell *shell);
+bool	open_infiles(t_chunk *cmd, t_minishell *shell);
+bool	set_redirects(t_chunk *cmd, t_minishell *shell);
 
 //freeing:
 void	wrap_free(void *item);

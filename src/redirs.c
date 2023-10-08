@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/06 11:50:17 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:16:05 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	heredoc(int fd, char *delimiter)
 	}
 }
 
-void	open_outfiles(t_chunk *cmd, t_minishell *shell)
+bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 {
 	int	i;
 
@@ -67,7 +67,8 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
-				print_exit(NULL, shell, "Outfile access error", 1);
+				printf("Outfile access error\n");
+				return (false);
 			}
 			if (cmd->redir_out_type[i] == REDIR_OUT)
 			{
@@ -85,14 +86,16 @@ void	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
-				print_exit(NULL, shell, "Outfile couldn't be opened", 1);
+				printf("Outfile access error");
+				return (false);
 			}
 			i++;
 		}
 	}
+	return (true);
 }
 
-void	open_infiles(t_chunk *cmd, t_minishell *shell)
+bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 {
 	int		i;
 	char	*filename;
@@ -108,7 +111,8 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
-				print_exit(NULL, shell, "Infile access error", 1);
+				printf("Infile access error\n");
+				return (false);
 			}
 			if (cmd->redir_in_type[i] == REDIR_IN)
 				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);
@@ -127,14 +131,16 @@ void	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
-				print_exit(NULL, shell, "Infile couldn't be opened", 1);
+				printf("Infile couldn't be opened\n");
+				return (false);
 			}
 			i++;
 		}
 	}
+	return (true);
 }
 
-void	set_redirects(t_chunk *cmd, t_minishell *shell)
+bool	set_redirects(t_chunk *cmd, t_minishell *shell)
 {
 	cmd->redir_in_count = set_redir_counts(cmd->redir_in);
 	cmd->redir_out_count = set_redir_counts(cmd->redir_out);
@@ -146,6 +152,5 @@ void	set_redirects(t_chunk *cmd, t_minishell *shell)
 		cmd->fds_out = ft_calloc (sizeof(int), cmd->redir_out_count);
 	if (cmd->redir_out_count != 0 && !cmd->fds_out)
 		printf("we have a situation. abort. :/ \n"); //fix
-	open_outfiles(cmd, shell);
-	open_infiles(cmd, shell);
+	return (open_outfiles(cmd, shell) && open_infiles(cmd, shell));
 }
