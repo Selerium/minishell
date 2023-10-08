@@ -6,16 +6,12 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:54:48 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/06 08:24:22 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/08 20:30:28 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/* qflag = 0
-if single quote (\') is encounted, set it to one
-if double quote (\") set it to 2
-if a closing quote of the specific is encountered, reset to 0*/
 int	get_quote_type(int qflag, char q)
 {
 	if (q == SINGLE && qflag == 0)

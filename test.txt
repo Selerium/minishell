@@ -1,7 +1,0 @@
-hello world test test minishell sucks
-hello
-1
-2
-3fjdisfjahellohejfioa
-4
-5 hello

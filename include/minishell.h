@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:31:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:32:56 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_env	*add_env(char *str);
 t_env	*create_envs(char **env);
 void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
-t_env	*get_env(char *name, t_minishell shell);
 
 //signal handlers:
 void	sigint_handler(int n);
