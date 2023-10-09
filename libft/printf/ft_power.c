@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 23:12:13 by jadithya          #+#    #+#             */
-/*   Updated: 2022/07/05 17:09:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libftprintf.h"
+#include "libftprintf.h"
 
 int	ft_power(int num, int power)
 {

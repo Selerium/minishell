@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printptrhex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 13:33:01 by jadithya          #+#    #+#             */
-/*   Updated: 2022/07/05 19:19:17 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libftprintf.h"
+#include "libftprintf.h"
 
 static int	digits(unsigned long n)
 {

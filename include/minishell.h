@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 17:36:26 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:34:06 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@
 # define LEFT 0
 # define RIGHT 1
 
-# include<stdio.h>
-# include<stdlib.h>
-# include<unistd.h>
-# include<fcntl.h>
-# include<readline/readline.h>
-# include<readline/history.h>
-# include<sys/types.h>
-# include<sys/wait.h>
-# include<sys/stat.h>
-# include<sys/resource.h>
-# include<signal.h>
-# include<dirent.h>
-# include<string.h>
-# include<stdbool.h>
-# include<errno.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/resource.h>
+# include <signal.h>
+# include <dirent.h>
+# include <string.h>
+# include <stdbool.h>
+# include <errno.h>
 
-# include"../libft/libft.h"
-# include"structs.h"
-# include"exit_codes.h"
+# include "../libft/libft.h"
+# include "structs.h"
+# include "exit_codes.h"
 
-# define DOUBLE '\"'
-# define SINGLE '\''
+# define DOUBLE 34
+# define SINGLE 39
 
 extern int	g_exitcode;
 

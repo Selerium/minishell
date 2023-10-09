@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:51:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 19:29:54 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/minishell.h"
+#include "../include/minishell.h"
 #include <readline/readline.h>
 #include <signal.h>
 

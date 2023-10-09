@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printzeros.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 17:14:36 by jadithya          #+#    #+#             */
-/*   Updated: 2022/07/07 16:07:26 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libftprintf.h"
+#include "libftprintf.h"
 
 static int	ft_precheck(char *add)
 {
