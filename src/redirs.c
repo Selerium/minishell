@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:38:07 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:29 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
 				printf("Outfile access error\n");
+				g_exitcode = 1;
 				return (false);
 			}
 			if (cmd->redir_out_type[i] == REDIR_OUT)
@@ -81,6 +82,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
 				printf("Outfile access error\n");
+				g_exitcode = 1;
 				return (false);
 			}
 			i++;
@@ -105,6 +107,7 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
+				g_exitcode = 1;
 				printf("Infile access error\n");
 				return (false);
 			}
@@ -125,6 +128,7 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
 				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
+				g_exitcode = 1;
 				printf("Infile couldn't be opened\n");
 				return (false);
 			}
