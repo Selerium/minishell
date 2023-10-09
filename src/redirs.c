@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:29 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:19:52 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 		while (cmd->redir_in[i])
 		{
 			if (access(cmd->redir_in[i], F_OK) == 0
+				&& cmd->redir_in_type[i] != HEREDOC
 				&& access(cmd->redir_in[i], R_OK) == -1)
 			{
 				close_pipes(shell);

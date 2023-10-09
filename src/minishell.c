@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 20:13:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 
 	cmd = NULL;
 	g_exitcode = 0;
-	if (cmds->cmd[1])
+	if (cmds->cmd && cmds->cmd[0] && cmds->cmd[1])
 		cmd = ft_strdup(cmds->cmd[1]);
+	if (!cmds->cmd || !cmds->cmd[0])
+		return (0);
 	if (ft_strncmp(cmds->cmd[0], "export", 7) == 0)
 	{
 		if (!set_redirects(cmds, shell))

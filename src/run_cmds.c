@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:50:03 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:58:48 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,6 @@ void	close_run(t_minishell *shell)
 		waitpid(shell->processes[i], &g_exitcode, 0);
 	if (WIFEXITED(g_exitcode))
 		g_exitcode = WEXITSTATUS(g_exitcode);
-}
-
-void	special_free(t_minishell *shell)
-{
-	free_cmd(shell->cmds);
-	free_envs(shell->envs);
-	free_fds(shell->fds, shell->num_chunks);
-	wrap_free(shell->processes);
-	exit(g_exitcode);
 }
 
 //check if pipe creation is failing

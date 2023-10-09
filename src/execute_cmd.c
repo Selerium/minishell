@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:11:31 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:29:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	if (!envs)
 		printf("exec cmd - ft_calloc eror\n");
 	make_envs_array(shell->envs, envs);
+	if (!cmd->cmd || !cmd->cmd[0])
+	{
+		close_pipes(shell);
+		close_fds(shell, cmd->fds_in, cmd->redir_in_count);
+		print_exit(envs, shell, "Invalid input", 1);
+	}
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
 	dup_redirects(cmd);
 	close_unneededs(cmd, shell, i);
@@ -91,6 +97,7 @@ void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		wrap_free(envs[i++]);
 	wrap_free(shell->processes);
 	i = 0;
+	printf("%s\n", cmd[0]);
 	while (shell->fds && shell->fds[i])
 		wrap_free(shell->fds[i++]);
 	wrap_free(shell->fds);

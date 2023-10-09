@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:41:26 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:59:28 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	free_envs(t_env *envs);
 void	sigint_handler(int n);
 void	set_handlers(t_minishell *shell);
 void	set_child_handlers(t_minishell *shell);
+void	special_free(t_minishell *shell);
+//doesnt't belong there, just kept for norm
 
 //run shell with set of commands:
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);

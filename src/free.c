@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:46:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 20:13:58 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_cmd(t_chunk *cmd)
 	while (cmd)
 	{
 		i = 0;
-		while (cmd->cmd[i])
+		while (cmd->cmd && cmd->cmd[i])
 			free(cmd->cmd[i++]);
 		wrap_free(cmd->cmd);
 		free_redirs(cmd);
