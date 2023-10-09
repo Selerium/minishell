@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 19:32:20 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:42:29 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,17 @@ char	*expand_env(char *input, t_minishell shell, int qflag)
 	return (input);
 }
 
-void	expand_tokens(char **args, t_minishell shell)
+//type 0 is redir in
+//type 1 is redir out
+//type 2 is cmd
+void	expand_tokens(char **args, t_minishell shell, int type)
 {
 	size_t	i;
 
 	i = 0;
 	while (args && args[i])
 	{
-		if (shell.cmds->redir_in_type && shell.cmds->redir_in_type[i])
+		if (!type && shell.cmds->redir_in_type && shell.cmds->redir_in_type[i])
 		{
 			if (shell.cmds->redir_in_type[i] != HEREDOC)
 				args[i] = expand_env(args[i], shell, 0);

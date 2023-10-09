@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:32:34 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:41:26 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent);
 char	*get_env_name(char *input);
 char	*replace_env(char *input, size_t *idx, char *var_name, char *env);
 char	*expand_env(char *input, t_minishell shell, int qflag);
-void	expand_tokens(char **args, t_minishell shell);
+void	expand_tokens(char **args, t_minishell shell, int type);
 
 // quotes
 int		get_quote_type(int qflag, char q);
