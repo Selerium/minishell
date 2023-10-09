@@ -6,18 +6,12 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:57:02 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include <unistd.h>
-
-// split input by the pipes
-
-// and store in the linked list
-
-// tokenize each "word" in the string
 
 bool	condition(char c, int quote)
 {

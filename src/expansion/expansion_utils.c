@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 17:57:26 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 20:11:03 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*get_env_name(char *input)
 	while (ft_isalnum(input[i]) || input[i] == '_')
 		i++;
 	env_name = ft_substr(input, start, i - start);
+	printf("name: [%s]\n", env_name);
 	return (env_name);
 }
 
@@ -55,6 +56,24 @@ char	*replace_env(char *input, size_t *idx, char *var_name, char *env)
 	return (input);
 }
 
+char	*check_val_conds(char *val, char *name, t_minishell shell)
+{
+	t_env	*env_var;
+
+	env_var = NULL;
+	if (!ft_strncmp(name, "?", 1))
+		val = ft_itoa(g_exitcode, 0, 0);
+	else
+	{
+		env_var = get_env(name, shell);
+		if (env_var)
+			val = ft_strdup(env_var->value);
+		else
+			val = NULL;
+	}
+	return (val);
+}
+
 char	*expand_env(char *input, t_minishell shell)
 {
 	char	*name;
@@ -73,20 +92,11 @@ char	*expand_env(char *input, t_minishell shell)
 			&& (input[i + 1] != SINGLE && input[i + 1] != DOUBLE) && qflag != 1)
 		{
 			name = get_env_name(input + i);
-			if (!ft_strncmp(name, "?", 1))
-				val = ft_itoa(g_exitcode, 0, 0);
-			else
-			{
-				env_var = get_env(name, shell);
-				if (env_var)
-					val = ft_strdup(env_var->value);
-				else
-					val = NULL;
-			}
+			val = check_val_conds(val, name, shell);
 			input = replace_env(input, &i, name, val);
 			wrap_free(name);
 		}
-		if (input[i])
+		if (input[i] && val)
 			i++;
 	}
 	return (input);
