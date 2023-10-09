@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:39:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 21:06:13 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	run_pwd(char **cmd)
 	(void) cmd;
 	str = getcwd(NULL, 0);
 	if (!str)
+	{
+		wrap_free (str);
 		return (printf("Folder deleted\n"));
+	}
 	printf("%s\n", str);
 	wrap_free (str);
 	g_exitcode = 0;

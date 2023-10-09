@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 20:50:12 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:09:19 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 			return (1);
 		run_env(shell, true);
 	}
-	else if (run_single_cmd_mini(cmds, shell, cmd))
-		return (1);
-	else
+	else if (run_single_cmd_mini(cmds, shell, cmd) == 0)
 		return (0);
 	wrap_free(cmd);
 	free_cmd(cmds);
