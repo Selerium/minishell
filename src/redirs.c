@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 20:19:52 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:23:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_redir_counts(char **list)
 	return (i);
 }
 
-void	heredoc(int fd, char *delimiter)
+void	heredoc(int fd, char *delimiter, t_minishell shell)
 {
 	char	*text;
 
@@ -42,8 +42,10 @@ void	heredoc(int fd, char *delimiter)
 			printf("\n");
 		if (ft_strncmp(text, delimiter, ft_strlen(text) + 1) == 0)
 			break ;
+		text = expand_env(text, shell, 0);
 		write(fd, text, ft_strlen(text));
 		write(fd, "\n", 1);
+		wrap_free(text);
 	}
 }
 
@@ -118,7 +120,7 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 			{
 				filename = ft_strjoin(cmd->redir_in[i], ".heredoc.tmp");
 				cmd->fds_in[i] = open(filename, O_CREAT | O_WRONLY, 0600);
-				heredoc(cmd->fds_in[i], cmd->redir_in[i]);
+				heredoc(cmd->fds_in[i], cmd->redir_in[i], *shell);
 				close(cmd->fds_in[i]);
 				cmd->fds_in[i] = open(filename, O_RDONLY, 0644);
 				unlink(filename);
