@@ -89,7 +89,7 @@ int	run_single_cmd(t_chunk *cmds, t_minishell *shell)
 	{
 		if (!set_redirects(cmds, shell))
 			return (1);
-		wrap_export(cmds->cmd, shell, true);
+		wrap_export(cmds->cmd, shell);
 	}
 	else if (ft_strncmp(cmds->cmd[0], "env", 4) == 0)
 	{

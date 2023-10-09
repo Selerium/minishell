@@ -108,7 +108,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		run_env(shell, false);
 	else if (ft_strncmp(cmd[0], "export", 7) == 0)
 	{
-		wrap_export(cmd, shell, false);
+		wrap_export(cmd, shell);
 		free_envs(shell->envs);
 	}
 	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
