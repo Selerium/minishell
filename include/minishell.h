@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 20:52:51 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 14:35:34 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ void	run_env(t_minishell *shell, bool parent);
 void	run_cd(char **input, bool parent);
 void	wrap_export(char **cmd, t_minishell *shell, bool parent);
 void	run_export(char *cmd, t_minishell *shell, bool parent, bool is_env);
-void	single_exit(t_chunk *cmds, t_env *envs, char *cmd);
+int		single_exit(t_chunk *cmds, t_env *envs, char *cmd);
+void	wrap_exit(char **cmd, t_minishell *shell, char *path);
 void	run_exit(char *num);
 void	run_echo(char **cmd);
 void	wrap_unset(char **cmd, t_minishell *shell, bool parent);
