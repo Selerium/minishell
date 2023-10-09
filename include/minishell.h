@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:34:06 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 19:32:34 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	run_unset(char *cmd, t_minishell *shell, bool parent);
 // expansion
 char	*get_env_name(char *input);
 char	*replace_env(char *input, size_t *idx, char *var_name, char *env);
-char	*expand_env(char *input, t_minishell shell);
+char	*expand_env(char *input, t_minishell shell, int qflag);
 void	expand_tokens(char **args, t_minishell shell);
 
 // quotes

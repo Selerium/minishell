@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 20:17:26 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 19:32:20 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*replace_env(char *input, size_t *idx, char *var_name, char *env)
 	if (!env)
 		tmp2 = ft_strdup("");
 	else
-		tmp2 = ft_strdup(env);
+		tmp2 = env;
 	tmp3 = ft_substr(input, *idx + ft_strlen(var_name) + 1, ft_strlen(input)
 			- *idx - ft_strlen(var_name) - 1);
 	(*idx) += ft_strlen(tmp2) - 1;
@@ -73,15 +73,16 @@ char	*check_val_conds(char *val, char *name, t_minishell shell)
 	return (val);
 }
 
-char	*expand_env(char *input, t_minishell shell)
+char	*expand_env(char *input, t_minishell shell, int qflag)
 {
 	char	*name;
 	char	*val;
-	int		qflag;
 	size_t	i;
+	bool	flag;
 
 	i = 0;
-	qflag = 0;
+	flag = true;
+	val = NULL;
 	while (input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
@@ -92,9 +93,11 @@ char	*expand_env(char *input, t_minishell shell)
 			val = check_val_conds(val, name, shell);
 			input = replace_env(input, &i, name, val);
 			wrap_free(name);
+			flag = false;
 		}
-		if (input[i] && val)
+		if (input[i] && (flag || val))
 			i++;
+		flag = true;
 	}
 	return (input);
 }
@@ -109,10 +112,10 @@ void	expand_tokens(char **args, t_minishell shell)
 		if (shell.cmds->redir_in_type && shell.cmds->redir_in_type[i])
 		{
 			if (shell.cmds->redir_in_type[i] != HEREDOC)
-				args[i] = expand_env(args[i], shell);
+				args[i] = expand_env(args[i], shell, 0);
 		}
 		else
-			args[i] = expand_env(args[i], shell);
+			args[i] = expand_env(args[i], shell, 0);
 		args[i] = trim_quotes(args[i]);
 		i++;
 	}
