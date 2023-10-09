@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/10/05 11:05:01 by jadithya         ###   ########.fr        #
+#    Updated: 2023/10/09 16:21:57 by jebucoy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,10 +48,9 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
 		$(SRCDIR)/$(PARSING)/get_redir.c\
+		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(EXPANSION)/expansion_utils.c \
 		$(SRCDIR)/$(QUOTES)/quotes.c
-
-# $(SRCDIR)/$(PARSING)/deboog.c\
 
 OBJS := $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 

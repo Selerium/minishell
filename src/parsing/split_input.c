@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/08 19:29:46 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:02:25 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ void	fill_struct(t_minishell *shell)
 	{
 		new = init_chunk();
 		fill_struct_mini(split[i], new);
+		set_next_node(shell, new, &head);
 		expand_tokens(new->cmd, *shell);
 		expand_tokens(new->redir_in, *shell);
 		expand_tokens(new->redir_out, *shell);
-		set_next_node(shell, new, &head);
 		free (split[i]);
 		i++;
 	}

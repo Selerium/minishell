@@ -82,10 +82,7 @@ void	run_exit(char *num)
 {
 	int	i;
 	int	n;
-	int	i;
-	int	space;
 
-	i = 0;
 	if (!num)
 	{
 		printf("Exiting minishell. Thanks :\")");
