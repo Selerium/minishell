@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:17:44 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@
 
 bool	check_export_cmd(char *cmd)
 {
-	int	i;
+	int		i;
+	bool	flag;
 
 	i = 1;
+	flag = false;
 	if (cmd[0] == '=' || ft_isdigit(cmd[0]))
 		return (false);
 	while (cmd[i])
 	{
-		if (!ft_isalnum(cmd[i]) && cmd[i] != '_')
+		if (cmd[i] == '=' && !flag)
+			flag = true;
+		else if (cmd[i] == '=')
+			return (false);
+		else if (!ft_isalnum(cmd[i]) && cmd[i] != '_')
 			return (false);
 		i++;
 	}
