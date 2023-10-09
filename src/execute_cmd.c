@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 20:12:47 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:35:05 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
 		run_echo(cmd);
 	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
-		run_exit(cmd[1]);
+		wrap_exit(cmd, shell, cmdpath);
 	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
 		run_pwd(cmd);
 	else if (ft_strncmp(cmd[0], "cd", 3) == 0)

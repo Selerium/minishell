@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 21:11:54 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 13:47:27 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-// valgrind --leak-check=full --show-leak-kinds=all --suppressions=valsupp.sup ./minishell
 void	our_readline(t_minishell *shell)
 {
 	printf("\e[34m");
@@ -37,13 +36,13 @@ void	print_welcome(int ac, char **av)
 	startfile = open("src/.startfile", O_RDONLY, 0644);
 	if (startfile <= 0)
 	{
-		// printf("Missing startup text file. Create your own if you'd like.\n\n");
+		printf("Missing startup text file. Create your own if you'd like.\n\n");
 		return ;
 	}
 	text = get_next_line(startfile);
 	while (text)
 	{
-		// printf("%s", text);
+		printf("%s", text);
 		free(text);
 		text = get_next_line(startfile);
 	}
@@ -62,7 +61,7 @@ int	run_single_cmd_mini(t_chunk *cmds, t_minishell *shell, char *cmd)
 	{
 		if (!set_redirects(cmds, shell))
 			return (1);
-		single_exit(cmds, shell->envs, cmd);
+		return (single_exit(cmds, shell->envs, cmd));
 	}
 	else if (ft_strncmp(cmds->cmd[0], "cd", 3) == 0)
 	{

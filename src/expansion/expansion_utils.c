@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
 /*   Updated: 2023/10/08 22:55:33 by jebucoy          ###   ########.fr       */
@@ -83,7 +83,6 @@ char	*expand_env(char *input, t_minishell shell)
 			input = replace_env(input, &i, name, val);
 			wrap_free(name);
 		}
-		// printf("input[%zd]: %c | %s : %ld\n", i, input[i], input, ft_strlen(input));
 		if (input[i])
 			i++;
 	}
