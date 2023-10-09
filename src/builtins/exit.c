@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 23:40:44 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 15:22:22 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,11 @@ void	single_exit(t_chunk *cmds, t_env *envs, char *cmd)
 void	run_exit(char *num)
 {
 	int	n;
-	int	i;
-	int	space;
 
-	i = 0;
 	if (!num)
 	{
 		printf("Exiting minishell. Thanks :\")");
 		exit(0);
-	}
-	while (num[i])
-	{
-		if (ft_isdigit(num[i]))
-			exit(255);
-		if (ft_isspace(num[i]))
-			space++;
-		if (space > 1)
-			exit (1);
-		i++;
 	}
 	n = ft_atoi(num);
 	free(num);
