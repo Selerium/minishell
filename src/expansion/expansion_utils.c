@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 20:11:03 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 20:15:17 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*get_env_name(char *input)
 	while (ft_isalnum(input[i]) || input[i] == '_')
 		i++;
 	env_name = ft_substr(input, start, i - start);
-	printf("name: [%s]\n", env_name);
 	return (env_name);
 }
 
@@ -80,11 +79,9 @@ char	*expand_env(char *input, t_minishell shell)
 	char	*val;
 	int		qflag;
 	size_t	i;
-	t_env	*env_var;
 
 	i = 0;
 	qflag = 0;
-	env_var = NULL;
 	while (input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
