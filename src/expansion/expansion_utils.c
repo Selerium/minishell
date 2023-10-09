@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 20:11:03 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 19:12:00 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,9 @@ char	*expand_env(char *input, t_minishell shell)
 	char	*val;
 	int		qflag;
 	size_t	i;
-	t_env	*env_var;
 
 	i = 0;
 	qflag = 0;
-	env_var = NULL;
 	while (input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
