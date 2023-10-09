@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
 /*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
@@ -25,15 +25,46 @@
 *	>	(hell no we're not sorting)
 */
 
-void	wrap_export(char **cmd, t_minishell *shell, bool parent)
+bool	check_export_cmd(char *cmd)
 {
 	int	i;
 
 	i = 1;
+	if (cmd[0] == '=' || ft_isdigit(cmd[0]))
+		return (false);
+	while (cmd[i])
+	{
+		if (!ft_isalnum(cmd[i]) && cmd[i] != '_')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+void	wrap_export(char **cmd, t_minishell *shell)
+{
+	int	i;
+
 	if (!cmd[1])
 		return (print_envs(shell->envs, false));
+	i = 1;
 	while (cmd[i])
-		run_export(cmd[i++], shell, parent, false);
+	{
+		if (check_export_cmd(cmd[i]))
+			run_export(cmd[i], shell, false);
+		else
+			printf("export: incorrect variable declaration\n");
+		i++;
+	}
+}
+
+void	env_exists_mini(t_env *iter_env, t_env *hold)
+{
+	wrap_free(iter_env->name);
+	wrap_free(iter_env->value);
+	iter_env->name = ft_strdup(hold->name);
+	iter_env->value = ft_strdup(hold->value);
+	free_envs(hold);
 }
 
 bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
@@ -61,32 +92,24 @@ bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
 		free_envs(hold);
 		return (true);
 	}
-	wrap_free(iter_env->name);
-	wrap_free(iter_env->value);
-	iter_env->name = ft_strdup(hold->name);
-	iter_env->value = ft_strdup(hold->value);
-	free_envs(hold);
+	env_exists_mini(iter_env, hold);
 	return (true);
 }
 
-void	run_export(char *cmd, t_minishell *shell, bool parent, bool is_env)
+void	run_export(char *cmd, t_minishell *shell, bool is_env)
 {
 	t_env	*iter_env;
 	t_env	*new_env;
 	int		i;
 	int		flag;
 
-	(void) parent;
 	if (env_exists(cmd, shell, is_env))
 		return ;
 	i = 0;
 	flag = 1;
 	while (cmd[i] && cmd[i] != '=')
-	{
-		if (cmd[i] == '-')
+		if (cmd[i++] == '-')
 			flag = 0;
-		i++;
-	}
 	if (!flag)
 	{
 		g_exitcode = 1;

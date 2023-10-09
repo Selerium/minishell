@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 18:11:02 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 17:57:26 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,12 @@ void	expand_tokens(char **args, t_minishell shell)
 	while (args && args[i])
 	{
 		if (shell.cmds->redir_in_type && shell.cmds->redir_in_type[i])
+		{
 			if (shell.cmds->redir_in_type[i] != HEREDOC)
 				args[i] = expand_env(args[i], shell);
+		}
+		else
+			args[i] = expand_env(args[i], shell);
 		args[i] = trim_quotes(args[i]);
 		i++;
 	}
