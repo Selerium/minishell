@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/minishell.h"
+#include "../include/minishell.h"
 
 char	*ft_wrapjoin(char *str1, char *str2)
 {

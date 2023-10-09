@@ -6,11 +6,11 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 22:25:13 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/09/04 18:13:48 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	handle_redirection(char *input, t_flag *flag, size_t *i, char n)
 {
