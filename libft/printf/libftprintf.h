@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 14:15:04 by jadithya          #+#    #+#             */
-/*   Updated: 2022/08/31 19:25:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:37:35 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-# include<unistd.h>
-# include<stdarg.h>
-# include<stdio.h>
-# include<stdbool.h>
-# include"../libft.h"
+# include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include "../libft.h"
 
 // int		ft_printf(const char *s, ...);
 int		ft_flag(char c);

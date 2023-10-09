@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 20:49:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:38:07 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../include/minishell.h"
-#include <complex.h>
-#include <fcntl.h>
-#include <readline/readline.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include "../include/minishell.h"
 
 int	set_redir_counts(char **list)
 {

@@ -6,11 +6,11 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:44:49 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/08 21:19:06 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/09 18:39:57 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/minishell.h"
+#include "../../include/minishell.h"
 
 /**
 *	a replacement to the system pwd.
@@ -20,9 +20,8 @@
 int	run_pwd(char **cmd)
 {
 	char	*str;
-	(void)cmd;
-	// if (cmd[1])
-	// 	return (printf("pwd: wrong number of arguments\n"));
+
+	(void) cmd;
 	str = getcwd(NULL, 0);
 	if (!str)
 		return (printf("Folder deleted\n"));
