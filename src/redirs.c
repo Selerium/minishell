@@ -6,11 +6,12 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 21:23:50 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 22:07:09 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <readline/readline.h>
 
 int	set_redir_counts(char **list)
 {
@@ -25,10 +26,18 @@ int	set_redir_counts(char **list)
 	return (i);
 }
 
+void	heredoc_sig(int x)
+{
+	(void) x;
+	write(1, "\0", 1);
+}
+
 void	heredoc(int fd, char *delimiter, t_minishell shell)
 {
 	char	*text;
+	void	*s1;
 
+	s1 = signal(SIGINT, heredoc_sig);
 	while (true)
 	{
 		printf("[%s] heredoc> ", delimiter);
@@ -47,6 +56,7 @@ void	heredoc(int fd, char *delimiter, t_minishell shell)
 		write(fd, "\n", 1);
 		wrap_free(text);
 	}
+	signal(SIGINT, s1);
 }
 
 bool	open_outfiles(t_chunk *cmd, t_minishell *shell)

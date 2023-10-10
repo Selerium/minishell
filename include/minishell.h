@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 21:17:44 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:34:22 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	*trim_quotes(char *input);
 char	*eliminate_quotes(char *input, size_t *idx);
 
 // test con:
-//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also
-// > hey | echo > hey > also hiiii thereeee < oat
+//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | 
+// echo > hey > also hiiii thereeee < oat
 
 #endif
