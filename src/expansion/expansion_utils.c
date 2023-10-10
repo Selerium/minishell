@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:17:59 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 19:42:29 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:39:13 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*expand_env(char *input, t_minishell shell, int qflag)
 	i = 0;
 	flag = true;
 	val = NULL;
-	while (input[i])
+	while (ft_strlen(input) && input[i])
 	{
 		qflag = get_quote_type(qflag, input[i]);
 		if (input[i] == '$' && input[i + 1] && !ft_isspace(input[i + 1])
@@ -95,7 +95,7 @@ char	*expand_env(char *input, t_minishell shell, int qflag)
 			wrap_free(name);
 			flag = false;
 		}
-		if (input[i] && (flag || val))
+		if ((ft_strlen(input) && input[i]) && (flag || (val)))
 			i++;
 		flag = true;
 	}
