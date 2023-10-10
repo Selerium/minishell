@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:59:28 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:34:22 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	close_fds(t_minishell *shell, int *fds, int n);
 
 //redirections:
 int		set_redir_counts(char **list);
-void	heredoc(int fd, char *delimiter);
+void	heredoc(int fd, char *delimiter, t_minishell shell);
 bool	open_outfiles(t_chunk *cmd, t_minishell *shell);
 bool	open_infiles(t_chunk *cmd, t_minishell *shell);
 bool	set_redirects(t_chunk *cmd, t_minishell *shell);
@@ -150,7 +150,7 @@ char	*trim_quotes(char *input);
 char	*eliminate_quotes(char *input, size_t *idx);
 
 // test con:
-//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also
-// > hey | echo > hey > also hiiii thereeee < oat
+//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | 
+// echo > hey > also hiiii thereeee < oat
 
 #endif

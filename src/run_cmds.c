@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:58:48 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:34:07 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	i = -1;
 	while (iter_cmd && ++i >= 0)
 	{
+		if (!set_redirects(iter_cmd, shell))
+			continue ;
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
@@ -110,10 +112,10 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 			if (i != shell->num_chunks - 1)
 				dup2(shell->fds[i + 1][WRITE], STDOUT_FILENO);
 			set_child_handlers(shell);
-			if (!set_redirects(iter_cmd, shell))
-				special_free(shell);
 			execute_cmd(iter_cmd, shell, i);
 		}
+		close_fds(shell, iter_cmd->fds_in, iter_cmd->redir_in_count);
+		close_fds(shell, iter_cmd->fds_out, iter_cmd->redir_out_count);
 		shell->cmds = shell->cmds->next;
 		iter_cmd = free_iter(iter_cmd);
 	}

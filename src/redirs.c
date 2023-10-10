@@ -6,11 +6,12 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 23:17:42 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:07:02 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <readline/readline.h>
 
 int	set_redir_counts(char **list)
 {
@@ -25,10 +26,18 @@ int	set_redir_counts(char **list)
 	return (i);
 }
 
-void	heredoc(int fd, char *delimiter)
+void	heredoc_sig(int x)
+{
+	(void) x;
+	write(1, "\0", 1);
+}
+
+void	heredoc(int fd, char *delimiter, t_minishell shell)
 {
 	char	*text;
+	void	*s1;
 
+	s1 = signal(SIGINT, heredoc_sig);
 	while (true)
 	{
 		printf("[%s] heredoc> ", delimiter);
@@ -42,9 +51,12 @@ void	heredoc(int fd, char *delimiter)
 			printf("\n");
 		if (ft_strncmp(text, delimiter, ft_strlen(text) + 1) == 0)
 			break ;
+		text = expand_env(text, shell, 0);
 		write(fd, text, ft_strlen(text));
 		write(fd, "\n", 1);
+		wrap_free(text);
 	}
+	signal(SIGINT, s1);
 }
 
 bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
@@ -118,7 +130,7 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 			{
 				filename = ft_strjoin(cmd->redir_in[i], ".heredoc.tmp");
 				cmd->fds_in[i] = open(filename, O_CREAT | O_WRONLY, 0600);
-				heredoc(cmd->fds_in[i], cmd->redir_in[i]);
+				heredoc(cmd->fds_in[i], cmd->redir_in[i], *shell);
 				close(cmd->fds_in[i]);
 				cmd->fds_in[i] = open(filename, O_RDONLY, 0644);
 				unlink(filename);
