@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:19:42 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:30 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@ void	run_echo(char **cmd)
 	int		i;
 	bool	n;
 
-	n = (cmd[1] && ft_strncmp(cmd[1], "-n", 2) == 0 && ft_strlen(cmd[1]) == 2);
-	i = 0;
+	i = 2;
+	n = (cmd[1] && ft_strncmp(cmd[1], "-n", 2) == 0);
+	if (!n)
+		i = 0;
+	else
+		while (ft_strncmp(cmd[i], "-n", 2) == 0)
+			i++;
+	if (n)
+		i--;
 	while (cmd[++i])
 	{
 		if (n && i == 1)
