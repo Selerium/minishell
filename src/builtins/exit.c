@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:35:57 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 18:05:23 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	run_exit(char *num)
 		exit(0);
 	}
 	i = 0;
-	while (num[i])
+	while (num[0] != '+' && num[i])
 	{
 		if (!ft_isdigit(num[i++]))
 		{
