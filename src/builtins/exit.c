@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 18:25:15 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:46:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	run_exit(char *num)
 	while (num[++i])
 	{
 		if ((!ft_isdigit(num[i]) && i != 0)
-			|| (!ft_isdigit(num[0]) && num[0] != '+'))
+			|| (!ft_isdigit(num[0]) && (num[0] != '+' || !num[1])))
 		{
 			printf("exit: numeric argument required\n");
 			wrap_free(num);
