@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/10/09 16:21:57 by jebucoy          ###   ########.fr        #
+#    Updated: 2023/10/10 19:53:28 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,6 @@ norm:
 	@python3 -m norminette $(SRCS) include/minishell.h
 
 valgrind: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --suppressions=valsupp.sup ./minishell
 
 .PHONY: all bonus clean fclean re norm valgrind
