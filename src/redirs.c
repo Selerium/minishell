@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:03:00 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:15:26 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
+				close_fds(shell, cmd->fds_in, cmd->redir_in_count);
 				printf("Outfile access error\n");
 				g_exitcode = 1;
 				return (false);
@@ -94,6 +95,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_out, i);
+				close_fds(shell, cmd->fds_in, cmd->redir_in_count);
 				printf("Outfile access error\n");
 				g_exitcode = 1;
 				return (false);
@@ -120,7 +122,6 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
-				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
 				g_exitcode = 1;
 				printf("Infile access error\n");
 				return (false);
@@ -141,7 +142,6 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 			{
 				close_pipes(shell);
 				close_fds(shell, cmd->fds_in, i);
-				close_fds(shell, cmd->fds_out, cmd->redir_out_count);
 				g_exitcode = 1;
 				printf("Infile couldn't be opened\n");
 				return (false);
@@ -164,5 +164,5 @@ bool	set_redirects(t_chunk *cmd, t_minishell *shell)
 		cmd->fds_out = ft_calloc (sizeof(int), cmd->redir_out_count);
 	if (cmd->redir_out_count != 0 && !cmd->fds_out)
 		printf("we have a situation. abort. :/ \n"); //fix
-	return (open_outfiles(cmd, shell) && open_infiles(cmd, shell));
+	return (open_infiles(cmd, shell) && open_outfiles(cmd, shell));
 }
