@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:19:42 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 18:13:02 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 18:14:06 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ void	run_echo(char **cmd)
 {
 	int		i;
 	bool	n;
-	int		flag;
 
-	flag = 0;
+	i = 2;
 	n = (cmd[1] && ft_strncmp(cmd[1], "-n", 2) == 0);
-	i = 0;
-	while (cmd[++i] && ++flag)
+	if (!n)
+		i = 0;
+	else
+		while (ft_strncmp(cmd[i], "-n", 2) == 0)
+			i++;
+	if (n)
+		i--;
+	while (cmd[++i])
 	{
 		if (n && i == 1)
 			continue ;
