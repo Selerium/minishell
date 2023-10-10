@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:14:23 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:22:56 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	while (iter_cmd && ++i >= 0)
 	{
 		if (!set_redirects(iter_cmd, shell))
+		{
+			iter_cmd = iter_cmd->next;
 			continue ;
+		}
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
