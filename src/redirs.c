@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:07:02 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 19:18:20 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 {
 	int	i;
 
+	(void) shell;
 	i = 0;
 	if (cmd->redir_out)
 	{

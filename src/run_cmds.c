@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 13:34:07 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:22:56 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_chunk	*free_iter(t_chunk *cmd)
 	t_chunk	*hold;
 
 	i = 0;
+	(void) i;
 	while (cmd->cmd && cmd->cmd[i])
 		free(cmd->cmd[i++]);
 	wrap_free(cmd->cmd);
@@ -80,9 +81,13 @@ t_chunk	*free_iter(t_chunk *cmd)
 
 void	close_run(t_minishell *shell)
 {
-	int	i;
+	int		i;
+	t_chunk	*cmd;
 
+	cmd = shell->cmds;
 	i = -1;
+	while (cmd)
+		cmd = free_iter(cmd);
 	close_pipes(shell);
 	while (++i < shell->num_chunks)
 		waitpid(shell->processes[i], &g_exitcode, 0);
@@ -103,7 +108,10 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 	while (iter_cmd && ++i >= 0)
 	{
 		if (!set_redirects(iter_cmd, shell))
+		{
+			iter_cmd = iter_cmd->next;
 			continue ;
+		}
 		shell->processes[i] = fork();
 		if (shell->processes[i] == 0)
 		{
@@ -114,10 +122,8 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 			set_child_handlers(shell);
 			execute_cmd(iter_cmd, shell, i);
 		}
-		close_fds(shell, iter_cmd->fds_in, iter_cmd->redir_in_count);
-		close_fds(shell, iter_cmd->fds_out, iter_cmd->redir_out_count);
-		shell->cmds = shell->cmds->next;
-		iter_cmd = free_iter(iter_cmd);
+		close_unneededs(iter_cmd, shell, i, true);
+		iter_cmd = iter_cmd->next;
 	}
 	close_run(shell);
 }

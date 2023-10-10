@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:46:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 20:13:58 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:53:50 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	free_cmd(t_chunk *cmd)
 	{
 		i = 0;
 		while (cmd->cmd && cmd->cmd[i])
-			free(cmd->cmd[i++]);
+			wrap_free(cmd->cmd[i++]);
 		wrap_free(cmd->cmd);
 		free_redirs(cmd);
 		wrap_free(cmd->fds_in);
 		wrap_free(cmd->fds_out);
 		hold = cmd->next;
-		free(cmd);
+		wrap_free(cmd);
 		cmd = hold;
 	}
 }
@@ -44,10 +44,12 @@ void	free_redirs(t_chunk *cmd)
 
 	i = 0;
 	if (cmd->redir_in)
+	{
 		while (cmd->redir_in[i])
 			free(cmd->redir_in[i++]);
-	wrap_free(cmd->redir_in);
-	wrap_free(cmd->redir_in_type);
+		wrap_free(cmd->redir_in);
+		wrap_free(cmd->redir_in_type);
+	}
 	i = 0;
 	if (cmd->redir_out)
 		while (cmd->redir_out[i])

@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 13:34:22 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:16:09 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell);
 
 //cleanup:
 void	close_pipes(t_minishell *shell);
-void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i);
+void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i, bool parent);
 void	print_exit(char **envs, t_minishell *shell, char *error, int errnum);
 void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell);
 void	close_fds(t_minishell *shell, int *fds, int n);
