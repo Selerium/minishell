@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:51:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:07:11 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 22:54:17 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sigint_handler(int x)
 	rl_on_new_line();
 	printf("\e[34m");
 	rl_redisplay();
-	g_exitcode = 130;
+	g_exitcode = 127;
 }
 
 void	set_handlers(t_minishell *shell)
