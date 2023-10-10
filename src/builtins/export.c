@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:43:17 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:48:11 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
 	flag = false;
 	while (iter_env && !flag)
 	{
-		if (ft_strncmp(iter_env->name, cmd, ft_strlen(iter_env->name)) == 0)
+		if (ft_strncmp(iter_env->name, cmd, ft_strlen(cmd)) == 0)
 		{
 			flag = true;
 			break ;
