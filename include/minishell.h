@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:16:09 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:50:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		run_single_cmd(t_chunk *cmds, t_minishell *shell);
 
 //environment variables:
 t_env	*get_env(char *name, t_minishell shell);
-t_env	*add_env(char *str);
-t_env	*create_envs(char **env);
+t_env	*add_env(char *str, t_minishell *shell);
+t_env	*create_envs(char **env, t_minishell *shell);
 void	print_envs(t_env *envs, bool is_env);
 void	free_envs(t_env *envs);
 
@@ -64,6 +64,7 @@ void	special_free(t_minishell *shell);
 //run shell with set of commands:
 void	set_num_chunks(t_chunk *cmd, t_env *env, t_minishell *shell);
 int		**create_fds(t_minishell *shell);
+void	close_run(t_minishell *shell);
 t_chunk	*free_iter(t_chunk *cmd);
 void	run_cmd(t_chunk *cmds, t_minishell *shell);
 
@@ -151,6 +152,6 @@ char	*eliminate_quotes(char *input, size_t *idx);
 
 // test con:
 //  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | 
-// echo > hey > also hiiii thereeee < oat
+// echo > hey > also hiiii thereeee < oamt
 
 #endif
