@@ -1,0 +1,3 @@
+hi bestie $> env | grep SHLVL | ''  | ls
+Command not found: Permission denied
+free(): double free detected in tcache 2

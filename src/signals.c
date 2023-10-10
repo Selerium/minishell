@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:51:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:58:57 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/09 23:17:31 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
