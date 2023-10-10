@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 21:09:19 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:43:29 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	main(int argc, char **argv, char **env)
 	t_minishell	shell;
 
 	print_welcome(argc, argv);
-	shell.envs = create_envs(env);
+	shell.envs = create_envs(env, &shell);
 	set_handlers(&shell);
 	shell.flag = 1;
 	while (shell.flag)
@@ -132,7 +132,7 @@ int	main(int argc, char **argv, char **env)
 		shell.fds = create_fds(&shell);
 		shell.processes = ft_calloc (sizeof(int), shell.num_chunks);
 		run_cmd(shell.cmds, &shell);
-		free_shell(&shell);
+		close_run(&shell);
 	}
 	free_envs(shell.envs);
 }

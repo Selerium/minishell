@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:53:08 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:22:56 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:27:27 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	close_run(t_minishell *shell)
 		waitpid(shell->processes[i], &g_exitcode, 0);
 	if (WIFEXITED(g_exitcode))
 		g_exitcode = WEXITSTATUS(g_exitcode);
+	free_shell(shell);
 }
 
 //check if pipe creation is failing
@@ -125,5 +126,4 @@ void	run_cmd(t_chunk *cmds, t_minishell *shell)
 		close_unneededs(iter_cmd, shell, i, true);
 		iter_cmd = iter_cmd->next;
 	}
-	close_run(shell);
 }

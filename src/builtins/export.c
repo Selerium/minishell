@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 19:53:30 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:43:17 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool	env_exists(char *cmd, t_minishell *shell, bool is_env)
 	}
 	if (!flag || !cmd)
 		return (false);
-	hold = add_env(cmd);
+	hold = add_env(cmd, shell);
 	if (!hold->value || is_env)
 	{
 		free_envs(hold);
@@ -124,7 +124,7 @@ void	run_export(char *cmd, t_minishell *shell, bool is_env)
 	iter_env = shell->envs;
 	while (iter_env && iter_env->next)
 		iter_env = iter_env->next;
-	new_env = add_env(cmd);
+	new_env = add_env(cmd, shell);
 	if (iter_env)
 		iter_env->next = new_env;
 	else

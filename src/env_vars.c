@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 14:52:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/09 18:37:49 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/10 18:09:37 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*get_env(char *name, t_minishell shell)
 	return (NULL);
 }
 
-t_env	*add_env(char *str)
+t_env	*add_env(char *str, t_minishell *shell)
 {
 	t_env	*new_env;
 	int		i;
@@ -44,6 +44,8 @@ t_env	*add_env(char *str)
 	new_env->name = ft_substr(str, 0, i);
 	if (str[i] == '=' && !str[i + 1])
 		new_env->value = ft_strdup("");
+	else if (shell->cmds && str[i] == '=' && ft_strchr(&str[i + 1], '$'))
+		new_env->value = expand_env(&str[i], *shell, 0);
 	else if (str[i] != '=')
 		new_env->value = NULL;
 	else
@@ -52,20 +54,21 @@ t_env	*add_env(char *str)
 	return (new_env);
 }
 
-t_env	*create_envs(char **env)
+t_env	*create_envs(char **env, t_minishell *shell)
 {
 	t_env	*start;
 	t_env	*next;
 	int		i;
 
 	i = 0;
+	shell->cmds = NULL;
 	if (! env || !env[0])
 		return (NULL);
-	start = add_env(env[i]);
+	start = add_env(env[i], shell);
 	next = start;
 	while (env[++i] && next)
 	{
-		next->next = add_env(env[i]);
+		next->next = add_env(env[i], shell);
 		next = next->next;
 	}
 	if (!next)
