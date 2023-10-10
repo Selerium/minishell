@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 18:42:47 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:58:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	wrap_export(char **cmd, t_minishell *shell);
 void	run_export(char *cmd, t_minishell *shell, bool is_env);
 int		single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	wrap_exit(char **cmd, t_minishell *shell, char *path);
-void	run_exit(char *num);
+void	run_exit(char *num, int i);
 void	run_echo(char **cmd);
 void	wrap_unset(char **cmd, t_minishell *shell, bool parent);
 void	run_unset(char *cmd, t_minishell *shell, bool parent);

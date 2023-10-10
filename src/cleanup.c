@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 17:15:05 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:35:25 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	close_unneededs(t_chunk *cmd, t_minishell *shell, int i, bool parent)
 {
 	(void) cmd;
 	(void) i;
-	close_pipes(shell);
 	if (parent)
 	{
 		close_fds(shell, cmd->fds_in, cmd->redir_in_count);
