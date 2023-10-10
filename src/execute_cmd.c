@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 19:35:30 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:41:08 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	execute_cmd(t_chunk *cmd, t_minishell *shell, int i)
 	{
 		close_pipes(shell);
 		close_fds(shell, cmd->fds_in, cmd->redir_in_count);
+		close_fds(shell, cmd->fds_out, cmd->redir_out_count);
 		print_exit(envs, shell, "Invalid input", 1);
 	}
 	cmdpath = ft_findcmd(cmd->cmd[0], shell->envs);
