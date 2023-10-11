@@ -22,6 +22,8 @@
         "type_traits": "c",
         "vector": "c",
         "__locale": "c",
-        "cctype": "c"
+        "cctype": "c",
+        "stdbool.h": "c",
+        "unistd.h": "c"
     }
 }

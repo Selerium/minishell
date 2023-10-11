@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/11 14:50:16 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:46:52 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <readline/readline.h>
-#include <stdbool.h>
-#include <stdio.h>
 
 /**
 *	replaces the export function for the env vars.
