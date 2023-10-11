@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:57:20 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/11 15:47:38 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/11 21:07:10 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	run_single_cmd_mini(t_chunk *cmds, t_minishell *shell, char *cmd)
 	{
 		if (!set_redirects(cmds, shell))
 			return (1);
-		run_unset(cmds->cmd[1], shell, true);
+		wrap_unset(cmds->cmd, shell, true);
 	}
 	else if (ft_strncmp(cmds->cmd[0], "exit", 5) == 0)
 	{

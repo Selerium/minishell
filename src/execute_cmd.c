@@ -6,7 +6,7 @@
 /*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/11 15:47:30 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/11 21:56:37 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 		wrap_free(cmdpath);
 		exit(127);
 	}
-	printf("%s\n", cmd[0]);
 	wrap_free(cmdpath);
 	exit(127);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:14:38 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 19:14:00 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:21:16 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,22 @@ int	single_exit(t_chunk *cmds, t_env *envs, char *cmd)
 	juju = false;
 	if (cmds->cmd[1] && cmds->cmd[2])
 		juju = true;
-	free_cmd(cmds);
 	if (juju)
 	{
 		printf("exit: too many arguments\n");
 		num = ft_strdup("1");
 		while (cmd[i])
+		{
 			if (!ft_isdigit(cmd[i++]))
+			{
+				free_cmd(cmds);
 				free_envs_exit(envs, cmd, num, NULL);
-		wrap_free(cmd);
+			}
+		}
 		wrap_free(num);
 		return (1);
 	}
+	free_cmd(cmds);
 	free_envs(envs);
 	run_exit(cmd, -1);
 	return (1);

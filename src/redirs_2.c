@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:02:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/11 15:03:43 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:32:58 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ bool	open_infiles(t_chunk *cmd, t_minishell *shell)
 			if (access(cmd->redir_in[i], F_OK) == 0
 				&& cmd->redir_in_type[i] != HEREDOC
 				&& access(cmd->redir_in[i], R_OK) == -1)
-				exit_infiles(shell, cmd, i, "Infile access error\n");
+				return exit_infiles(shell, cmd, i, "Infile access error\n");
 			if (cmd->redir_in_type[i] == REDIR_IN)
 				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);
 			else if (cmd->redir_in_type[i] == HEREDOC)
 				open_heredoc(cmd, shell, i);
 			if (cmd->fds_in[i] < 0)
-				exit_infiles(shell, cmd, i, "Infile couldn't be opened\n");
+				return exit_infiles(shell, cmd, i, "Infile couldn't be opened\n");
 			i++;
 		}
 	}

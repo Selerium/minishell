@@ -36,6 +36,12 @@ char	*ft_findpath(t_env *paths, char *cmd)
 		while (paths->value[i + j] && paths->value[i + j] != ':')
 			j++;
 		path = ft_substr(paths->value, i, j);
+		if (ft_strlen(path) == 0)
+		{
+			free(path);
+			i++;
+			continue ;
+		}
 		if (path[ft_strlen(path) - 1] != '/')
 			path = ft_wrapjoin(path, "/");
 		path = ft_wrapjoin(path, cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:12:37 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 19:35:25 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:55:13 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	check_to_free_envs(t_chunk *cmd, char **envs, t_minishell *shell)
 {
 	int		i;
 
-	if ((ft_strncmp(cmd->cmd[0], "env", 3) == 0
-			|| ft_strncmp(cmd->cmd[0], "export", 6) == 0
+	if ((ft_strncmp(cmd->cmd[0], "env", 4) == 0
+			|| ft_strncmp(cmd->cmd[0], "export", 7) == 0
 			|| ft_strncmp(cmd->cmd[0], "unset", 6) == 0
 			|| ft_strncmp(cmd->cmd[0], "echo", 5) == 0
 			|| ft_strncmp(cmd->cmd[0], "exit", 5) == 0

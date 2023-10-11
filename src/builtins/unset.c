@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:30:40 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 19:23:51 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:08:46 by jebucoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	wrap_unset(char **cmd, t_minishell *shell, bool parent)
 		run_unset(cmd[i], shell, parent);
 		i++;
 	}
-	if (shell->envs)
+	if (!parent && shell->envs)
 		free_envs(shell->envs);
 }
 
