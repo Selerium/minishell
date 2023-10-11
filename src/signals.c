@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:51:58 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 22:54:17 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:50:24 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,23 @@ void	special_free(t_minishell *shell)
 	free_fds(shell->fds, shell->num_chunks);
 	wrap_free(shell->processes);
 	exit(g_exitcode);
+}
+
+bool	envcondition(char *a, char *b)
+{
+	char	*cmd;
+	int		n;
+
+	n = 0;
+	while (b[n] && b[n] != '=')
+		n++;
+	cmd = ft_substr(b, 0, n);
+	if (ft_strncmp(a, cmd, ft_strlen(a)) == 0
+		&& ft_strlen(a) == ft_strlen(cmd))
+	{
+		wrap_free(cmd);
+		return (true);
+	}
+	wrap_free(cmd);
+	return (false);
 }

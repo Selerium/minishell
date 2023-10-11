@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/10/10 19:53:28 by jadithya         ###   ########.fr        #
+#    Updated: 2023/10/11 14:49:59 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/$(PARSING)/utils.c\
 		$(SRCDIR)/$(PARSING)/my_split.c\
 		$(SRCDIR)/$(PARSING)/get_redir.c\
-		$(SRCDIR)/$(PARSING)/deboog.c\
 		$(SRCDIR)/$(EXPANSION)/expansion_utils.c \
 		$(SRCDIR)/$(QUOTES)/quotes.c
 

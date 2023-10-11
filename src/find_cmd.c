@@ -75,10 +75,3 @@ char	*ft_findcmd(char *cmd, t_env *env)
 	path = ft_findpath(env, cmd);
 	return (path);
 }
-
-// int	main(int argc, char **argv, char **env)
-// {
-// 	if (argc && argv) {}
-// 	ft_printf("%s\n", ft_findcmd("ls", env));
-// 	return (0);
-// }

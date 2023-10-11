@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:31:10 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 20:23:42 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:50:16 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,6 @@ void	env_exists_mini(t_env *iter_env, t_env *hold)
 	iter_env->name = ft_strdup(hold->name);
 	iter_env->value = ft_strdup(hold->value);
 	free_envs(hold);
-}
-
-bool	envcondition(char *a, char *b)
-{
-	char	*cmd;
-	int		n;
-
-	n = 0;
-	while (b[n] && b[n] != '=')
-		n++;
-	cmd = ft_substr(b, 0, n);
-	if (ft_strncmp(a, cmd, ft_strlen(a)) == 0
-		&& ft_strlen(a) == ft_strlen(cmd))
-	{
-		wrap_free(cmd);
-		return (true);
-	}
-	wrap_free(cmd);
-	return (false);
 }
 
 bool	env_exists(char *cmd, t_minishell *shell, bool is_env)

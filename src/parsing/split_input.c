@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:49:07 by jebucoy           #+#    #+#             */
-/*   Updated: 2023/10/09 19:42:12 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:12:33 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ void	fill_struct_mini(char *split, t_chunk *chunk)
 	}
 }
 
-void	set_next_node(t_minishell *shell, t_chunk *new, t_chunk **head)
+void	set_next_node(t_minishell *shell, t_chunk *nnew, t_chunk **head)
 {
 	if (shell->cmds == NULL)
 	{
-		*head = new;
-		shell->cmds = new;
+		*head = nnew;
+		shell->cmds = nnew;
 	}
 	else
 	{
-		shell->cmds->next = new;
+		shell->cmds->next = nnew;
 		shell->cmds = shell->cmds->next;
 	}
 }

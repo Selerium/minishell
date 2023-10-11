@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jebucoy <jebucoy@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:48:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 23:12:58 by jebucoy          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:03:55 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include <readline/readline.h>
 
 int	set_redir_counts(char **list)
 {
@@ -59,11 +58,20 @@ void	heredoc(int fd, char *delimiter, t_minishell shell)
 	signal(SIGINT, s1);
 }
 
+bool	exit_outfiles(t_minishell *shell, t_chunk *cmd, int i)
+{
+	close_pipes(shell);
+	close_fds(shell, cmd->fds_out, i);
+	close_fds(shell, cmd->fds_in, cmd->redir_in_count);
+	printf("Outfile access error\n");
+	g_exitcode = 1;
+	return (false);
+}
+
 bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 {
 	int	i;
 
-	(void) shell;
 	i = 0;
 	if (cmd->redir_out)
 	{
@@ -71,14 +79,7 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 		{
 			if (access(cmd->redir_out[i], F_OK) == 0
 				&& access(cmd->redir_out[i], W_OK) == -1)
-			{
-				close_pipes(shell);
-				close_fds(shell, cmd->fds_out, i);
-				close_fds(shell, cmd->fds_in, cmd->redir_in_count);
-				printf("Outfile access error\n");
-				g_exitcode = 1;
-				return (false);
-			}
+				return (exit_outfiles(shell, cmd, i));
 			if (cmd->redir_out_type[i] == REDIR_OUT)
 			{
 				unlink(cmd->redir_out[i]);
@@ -86,83 +87,12 @@ bool	open_outfiles(t_chunk *cmd, t_minishell *shell)
 						0644);
 			}
 			else if (cmd->redir_out_type[i] == APPEND)
-			{
 				cmd->fds_out[i] = open(cmd->redir_out[i], O_APPEND | O_CREAT
-						| O_WRONLY,
-						0644);
-			}
+						| O_WRONLY, 0644);
 			if (cmd->fds_out[i] < 0)
-			{
-				close_pipes(shell);
-				close_fds(shell, cmd->fds_out, i);
-				close_fds(shell, cmd->fds_in, cmd->redir_in_count);
-				printf("Outfile access error\n");
-				g_exitcode = 1;
-				return (false);
-			}
+				return (exit_outfiles(shell, cmd, i));
 			i++;
 		}
 	}
 	return (true);
-}
-
-bool	open_infiles(t_chunk *cmd, t_minishell *shell)
-{
-	int		i;
-	char	*filename;
-
-	i = 0;
-	if (cmd->redir_in)
-	{
-		while (cmd->redir_in[i])
-		{
-			if (access(cmd->redir_in[i], F_OK) == 0
-				&& cmd->redir_in_type[i] != HEREDOC
-				&& access(cmd->redir_in[i], R_OK) == -1)
-			{
-				close_pipes(shell);
-				close_fds(shell, cmd->fds_in, i);
-				g_exitcode = 1;
-				printf("Infile access error\n");
-				return (false);
-			}
-			if (cmd->redir_in_type[i] == REDIR_IN)
-				cmd->fds_in[i] = open(cmd->redir_in[i], O_RDONLY, 0644);
-			else if (cmd->redir_in_type[i] == HEREDOC)
-			{
-				filename = ft_strjoin(cmd->redir_in[i], ".heredoc.tmp");
-				cmd->fds_in[i] = open(filename, O_CREAT | O_WRONLY, 0600);
-				heredoc(cmd->fds_in[i], cmd->redir_in[i], *shell);
-				close(cmd->fds_in[i]);
-				cmd->fds_in[i] = open(filename, O_RDONLY, 0644);
-				unlink(filename);
-				free(filename);
-			}
-			if (cmd->fds_in[i] < 0)
-			{
-				close_pipes(shell);
-				close_fds(shell, cmd->fds_in, i);
-				g_exitcode = 1;
-				printf("Infile couldn't be opened\n");
-				return (false);
-			}
-			i++;
-		}
-	}
-	return (true);
-}
-
-bool	set_redirects(t_chunk *cmd, t_minishell *shell)
-{
-	cmd->redir_in_count = set_redir_counts(cmd->redir_in);
-	cmd->redir_out_count = set_redir_counts(cmd->redir_out);
-	if (cmd->redir_in_count != 0)
-		cmd->fds_in = ft_calloc (sizeof(int), cmd->redir_in_count);
-	if (cmd->redir_in_count != 0 && !cmd->fds_in)
-		printf("we have a situation. abort. :/ \n"); //fix
-	if (cmd->redir_out_count != 0)
-		cmd->fds_out = ft_calloc (sizeof(int), cmd->redir_out_count);
-	if (cmd->redir_out_count != 0 && !cmd->fds_out)
-		printf("we have a situation. abort. :/ \n"); //fix
-	return (open_infiles(cmd, shell) && open_outfiles(cmd, shell));
 }

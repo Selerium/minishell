@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:50:32 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/10 19:41:08 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:47:47 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,19 @@ void	wrap_execve(char *cmdpath, char **cmd, char **envs, t_minishell *shell)
 	i = 0;
 	while (envs[i])
 		wrap_free(envs[i++]);
+	wrap_free(envs);
 	wrap_free(shell->processes);
 	i = 0;
-	printf("%s\n", cmd[0]);
-	while (shell->fds && shell->fds[i])
+	while (shell->fds && i < shell->num_chunks && shell->fds[i])
 		wrap_free(shell->fds[i++]);
 	wrap_free(shell->fds);
+	if (cmdpath[0] == '.' || cmdpath[0] == '/')
+	{
+		wrap_free(cmdpath);
+		exit(127);
+	}
+	printf("%s\n", cmd[0]);
 	wrap_free(cmdpath);
-	i = 0;
-	while (envs && envs[i])
-		wrap_free(envs[i++]);
-	wrap_free(envs);
 	exit(127);
 }
 
