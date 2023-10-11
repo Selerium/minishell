@@ -6,7 +6,7 @@
 /*   By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:58:17 by jadithya          #+#    #+#             */
-/*   Updated: 2023/10/11 15:18:33 by jadithya         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:20:39 by jadithya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,5 @@ int		single_exit(t_chunk *cmds, t_env *envs, char *cmd);
 void	special_exit(t_minishell *shell, char *num, char *path);
 void	wrap_exit(char **cmd, t_minishell *shell, char *path);
 void	run_exit(char *num, int i);
-
-// test con:
-//  ls < oat > outals < oat > outaaa | pwd < outie < outa > also > hey | 
-// echo > hey > also hiiii thereeee < oamt
 
 #endif
