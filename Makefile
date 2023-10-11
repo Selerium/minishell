@@ -6,7 +6,7 @@
 #    By: jadithya <jadithya@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 15:46:23 by jadithya          #+#    #+#              #
-#    Updated: 2023/10/11 14:49:59 by jadithya         ###   ########.fr        #
+#    Updated: 2023/10/11 15:19:32 by jadithya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS := $(SRCDIR)/minishell.c\
 		$(SRCDIR)/execute_cmd.c\
 		$(SRCDIR)/cleanup.c\
 		$(SRCDIR)/redirs.c\
+		$(SRCDIR)/redirs_2.c\
 		$(SRCDIR)/free.c\
 		$(SRCDIR)/$(BUILTINS)/pwd.c\
 		$(SRCDIR)/$(BUILTINS)/export.c\
